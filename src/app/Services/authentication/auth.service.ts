@@ -21,6 +21,10 @@ export class AuthService {
     return this.currentUserSubject.value;
   }
 
+  public getToken(): string | null {
+    return this.currentUserValue?.token || null;
+  }
+
   login(email: string, password: string): Observable<boolean> {
     return this.http.post<any>(`${this.apiUrl}/login`, { email, password }).pipe(
       map((response) => {
