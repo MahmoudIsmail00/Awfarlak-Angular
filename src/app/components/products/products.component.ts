@@ -13,6 +13,7 @@ import { ProductComponent } from '../product/product.component'
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
+  subcategories:any;
   images:any;
   filteredProducts: Product[] = [];
 
@@ -30,17 +31,21 @@ export class ProductsComponent implements OnInit {
     this.productService.getAllProducts().subscribe((products:any) => {
       this.products = products["data"];
       this.filteredProducts = products["data"];
-      console.log(this.products);
-      console.log(this.images);
     });
+    // this.productService.getAllSubCategories().subscribe((data:any)=>{
+    //   this.subcategories = data;
+    //   console.log(this.subcategories);
 
+    // })
+    this.productService.getProductsbySubCategoryId(1).subscribe((prods:Product[])=>{
+      // console.log(prods);
+
+    })
     this.productService.currentSearchTerm.subscribe((term) => {
       this.updateProductList(term);
     });
   }
   updateProductList(term: string) {
-    // console.log('the search term is :::', term);
-    // console.log(this.products);
     this.filteredProducts = this.products.filter((product) =>
       product.name.toLowerCase().includes(term.toLowerCase())
     );
