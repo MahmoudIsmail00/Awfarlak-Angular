@@ -59,7 +59,7 @@ export class NavbarComponent implements OnInit {
           name: item.name
         };
       });
-      console.log(this.subcategories);
     })
+    console.log(this.subcategories);
   }
 }

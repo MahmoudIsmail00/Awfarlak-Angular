@@ -67,28 +67,27 @@
 
             </li>
           </ul>
-
-
         </div>
-
       </div>
-
-
     </nav>
-
   </div>
   <div class="category-list-container bg-[#3398C7]  ">
     <div class="bg-[#3398C7] w-3/4  mx-auto  flex justify-around place-items-center text-[#eaeaea] h-[40px]">
       <a routerLink="products/0" class="category">All Laptops</a>
+      @if (subcategories.length < 1) {
+        <a routerLink="products/1" class="category">Business Laptops</a>
+        <a routerLink="products/2" class="category">Gaming Laptops</a>
+        <a routerLink="products/3" class="category">Standard Laptops</a>
+        <a routerLink="products/4" class="category">2-in-1 Laptops</a>
+      }@else{
         @for (item of subcategories; track subcategories) {
           <!-- <a routerLink="products/{{item.id}}" class="category">{{item.name}}</a> -->
           <a routerLink="products/{{item.id}}" class="category">{{item.name}}</a>
 
         }
-      <!-- <a routerLink="products" class="category">Standard</a>
-      <a routerLink="products" class="category">2-in-1</a>
-      <a routerLink="products" class="category">Gaming</a>
-      <a routerLink="products" class="category">Business</a>
+      }
+
+      <!--
       <a routerLink="products" class="category">Ultrabooks</a>
       <a routerLink="products" class="category">Workstations</a>
       <a routerLink="products" class="category">Desktops</a> -->
