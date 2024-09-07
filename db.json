@@ -1,0 +1,519 @@
+{
+  "products": [
+    {
+      "id": "f4366d51-48a3-458e-ae20-73fb63f0e082",
+      "price": 212,
+      "title": "Gorgeous Plastic Ball",
+      "category": "Books",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 5,
+      "image": "https://onyuclothing.com/cdn/shop/files/ClassicT-ShirtSageGreen_900x.jpg?v=1690373164"
+    },
+    {
+      "id": "8e67e74e-a0cc-433a-a66a-aedad4b82fb3",
+      "price": 577,
+      "title": "Small Wooden Bike",
+      "category": "Movies",
+      "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+      "rating": 1,
+      "image": "https://uk.e-cloth.com/cdn/shop/products/z5kcyulbczxfrmcrjbkq_2000x.jpg?v=1689609204"
+    },
+    {
+      "id": "4f1c39ef-569f-4877-af34-d934e8818c3d",
+      "price": 334,
+      "title": "Handcrafted Soft Sausages",
+      "category": "Books",
+      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+      "rating": 2,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Product_photography.jpg"
+    },
+    {
+      "id": "229d156f-0621-4188-8d22-3e204f35ebe0",
+      "price": 59,
+      "title": "Sleek Fresh Soap",
+      "category": "Clothing",
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+      "rating": 5,
+      "image": "https://onyuclothing.com/cdn/shop/files/ClassicT-ShirtSageGreen_900x.jpg?v=1690373164"
+    },
+    {
+      "id": "8f306c76-00d1-4b8d-804f-23c35320d34c",
+      "price": 436,
+      "title": "Recycled Frozen Chicken",
+      "category": "Automotive",
+      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+      "rating": 5,
+      "image": "https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTExL3JtMzYyLTAxYS1tb2NrdXAuanBn.jpg"
+    },
+    {
+      "id": "c3745dd6-0e40-4720-aca0-ec84bf06ab1f",
+      "price": 618,
+      "title": "Recycled Plastic Keyboard",
+      "category": "Automotive",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+      "rating": 1,
+      "image": "https://i.pinimg.com/736x/b6/f9/ad/b6f9ade1c033e642f5afa77f9af08560.jpg"
+    },
+    {
+      "id": "7425a31a-fb40-4797-8e0e-e49d44abb5f0",
+      "price": 147,
+      "title": "Luxurious Granite Keyboard",
+      "category": "Movies",
+      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+      "rating": 1,
+      "image": "https://media.4rgos.it/i/Argos/9520103_R_Z001A?w=750&h=440&qlt=70"
+    },
+    {
+      "id": "1c6ecc15-93b3-4320-81c9-aef247b48e6e",
+      "price": 237,
+      "title": "Modern Frozen Table",
+      "category": "Tools",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 1,
+      "image": "https://img.mytheresa.com/1094/1238/100/jpeg/catalog/product/2c/P00799937.jpg"
+    },
+    {
+      "id": "7c6d5892-9bb1-49ce-83f4-b7788b12a37c",
+      "price": 637,
+      "title": "Incredible Granite Pizza",
+      "category": "Electronics",
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+      "rating": 3,
+      "image": "https://img.mytheresa.com/1094/1238/100/jpeg/catalog/product/29/P00874027.jpg"
+    },
+    {
+      "id": "bc975cb6-988b-43cc-b424-a5e136cfee96",
+      "price": 430,
+      "title": "Awesome Cotton Pizza",
+      "category": "Music",
+      "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+      "rating": 2,
+      "image": "https://img.mytheresa.com/1094/1238/100/jpeg/catalog/product/5b/P00941603.jpg"
+    },
+    {
+      "id": "141acd50-4d93-4b6b-a625-8264ec509175",
+      "price": 923,
+      "title": "Generic Soft Towels",
+      "category": "Electronics",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+      "rating": 2,
+      "image": "https://images.unsplash.com/photo-1523275335684-37898b6baf30"
+    },
+    {
+      "id": "0355cd9d-5951-4d63-9a5a-f11488d4c23d",
+      "price": 313,
+      "title": "Gorgeous Metal Keyboard",
+      "category": "Music",
+      "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+      "rating": 1,
+      "image": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
+    },
+    {
+      "id": "f5fd594b-ef1e-4fcc-84f3-c97579162c65",
+      "price": 911,
+      "title": "Licensed Cotton Gloves",
+      "category": "Garden",
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+      "rating": 4,
+      "image": "https://m.media-amazon.com/images/I/61Z5J-fq7KL._AC_UF894,1000_QL80_.jpg"
+    },
+    {
+      "id": "d01af56f-0554-4658-b390-02e486a1cc69",
+      "price": 276,
+      "title": "Generic Soft Sausages",
+      "category": "Beauty",
+      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+      "rating": 4,
+      "image": "https://m.media-amazon.com/images/I/61H1z-mrvfL._AC_UF894,1000_QL80_.jpg"
+    },
+    {
+      "id": "f7228cd8-6e44-449c-b747-cee0015d1e4b",
+      "price": 911,
+      "title": "Awesome Soft Cheese",
+      "category": "Grocery",
+      "description": "Carbonite web goalkeeper gloves are ergonomically designed to give easy fit",
+      "rating": 1,
+      "image": "https://m.media-amazon.com/images/I/61Z5J-fq7KL._AC_UF894,1000_QL80_.jpg"
+    },
+    {
+      "id": "8ed475d1-1ca6-424c-aedf-24c8d240b1b0",
+      "price": 233,
+      "title": "Handmade Bronze Keyboard",
+      "category": "Home",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+      "rating": 2,
+      "image": "https://trojanstores.com/wp-content/uploads/2021/02/airpodsmax2.webp"
+    },
+    {
+      "id": "e974bf9d-535a-485f-b866-30b99d365a5c",
+      "price": 851,
+      "title": "Ergonomic Steel Pants",
+      "category": "Movies",
+      "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+      "rating": 1,
+      "image": "https://www.apple.com/v/watch/bl/images/overview/consider_modals/fitness/modal_fitness_rings__cznvg9yafq82_xlarge.jpg"
+    },
+    {
+      "id": "d7d845e9-1c22-432a-ba0c-e1dabbc9d4d5",
+      "price": 421,
+      "title": "Refined Wooden Pants",
+      "category": "Jewelery",
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+      "rating": 4,
+      "image": "https://btech.com/media/catalog/product/7/1/714rxoylmsl._sl1500_.jpg?width=1200&store=en&image-type=image"
+    },
+    {
+      "id": "457695fd-a243-4610-9c04-16a96d0db2e1",
+      "price": 889,
+      "title": "Ergonomic Wooden Fish",
+      "category": "Automotive",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+      "rating": 2,
+      "image": "https://cdn.thewirecutter.com/wp-content/media/2024/03/androidphones-2048px-0803.jpg"
+    },
+    {
+      "id": "2ace7d04-4473-4f5b-a470-0edfa18670bb",
+      "price": 379,
+      "title": "Modern Fresh Mouse",
+      "category": "Kids",
+      "description": "Ergonomic executive chair upholstered in bonded black leather and PVC padded seat and back for all-day comfort and support",
+      "rating": 5,
+      "image": "https://m.media-amazon.com/images/I/51wmd3ANYRL._AC_SX679_.jpg"
+    },
+    {
+      "id": "125aab00-392f-40ab-8bbb-2f74596545f1",
+      "price": 839,
+      "title": "Sleek Plastic Soap",
+      "category": "Garden",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+      "rating": 1,
+      "image": "https://t4.ftcdn.net/jpg/05/36/24/13/360_F_536241340_GsrsNhcWC0hyTVaJLilNafyDw6fl0cC8.jpg"
+    },
+    {
+      "id": "6631ef27-960a-4430-aa8b-42a5f0113fe5",
+      "price": 43,
+      "title": "Handmade Cotton Keyboard",
+      "category": "Grocery",
+      "description": "The Football Is Good For Training And Recreational Purposes",
+      "rating": 3,
+      "image": "https://m.media-amazon.com/images/I/81zLCnNaMsL._AC_SL1500_.jpg"
+    },
+    {
+      "id": "827bd83d-0f1f-4a81-9f1d-71b2ee364c1f",
+      "price": 859,
+      "title": "Oriental Soft Computer",
+      "category": "Electronics",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 4,
+      "image": "https://ozeyhome.com/wp-content/uploads/2022/04/Reem-Mattress-Foam.png"
+    },
+    {
+      "id": "c8ca4c64-d73f-442d-8b08-551cc9ebc573",
+      "price": 612,
+      "title": "Elegant Cotton Shoes",
+      "category": "Movies",
+      "description": "The Football Is Good For Training And Recreational Purposes",
+      "rating": 4,
+      "image": "https://mcprod.hyperone.com.eg/media/catalog/product/cache/1ca275941aea0ae98b372dcb44b7c67a/6/2/6224002295071-50inch---.jpg"
+    },
+    {
+      "id": "7fb76435-2acf-487e-aba9-0940a787ecf9",
+      "price": 410,
+      "title": "Sleek Rubber Salad",
+      "category": "Tools",
+      "description": "The Football Is Good For Training And Recreational Purposes",
+      "rating": 4,
+      "image": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
+    },
+    {
+      "id": "82819b74-389a-460d-b0b5-76b404ffcf34",
+      "price": 748,
+      "title": "Sleek Steel Car",
+      "category": "Computers",
+      "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+      "rating": 3,
+      "image": "https://romeojuliet-eg.com/image/cache/catalog/78/7-700x700.jpg"
+    },
+    {
+      "id": "239f71a4-9695-423f-842f-403b3542df92",
+      "price": 897,
+      "title": "Licensed Concrete Chair",
+      "category": "Tools",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+      "rating": 5,
+      "image": "https://i1.adis.ws/i/canon/pro-oliver-wright-macro-boxout-2_a7b6297ac2f747958249756e23a18318?$box-out-media-jpg$"
+    },
+    {
+      "id": "9ee8ae4f-363f-463c-bdf7-f8725c8ffe9b",
+      "price": 951,
+      "title": "Handmade Bronze Salad",
+      "category": "Electronics",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+      "rating": 3,
+      "image": "https://i1.adis.ws/i/canon/pro-oliver-wright-macro-boxout-3_9710610422884d8090f70bafc0baf14e?$box-out-media-jpg$"
+    },
+    {
+      "id": "f707c154-6cf6-48af-ab68-d130aaa472d8",
+      "price": 419,
+      "title": "Luxurious Concrete Table",
+      "category": "Home",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 5,
+      "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/SanDisk-Cruzer-USB-4GB-ThumbDrive.jpg/1200px-SanDisk-Cruzer-USB-4GB-ThumbDrive.jpg"
+    },
+    {
+      "id": "be1f56f3-eeae-438f-826b-172d90e32ad9",
+      "price": 512,
+      "title": "Handcrafted Fresh Sausages",
+      "category": "Jewelery",
+      "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+      "rating": 4,
+      "image": "https://mobaco.com/wp-content/uploads/2024/07/LR182_L130_FIT1-300x300.jpg"
+    },
+    {
+      "id": "c26a9155-ea26-4bde-9255-d0f0ae7b53bb",
+      "price": 661,
+      "title": "Awesome Bronze Salad",
+      "category": "Electronics",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 5,
+      "image": "https://mobaco.com/wp-content/uploads/2024/07/LR177_0020_FIT1-300x300.jpg"
+    },
+    {
+      "id": "b7f6c236-fd96-4165-876d-26a52aa3f839",
+      "price": 706,
+      "title": "Modern Granite Cheese",
+      "category": "Toys",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 3,
+      "image": "https://mobaco.com/wp-content/uploads/2024/07/LL631_S328_FIT1-300x300.jpg"
+    },
+    {
+      "id": "501299d0-7835-4141-8443-b61e4b766d1d",
+      "price": 225,
+      "title": "Luxurious Steel Pizza",
+      "category": "Home",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+      "rating": 4,
+      "image": "https://mobaco.com/wp-content/uploads/2021/10/SV046_0020_FIT1-300x300.jpg"
+    },
+    {
+      "id": "1710bdaa-11d9-4ff1-b336-ed24be48e527",
+      "price": 263,
+      "title": "Small Metal Sausages",
+      "category": "Baby",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+      "rating": 4,
+      "image": "https://mobaco.com/wp-content/uploads/2021/06/ST282_0428_FIT1-600x600.jpg"
+    },
+    {
+      "id": "30fc33a6-37d3-4ba4-ad39-0066d66eddb9",
+      "price": 27,
+      "title": "Elegant Fresh Keyboard",
+      "category": "Grocery",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+      "rating": 5,
+      "image": "https://mobaco.com/wp-content/uploads/2024/04/ST375_0752_1-300x300.jpg"
+    },
+    {
+      "id": "a9f3505f-2e1c-4153-9a16-ed4b41e7f5b4",
+      "price": 395,
+      "title": "Refined Metal Hat",
+      "category": "Kids",
+      "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+      "rating": 4,
+      "image": "https://printmytee.in/wp-content/uploads/2021/07/Product-Your-Design-Here-07-2.jpg"
+    },
+    {
+      "id": "5d603e14-a5d7-461a-998f-e96aaee586bd",
+      "price": 608,
+      "title": "Handcrafted Fresh Sausages",
+      "category": "Health",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+      "rating": 2,
+      "image": "https://images.squarespace-cdn.com/content/v1/60c4dd6af8b96029760b5a58/1647275417528-D2A6F4RQZY2TKT2WZZTW/unisex-staple-t-shirt-pink-front-622f6d8c0d1ea.jpg"
+    },
+    {
+      "id": "40d32bd2-01cc-4c0c-bb01-5d0c92120e29",
+      "price": 279,
+      "title": "Rustic Rubber Mouse",
+      "category": "Sports",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+      "rating": 2,
+      "image": "https://m.media-amazon.com/images/I/71ZNxePyBVL.jpg"
+    },
+    {
+      "id": "d7d9aa25-0c4c-4601-afb0-215e6a3b1370",
+      "price": 781,
+      "title": "Luxurious Steel Shoes",
+      "category": "Baby",
+      "description": "New range of formal shirts are designed keeping you in mind. With fits and styling that will make you stand apart",
+      "rating": 1,
+      "image": "https://m.media-amazon.com/images/I/41kMZHeB85L._AC_SX679_.jpg"
+    },
+    {
+      "id": "58fdd54f-65be-4180-a466-3f343756a5ad",
+      "price": 20,
+      "title": "Oriental Rubber Shoes",
+      "category": "Sports",
+      "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+      "rating": 2,
+      "image": "https://m.media-amazon.com/images/I/51wmd3ANYRL._AC_SX679_.jpg"
+    },
+    {
+      "id": "fcc74b1d-d9e3-4f1d-a8d5-09eca254065c",
+      "price": 331,
+      "title": "Small Plastic Keyboard",
+      "category": "Outdoors",
+      "description": "The Football Is Good For Training And Recreational Purposes",
+      "rating": 5,
+      "image": "https://m.media-amazon.com/images/I/51yR9cIxYPL._AC_SX679_.jpg"
+    },
+    {
+      "id": "9f356337-c23b-4551-9e88-03a204bf7080",
+      "price": 926,
+      "title": "Elegant Metal Soap",
+      "category": "Music",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 4,
+      "image": "https://ofisxprs.com/cdn/shop/files/220301019150_700x700.png?v=1695822503"
+    },
+    {
+      "id": "e11c2dcf-3db8-4569-9b44-b6f898ddf3a2",
+      "price": 319,
+      "title": "Oriental Metal Soap",
+      "category": "Tools",
+      "description": "Andy shoes are designed to keeping in mind durability as well as trends, the most stylish range of shoes & sandals",
+      "rating": 1,
+      "image": "https://cdn.pixabay.com/photo/2013/07/13/14/07/apparel-162180_960_720.png"
+    },
+    {
+      "id": "df545192-22f7-4fe5-809f-744fc56e5ddc",
+      "price": 868,
+      "title": "Refined Fresh Bacon",
+      "category": "Clothing",
+      "description": "The Apollotech B340 is an affordable wireless mouse with reliable connectivity, 12 months battery life and modern design",
+      "rating": 5,
+      "image": "https://i.ibb.co/SXZvYHs/irene-kredenets-DDqx-X0-7v-KE-unsplash-1.png"
+    },
+    {
+      "id": "dc4074d4-6545-4244-abd3-93c0f5b6ddc6",
+      "price": 337,
+      "title": "Handcrafted Bronze Gloves",
+      "category": "Home",
+      "description": "The beautiful range of Apple Naturalé that has an exciting mix of natural ingredients. With the Goodness of 100% Natural Ingredients",
+      "rating": 1,
+      "image": "https://i.ibb.co/8403ZFZ/pexels-hormel-2762247-removebg-preview-2-1.png"
+    },
+    {
+      "id": "a6d7b8d6-f7c1-4b35-b771-dfb512702fab",
+      "price": 617,
+      "title": "Handcrafted Metal Soap",
+      "category": "Industrial",
+      "description": "New ABC 13 9370, 13.3, 5th Gen CoreA5-8250U, 8GB RAM, 256GB SSD, power UHD Graphics, OS 10 Home, OS Office A & J 2016",
+      "rating": 2,
+      "image": "https://i.ibb.co/Hd1pVxW/louis-mornaud-Ju-6-TPKXd-Bs-unsplash-1-2.png"
+    },
+    {
+      "id": "937d8e30-716f-4dba-a3d3-9da5c9314755",
+      "price": 576,
+      "title": "Bespoke Rubber Cheese",
+      "category": "Garden",
+      "description": "Boston's most advanced compression wear technology increases muscle oxygenation, stabilizes active muscles",
+      "rating": 2,
+      "image": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-03.jpg"
+    },
+    {
+      "id": "bbdc7965-7b0f-4b5e-8dce-1c156d1cdf02",
+      "price": 626,
+      "title": "Generic Rubber Hat",
+      "category": "Health",
+      "description": "The slim & simple Maple Gaming Keyboard from Dev Byte comes with a sleek body and 7- Color RGB LED Back-lighting for smart functionality",
+      "rating": 3,
+      "image": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-04.jpg"
+    },
+    {
+      "id": "36b994ba-86fe-4262-bc39-2a0c0ceaf762",
+      "price": 744,
+      "title": "Rustic Cotton Fish",
+      "category": "Outdoors",
+      "description": "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
+      "rating": 3,
+      "image": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-02.jpg"
+    },
+    {
+      "id": "86e1a803-d607-4f80-9d41-6b8db856a3f3",
+      "price": 969,
+      "title": "Gorgeous Cotton Table",
+      "category": "Games",
+      "description": "The automobile layout consists of a front-engine design, with transaxle-type transmissions mounted at the rear of the engine and four wheel drive",
+      "rating": 2,
+      "image": "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "seif",
+      "email": "sifelkateb@gmail.com",
+      "password": "1234",
+      "cartId": "234"
+    },
+    {
+      "id": "d47b",
+      "email": "medhat@gmail.com",
+      "username": "Medhat",
+      "password": "1234",
+      "cartId": "9864"
+    },
+    {
+      "id": "c1c8",
+      "email": "randa@gmail.com",
+      "username": "randa",
+      "password": "1234",
+      "cartId": "3963"
+    },
+    {
+      "id": "5e12",
+      "email": "ahmed@gmail.com",
+      "username": "ahmed",
+      "password": "1234",
+      "cartId": "a63b"
+    },
+    {
+      "id": "ea60",
+      "email": "",
+      "username": "",
+      "password": "",
+      "cartId": "c75e"
+    }
+  ],
+  "carts": [
+    {
+      "id": "234",
+      "items": {}
+    },
+    {
+      "id": "9864",
+      "items": {
+        "f4366d51-48a3-458e-ae20-73fb63f0e082": 5,
+        "8e67e74e-a0cc-433a-a66a-aedad4b82fb3": 5,
+        "229d156f-0621-4188-8d22-3e204f35ebe0": 9
+      }
+    },
+    {
+      "id": "3963",
+      "items": {}
+    },
+    {
+      "id": "a63b",
+      "items": {
+        "4f1c39ef-569f-4877-af34-d934e8818c3d": 11
+      }
+    },
+    {
+      "id": "c75e",
+      "items": {}
+    }
+  ]
+}

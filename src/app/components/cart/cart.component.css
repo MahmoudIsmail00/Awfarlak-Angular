@@ -1,0 +1,18 @@
+.cart-container {
+  padding: 20px;
+}
+
+.cart-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.cart-item h2 {
+  margin: 0;
+  font-size: 1.5em;
+}
+
+.cart-item p {
+  margin: 5px 0;
+}
