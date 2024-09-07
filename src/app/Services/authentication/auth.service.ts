@@ -1,66 +1,60 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, concatMap, map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { User } from '../../Models/user';
-import { CartService } from '../cart/cart.service';
-import { Cart } from '../../Models/cart';
+import { environment } from '../environment';
 
-
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AuthService {
-  apiUrl = 'http://localhost:3000/users';
+  apiUrl = `${environment.apiUrl}/account`;
+  private currentUserSubject: BehaviorSubject<User | null>;
+  public currentUser: Observable<User | null>;
 
-  isLoggedIn = false;
+  constructor(private http: HttpClient) {
+    this.currentUserSubject = new BehaviorSubject<User | null>(JSON.parse(localStorage.getItem('currentUser')!));
+    this.currentUser = this.currentUserSubject.asObservable();
+  }
+
+  public get currentUserValue(): User | null {
+    return this.currentUserSubject.value;
+  }
 
   login(email: string, password: string): Observable<boolean> {
-    return this.http
-      .get<User[]>(`${this.apiUrl}?email=${email}&password=${password}`)
-      .pipe(
-        map((users) => {
-          if (users.length > 0) {
-            this.isLoggedIn = true;
-            const user = users[0];
-            const userCartId = user.cartId;
-            this.cartService.getUserCart(userCartId!);
-
-            return true;
-          } else {
-            this.isLoggedIn = false;
-            return false;
-          }
-        })
-      );
-  }
-
-  logout() {
-    this.isLoggedIn = false;
-  }
-  signup(
-    email: string,
-    username: string,
-    password: string
-  ): Observable<boolean> {
-    const body: User = { email, username, password };
-    return this.cartService.initializeCart().pipe(
-      concatMap((cart: Cart) => {
-        console.log('the new generated cart is ::', cart);
-        body.cartId = cart.id;
-        console.log('the new body is ::', body);
-        return this.http.post<User>(this.apiUrl, body);
+    return this.http.post<any>(`${this.apiUrl}/login`, { email, password }).pipe(
+      map((response) => {
+        localStorage.setItem('currentUser', JSON.stringify(response));
+        this.currentUserSubject.next(response);
+        return true;
       }),
-      map((user) => {
-        if (user) {
-          console.log('the new registered user is ', user);
-          this.isLoggedIn = true;
-          this.cartService.getUserCart(user.cartId!);
-          return true;
-        } else {
-          this.isLoggedIn = false;
-          return false;
-        }
-      })
+      catchError(this.handleError<boolean>('login'))
     );
   }
 
-  constructor(private http: HttpClient, private cartService: CartService) {}
+  logout() {
+
+    localStorage.removeItem('currentUser');
+    this.currentUserSubject.next(null);
+  }
+
+  signup(email: string, displayName: string, password: string): Observable<boolean> {
+    const newUser = { email, displayName, password };
+    return this.http.post<any>(`${this.apiUrl}/register`, newUser).pipe(
+      map((response) => {
+
+        localStorage.setItem('currentUser', JSON.stringify(response));
+        this.currentUserSubject.next(response);
+        return true;
+      }),
+      catchError(this.handleError<boolean>('signup'))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(`${operation} failed: ${error.message}`);
+      return throwError(() => new Error(`${operation} failed: ${error.message}`));
+    };
+  }
 }

@@ -2,5 +2,11 @@
   "/images": {
     "target": "https://localhost:7082",
     "secure": false
+  },
+  "/wp-content": {
+    "target": "https://www.awfarlak.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
   }
 }

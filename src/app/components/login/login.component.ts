@@ -1,6 +1,7 @@
+import { NgIf } from '@angular/common';
 import { AuthService } from './../../Services/authentication/auth.service';
 import { Component, OnInit } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
@@ -8,28 +9,43 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   standalone: true,
-  imports: [FormsModule, RouterLink],
+  imports: [ReactiveFormsModule, RouterLink, NgIf],
 })
 export class LoginComponent implements OnInit {
-  email = '';
-  password = '';
-  constructor(private authService: AuthService, private router: Router) {}
+  loginForm: FormGroup;
+  loginError: string | null = null;
+
+  constructor(private authService: AuthService, private fb: FormBuilder, private router: Router) {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required]],
+    });
+  }
 
   onLogin() {
-    this.authService
-      .login(this.email, this.password)
-      .subscribe((isLoggedIn) => {
-        if (isLoggedIn) {
-          console.log('successful login');
-          this.router.navigate(['products']);
-        } else {
-          console.log('unsuccessful login');
+    if (this.loginForm.valid) {
+      const { email, password } = this.loginForm.value;
+      this.authService.login(email, password).subscribe(
+        (isLoggedIn) => {
+          if (isLoggedIn) {
+            console.log('Login successful');
+            this.router.navigate(['products']);
+          } else {
+            this.loginError = 'Invalid email or password';
+          }
+        },
+        (error) => {
+          this.loginError = 'Invalid email or password';
+          console.error('Login failed:', error);
         }
-      });
+      );
+    } else {
+      console.log('Form is invalid');
+    }
   }
 
   ngOnInit() {
-    if (this.authService.isLoggedIn) {
+    if (this.authService.currentUserValue) {
       this.router.navigate(['products']);
     }
   }

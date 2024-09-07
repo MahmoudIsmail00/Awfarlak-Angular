@@ -4,9 +4,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { AuthGuard } from './Services/authentication/authguard';
 import { AuthService } from './Services/authentication/auth.service';
-import { HttpClient, provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient } from '@angular/common/http';
 import { ProductsService } from './Services/store/products.service';
 import { CartService } from './Services/cart/cart.service';
+import { JwtInterceptor } from './Services/authentication/JwtInterceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,6 @@ export const appConfig: ApplicationConfig = {
     AuthService,
     ProductsService,
     provideHttpClient(),
-    CartService,
+    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
 };
