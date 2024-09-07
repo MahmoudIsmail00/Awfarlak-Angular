@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../Services/store/products.service';
 import { Product } from '../../Models/product';
-import { ProductComponent } from '../product/product.component';
+import { ProductComponent } from '../product/product.component'
 
 
 @Component({
@@ -13,6 +13,7 @@ import { ProductComponent } from '../product/product.component';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
+  images:any;
   filteredProducts: Product[] = [];
 
   constructor(private productService: ProductsService) {}
@@ -30,6 +31,7 @@ export class ProductsComponent implements OnInit {
       this.products = products["data"];
       this.filteredProducts = products["data"];
       console.log(this.products);
+      console.log(this.images);
     });
 
     this.productService.currentSearchTerm.subscribe((term) => {
@@ -40,7 +42,10 @@ export class ProductsComponent implements OnInit {
     // console.log('the search term is :::', term);
     // console.log(this.products);
     this.filteredProducts = this.products.filter((product) =>
-      product.title.toLowerCase().includes(term.toLowerCase())
+      product.name.toLowerCase().includes(term.toLowerCase())
     );
+  }
+  encodeImagePath(imagePath: string): string {
+    return imagePath.split(' ').join('%20');
   }
 }

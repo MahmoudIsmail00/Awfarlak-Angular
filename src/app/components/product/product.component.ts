@@ -14,6 +14,7 @@ import { FormsModule } from '@angular/forms';
 export class ProductComponent implements OnInit {
   @Input() product!: Product; // Define an input property
   quantity = 0;
+  image:any ;
   userCart!: Cart;
   constructor(private cartService: CartService) {}
   increaseQuantity() {
@@ -29,5 +30,8 @@ export class ProductComponent implements OnInit {
   }
   ngOnInit() {
     this.quantity = this.cartService.getProductQuantity(this.product.id);
+    console.log(this.product.id);
+    console.log(this.product.pictureUrl);
+
   }
 }
