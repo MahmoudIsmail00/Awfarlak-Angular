@@ -23,6 +23,7 @@ export class AuthService {
 
   public getToken(): string | null {
     return this.currentUserValue?.token || null;
+    
   }
 
   login(email: string, password: string): Observable<boolean> {
