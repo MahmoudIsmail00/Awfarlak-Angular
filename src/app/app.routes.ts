@@ -17,6 +17,7 @@ import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
+  { path: 'products', component: ProductsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'product', component: ProductComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },

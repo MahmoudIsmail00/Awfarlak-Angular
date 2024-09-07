@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
         (isLoggedIn) => {
           if (isLoggedIn) {
             console.log('Login successful');
-            this.router.navigate(['products']);
+            this.router.navigate(['products/0']);
           } else {
             this.loginError = 'Invalid email or password';
           }
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.authService.currentUserValue) {
-      this.router.navigate(['products']);
+      this.router.navigate(['products/0']);
     }
   }
 }
