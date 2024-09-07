@@ -16,7 +16,7 @@ import { AwfarlkComponentComponent } from './Components/awfarlk-component/awfarl
 import { WishlistComponent } from './components/wishlist/wishlist.component';
 
 export const routes: Routes = [
-  { path: 'products', component: ProductsComponent, canActivate: [AuthGuard]  },
+  { path: 'products/:id', component: ProductsComponent },
   { path: 'about', component: AboutComponent },
   { path: 'product', component: ProductComponent },
   { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },

@@ -22,7 +22,7 @@
                                                  c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
                                                  s-17-7.626-17-17S14.61,6,23.984,6z" />
             </svg>
-          </button> 
+          </button>
         </div>
         <!-- Header Icons -->
         <div class="icons flex px-10 justify-around ">
@@ -78,18 +78,23 @@
 
   </div>
   <div class="category-list-container bg-[#3398C7]  ">
-    <div class="bg-[#3398C7] w-3/4  mx-auto  flex justify-around place-items-center text-[#eaeaea] h-[40px]"><a href="#"
-        class="category">All Laptops</a>
-      <a routerLink="products" class="category">Standard</a>
+    <div class="bg-[#3398C7] w-3/4  mx-auto  flex justify-around place-items-center text-[#eaeaea] h-[40px]">
+      <a routerLink="products/0" class="category">All Laptops</a>
+        @for (item of subcategories; track subcategories) {
+          <!-- <a routerLink="products/{{item.id}}" class="category">{{item.name}}</a> -->
+          <a routerLink="products/{{item.id}}" class="category">{{item.name}}</a>
+
+        }
+      <!-- <a routerLink="products" class="category">Standard</a>
       <a routerLink="products" class="category">2-in-1</a>
       <a routerLink="products" class="category">Gaming</a>
       <a routerLink="products" class="category">Business</a>
       <a routerLink="products" class="category">Ultrabooks</a>
       <a routerLink="products" class="category">Workstations</a>
-      <a routerLink="products" class="category">Desktops</a>
-      <a routerLink="products" class="category">Graphic Cards</a>
+      <a routerLink="products" class="category">Desktops</a> -->
+      <!-- <a routerLink="products" class="category">Graphic Cards</a>
       <a routerLink="products" class="category">Components</a>
-      <a routerLink="products" class="category">Accessories</a>
+      <a routerLink="products" class="category">Accessories</a> -->
     </div>
   </div>
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../Services/store/products.service';
 import { Product } from '../../Models/product';
 import { ProductComponent } from '../product/product.component'
+import { ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -16,8 +17,8 @@ export class ProductsComponent implements OnInit {
   subcategories:any;
   images:any;
   filteredProducts: Product[] = [];
-
-  constructor(private productService: ProductsService) {}
+  subcategoryId:any;
+  constructor(private productService: ProductsService,private route: ActivatedRoute) {}
 
   shuffleProducts(products: any) {
     for (let i = products.length - 1; i > 0; i--) {
@@ -27,20 +28,25 @@ export class ProductsComponent implements OnInit {
     return products;
   }
 
+
   ngOnInit() {
-    this.productService.getAllProducts().subscribe((products:any) => {
-      this.products = products["data"];
-      this.filteredProducts = products["data"];
+    this.route.paramMap.subscribe(params => {
+      this.subcategoryId = params.get('id');  // Capture the 'id' from the route, '+' converts it to number
+      if (this.subcategoryId > 0) {
+        this.productService.getProductsbySubCategoryId(this.subcategoryId).subscribe((data: Product[]) => {
+          this.products = data;
+          this.filteredProducts = data;  // Initially set filtered products to be all products
+        })}
+        else{
+          this.productService.getAllProducts().subscribe((data:any)=>{
+            this.products = data['data'];
+            console.log(this.products);
+
+          })
+        }
     });
-    // this.productService.getAllSubCategories().subscribe((data:any)=>{
-    //   this.subcategories = data;
-    //   console.log(this.subcategories);
 
-    // })
-    this.productService.getProductsbySubCategoryId(1).subscribe((prods:Product[])=>{
-      // console.log(prods);
 
-    })
     this.productService.currentSearchTerm.subscribe((term) => {
       this.updateProductList(term);
     });
