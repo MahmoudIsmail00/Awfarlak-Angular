@@ -31,3 +31,70 @@
 .center-content button:hover {
   background-color: #326dec;
 }
+p{
+  text-decoration: none !important;
+}
+.container{
+  display: flex;
+}
+.myaccount{
+  width: 20%;
+  font-family: "Tajawal", sans-serif;
+  /* background-color: red; */
+  margin: .9375rem;
+  border-right: #EDEDED 1px solid;
+  padding-right: 1.25rem;
+  padding-bottom: 1.875rem;
+}
+#my{
+  color: #242424;
+  font-size: 1.125rem;
+  padding-bottom: 10px;
+  border-bottom: #EDEDED solid 1px;
+}
+.myaccount ul li{
+  font-size: .875rem;
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+.myaccount ul li:hover{
+  background-color:#EDEDED ;
+}
+.emptylist{
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.heart{
+  font-size: 190px;
+  color: #EDEDED;
+}
+#empty{
+ text-align: center;
+  color: #242424;
+  font-size: 48px;
+}
+#return{
+  color:#777777 ;
+  font-size: 1.0938rem;
+  font-weight: 400;
+  width: 50%;
+  max-width: 535px;
+  margin-inline: auto;
+  margin-bottom: 0;
+  text-align: center;
+  font-size: 110%;
+}
+.ReturnToShop{
+  background-color: #2573A3;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin-top: .9375rem;
+  border-radius: 8px;
+  /* margin-bottom: 0rem !important; */
+  font-size: 14px;
+  font-weight: 600;
+}
