@@ -22,7 +22,6 @@ export class HomeProductComponent implements OnInit {
   ngOnInit() {
       this.ProductsService.getProductsbySubCategoryId(this.subCategory.id).subscribe((data:Product[])=>{
         this.products = data;
-        console.log(this.products);
       })
   }
 }

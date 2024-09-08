@@ -194,7 +194,7 @@
   }
   @media all {
     .amount {
-      color: var(--wd-primary-color);
+      color: #2573a3;
       font-weight: 600;
     }
     del .amount {
@@ -1454,7 +1454,7 @@ div.br_alabel.berocket_alabel_id_21759 > span {
   }
 }
 /*! CSS Used fontfaces */
-@font-face {
+/* @font-face {
   font-weight: normal;
   font-style: normal;
   font-family: "woodmart-font";
@@ -1467,4 +1467,11 @@ div.br_alabel.berocket_alabel_id_21759 > span {
   font-family: "woodmart-font";
   src: url("https://www.awfarlak.com/wp-content/themes/woodmart/fonts/woodmart-font-1-400.woff2?v=7.6.0")
     format("woff2");
+} */
+.oldPrice{
+  text-decoration-line: line-through;
+    text-decoration-color: red;
+    text-decoration-style: solid;
+    color: #BBBBBB;
+    font-size: .9rem;
 }

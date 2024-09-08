@@ -3,7 +3,7 @@
     <!-- navbar -->
     <nav class="flex justify-between bg-[#2C91C1] text-white w-full  mx-auto">
       <div class="px-5 xl:px-12 py-6 flex w-full items-center">
-        <a class="text-3xl font-bold font-heading" href="#">
+        <a class="text-3xl font-bold font-heading"  routerLink="home">
           <img class="h-9"
             src="https://i0.wp.com/www.awfarlak.com/wp-content/uploads/2022/04/awfarlak_white_260x.webp?fit=215%2C82&ssl=1"
             alt="logo">
@@ -13,7 +13,7 @@
           <input (input)="updateSearch()" [(ngModel)]="search"
             class="border border-gray-300 h-10 w-full px-5 pr-16 rounded-lg text-sm placeholder-current focus:outline-none dark:bg-white dark:border-gray-50 dark:text-gray-600"
             type="search" name="search" placeholder="Search">
-          <button type="submit" class="absolute right-1 top-0 mt-3 mr-4">
+          <button type="submit" class="absolute right-0 top-0 search-button">
             <svg class="text-gray-600 dark:text-gray-200 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
               xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 56.966 56.966" xml:space="preserve"
               width="512px" height="512px">
