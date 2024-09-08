@@ -8,9 +8,9 @@
         class="wd-product wd-with-labels wd-hover-icons product-grid-item product type-product post-19950 status-publish instock product_cat-standard-laptops product_tag-used-laptop has-post-thumbnail shipping-taxable purchasable product-type-simple"
         data-loop="2" data-id="19950">
 
-        <div class="product-wrapper">
+        <div class="product-wrapper" routerLink="/product-details/{{item.id}}">
           <div class="product-element-top wd-quick-shop">
-            <a routerLink="productv2" class="product-image-link">
+            <a routerLink="/product-details/{{item.id}}" class="product-image-link">
               <div class="product-labels labels-rounded"><span
                   class="attribute-label product-label label-term-used-grade-a label-attribute-pa_condition">Used: Grade
                   A</span>
@@ -37,7 +37,7 @@
             </a>
 
             <div class="hover-img">
-              <a routerLink="productv2" aria-label="Product image"></a>
+              <a routerLink="/product-details/{{item.id}}" aria-label="Product image"></a>
             </div>
 
             <div class="wrapp-buttons">
@@ -70,7 +70,7 @@
             </div>
           </div>
           <div class="product-element-bottom">
-            <h3 class="wd-entities-title"><a href="product">{{item.description}}</a></h3>
+            <h3 class="wd-entities-title"><a routerLink="/product-details/{{item.id}}">{{item.description}}</a></h3>
             <span class="price"><del aria-hidden="true"><span class="oldPrice"><bdi>{{item.price + 2000}}&nbsp;<span
                       class="woocommerce-Price-currencySymbol">EGP</span></bdi></span></del> <span
                 class="screen-reader-text">السعر الأصلي هو: 14,000&nbsp;EGP.</span><ins aria-hidden="true"><span
