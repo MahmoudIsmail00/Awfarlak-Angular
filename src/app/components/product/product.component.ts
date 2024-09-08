@@ -1,3 +1,4 @@
+import { RouterLink } from '@angular/router';
 import { CartService } from './../../Services/cart/cart.service';
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../Models/product';
@@ -9,7 +10,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './product.component.html',
   styleUrls: ['./product.component.css'],
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,RouterLink],
 })
 export class ProductComponent implements OnInit {
   @Input() product!: Product; // Define an input property
