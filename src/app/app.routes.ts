@@ -34,6 +34,6 @@ export const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'productv2', component: AwfarlkComponentComponent },
+  { path: 'product-details/:id', component: AwfarlkComponentComponent },
   { path: '**', component: NotfoundComponent },
 ];

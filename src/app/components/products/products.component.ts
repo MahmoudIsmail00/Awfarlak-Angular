@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../../Services/store/products.service';
 import { Product } from '../../Models/product';
 import { ProductComponent } from '../product/product.component'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -10,7 +10,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
   standalone: true,
-  imports: [ProductComponent],
+  imports: [ProductComponent,RouterLink],
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];

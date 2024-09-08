@@ -49,4 +49,9 @@ export class ProductsService {
     const headers = this.getHeaders();
     return this.http.get<Product[]>(this.ProductsURL + 'GetProductsBySubCat/' + SubCategoryid, { headers });
   }
+
+  getProductWithSpecs(productId:number):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.get<any>(this.ProductsURL + 'GetProductWithSpecs/' + productId, { headers });
+  }
 }
