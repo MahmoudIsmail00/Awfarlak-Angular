@@ -68,6 +68,18 @@
   </section>
 
   <section class="home-category-container">
+
+    @for (item of subcategories; track $index) {
+        <app-home-product [subCategory]="item"/>
+      }
+    <!-- <div class="category-1 flex justify-around">
+      <app-home-product />
+      <app-home-product />
+      <app-home-product />
+      <app-home-product />
+      <app-home-product />
+    </div>
+
     <div class="category-1 flex justify-around">
       <app-home-product />
       <app-home-product />
@@ -81,14 +93,7 @@
       <app-home-product />
       <app-home-product />
       <app-home-product />
-    </div>
-    <div class="category-1 flex justify-around">
-      <app-home-product />
-      <app-home-product />
-      <app-home-product />
-      <app-home-product />
-      <app-home-product />
-    </div>
+    </div> -->
   </section>
 </div>
 <br>

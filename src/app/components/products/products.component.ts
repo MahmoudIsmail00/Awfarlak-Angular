@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit {
         })}
         else if(this.subcategoryId == 0){
           this.productService.getAllProducts().subscribe((data:any)=>{
-            this.products = data['data'];
+            this.products = data;
             console.log(this.products);
 
           })

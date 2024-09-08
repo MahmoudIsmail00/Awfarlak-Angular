@@ -24,7 +24,7 @@ export class ProductsService {
   // GetAll Methods
   getAllProducts(): Observable<Product[]> {
     const headers = this.getHeaders();
-    return this.http.get<Product[]>(this.ProductsURL + 'GetProducts', { headers });
+    return this.http.get<Product[]>(this.ProductsURL + 'GetAllProducts', { headers });
   }
 
   getAllBrands(): Observable<any[]> {

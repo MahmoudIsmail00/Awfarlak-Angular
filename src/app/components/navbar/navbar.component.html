@@ -80,10 +80,8 @@
         <a routerLink="products/3" class="category">Standard Laptops</a>
         <a routerLink="products/4" class="category">2-in-1 Laptops</a>
       }@else{
-        @for (item of subcategories; track subcategories) {
-          <!-- <a routerLink="products/{{item.id}}" class="category">{{item.name}}</a> -->
+        @for (item of subcategories; track $index) {
           <a routerLink="products/{{item.id}}" class="category">{{item.name}}</a>
-
         }
       }
 
