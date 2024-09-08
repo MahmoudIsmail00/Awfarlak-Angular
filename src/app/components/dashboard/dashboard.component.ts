@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/authentication/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { SideDashComponent } from '../side-dash/side-dash.component';
 
 @Component({
@@ -8,7 +8,7 @@ import { SideDashComponent } from '../side-dash/side-dash.component';
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
   standalone: true,
-  imports: [ SideDashComponent],
+  imports: [RouterLink, SideDashComponent],
 })
 export class DashboardComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}

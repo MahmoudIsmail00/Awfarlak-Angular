@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/authentication/auth.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-side-dash',
   standalone: true,
-  imports: [], 
+  imports: [RouterLink],
   templateUrl: './side-dash.component.html',
   styleUrls: ['./side-dash.component.css'],
 })
