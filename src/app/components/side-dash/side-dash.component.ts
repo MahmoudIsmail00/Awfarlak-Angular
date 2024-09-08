@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/authentication/auth.service';
 import { Router } from '@angular/router';
-import { SideDashComponent } from '../side-dash/side-dash.component';
 
 @Component({
-  selector: 'app-dashboard',
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css'],
+  selector: 'app-side-dash',
   standalone: true,
-  imports: [ SideDashComponent],
+  imports: [], 
+  templateUrl: './side-dash.component.html',
+  styleUrls: ['./side-dash.component.css'],
 })
-export class DashboardComponent implements OnInit {
+export class SideDashComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {}

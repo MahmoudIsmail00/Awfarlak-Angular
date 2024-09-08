@@ -3,10 +3,11 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../Models/product';
 import { AuthService } from '../authentication/auth.service';
+import { environment } from '../environment';
 
 @Injectable()
 export class ProductsService {
-  ProductsURL = 'https://localhost:7082/api/Products/';
+  ProductsURL = `${environment.apiUrl}/Products/`;
   private searchTerm = new BehaviorSubject<string>('');
   currentSearchTerm = this.searchTerm.asObservable();
 
