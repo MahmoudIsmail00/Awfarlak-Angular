@@ -6,14 +6,13 @@ import { AuthService } from '../../Services/authentication/auth.service';
 import { FormsModule } from '@angular/forms';
 import { SubCategory } from '../../Models/subCategory';
 import { ThemeService } from '../../Services/theme.service';
-import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   standalone: true,
-  imports: [RouterLink, FormsModule , MatIconModule ],
+  imports: [RouterLink, FormsModule],
 })
 export class NavbarComponent implements OnInit {
   search = '';
