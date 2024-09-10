@@ -18,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     AuthService,
     ProductsService,
     provideHttpClient(),
-    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, provideAnimationsAsync(), provideAnimationsAsync()
+    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, provideAnimationsAsync()
   ],
 };
