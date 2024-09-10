@@ -1,19 +1,22 @@
 import { Routes } from '@angular/router';
-import { ProductsComponent } from './Components/products/products.component';
-import { AboutComponent } from './Components/about/about.component';
-import { ProductComponent } from './Components/product/product.component';
-import { CartComponent } from './Components/cart/cart.component';
-import { HomeComponent } from './Components/home/home.component';
-import { LoginComponent } from './Components/login/login.component';
-import { SignupComponent } from './Components/signup/signup.component';
+import { ProductsComponent } from './products/products.component';
+import { AboutComponent } from './about/about.component';
+import { ProductComponent } from './product/product.component';
+import { CartComponent } from './cart/cart.component';
+import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './Services/authentication/authguard';
-import { NotfoundComponent } from './Components/notfound/notfound.component';
-import { ProfileComponent } from './Components/profile/profile.component';
-import { AlertComponent } from './Components/alert/alert.component';
-import { CompareComponent } from './Components/compare/compare.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { AwfarlkComponentComponent } from './Components/awfarlk-component/awfarlk-component.component';
-import { WishlistComponent } from './components/wishlist/wishlist.component';
+import { NotfoundComponent } from './notfound/notfound.component';
+import { ProfileComponent } from './profile/profile.component';
+import { AlertComponent } from './alert/alert.component';
+import { CompareComponent } from './compare/compare.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AwfarlkComponentComponent } from './awfarlk-component/awfarlk-component.component';
+import { WishlistComponent } from './wishlist/wishlist.component';
+import { AllAddressesComponent } from './all-addresses/all-addresses.component';
+import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
+import { AccountDetailsComponent } from './account-details/account-details.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -27,6 +30,9 @@ export const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'alert', component: AlertComponent },
+  { path: 'addresses', component: AllAddressesComponent },
+  { path: 'shippingAddress', component: ShippingAddressComponent },
+  { path: 'accountDetails', component: AccountDetailsComponent },
   { path: 'compare', component: CompareComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
   {

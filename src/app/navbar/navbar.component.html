@@ -1,0 +1,94 @@
+<div class="w-full  bg-[#2C91C1]">
+  <div class="flex flex-wrap place-items-center  bg-[#2C91C1]  w-3/4 mx-auto">
+    <!-- navbar -->
+    <nav class="flex justify-between bg-[#2C91C1] text-white w-full  mx-auto">
+      <div class="px-5 xl:px-12 py-6 flex w-full items-center">
+        <a class="text-3xl font-bold font-heading"  routerLink="home">
+          <img class="h-9"
+            src="https://i0.wp.com/www.awfarlak.com/wp-content/uploads/2022/04/awfarlak_white_260x.webp?fit=215%2C82&ssl=1"
+            alt="logo">
+        </a>
+        <!-- Nav Links -->
+        <div class="relative w-1/2 mx-auto text-gray-600">
+          <input (input)="updateSearch()" [(ngModel)]="search"
+            class="border border-gray-300 h-10 w-full px-5 pr-16 rounded-lg text-sm placeholder-current focus:outline-none dark:bg-white dark:border-gray-50 dark:text-gray-600"
+            type="search" name="search" placeholder="Search">
+          <button type="submit" class="absolute right-0 top-0 search-button">
+            <svg class="text-gray-600 dark:text-gray-200 h-4 w-4 fill-current" xmlns="http://www.w3.org/2000/svg"
+              xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 56.966 56.966" xml:space="preserve"
+              width="512px" height="512px">
+              <path d="M55.146,51.887L41.588,37.786c3.486-4.144,5.396-9.358,5.396-14.786c0-12.682-10.318-23-23-23s-23,10.318-23,23
+              s10.318,23,23,23c4.761,0,9.298-1.436,13.177-4.162l13.661,14.208c0.571,0.593,1.339,0.92,2.162,0.92
+              c0.779,0,1.518-0.297,2.079-0.837C56.255,54.982,56.293,53.08,55.146,51.887z M23.984,6c9.374,0,17,7.626,17,17s-7.626,17-17,17
+              s-17-7.626-17-17S14.61,6,23.984,6z" />
+            </svg>
+          </button>
+        </div>
+        <!-- Header Icons -->
+        <div class="icons flex px-10 justify-around ">
+          <ul class="flex items-center space-x-6">
+          <!-- <li>
+              <button mat-icon-button (click)="toggleTheme()">
+              <mat-icon>{{ isDarkMode ? 'wb_sunny' : 'nights_stay' }}</mat-icon>
+            </button>
+          </li> -->
+            <li><a routerLink="compare">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+                  <path fill-rule="evenodd"
+                    d="M12 5.25c1.213 0 2.415.046 3.605.135a3.256 3.256 0 0 1 3.01 3.01c.044.583.077 1.17.1 1.759L17.03 8.47a.75.75 0 1 0-1.06 1.06l3 3a.75.75 0 0 0 1.06 0l3-3a.75.75 0 0 0-1.06-1.06l-1.752 1.751c-.023-.65-.06-1.296-.108-1.939a4.756 4.756 0 0 0-4.392-4.392 49.422 49.422 0 0 0-7.436 0A4.756 4.756 0 0 0 3.89 8.282c-.017.224-.033.447-.046.672a.75.75 0 1 0 1.497.092c.013-.217.028-.434.044-.651a3.256 3.256 0 0 1 3.01-3.01c1.19-.09 2.392-.135 3.605-.135Zm-6.97 6.22a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.752-1.751c.023.65.06 1.296.108 1.939a4.756 4.756 0 0 0 4.392 4.392 49.413 49.413 0 0 0 7.436 0 4.756 4.756 0 0 0 4.392-4.392c.017-.223.032-.447.046-.672a.75.75 0 0 0-1.497-.092c-.013.217-.028.434-.044.651a3.256 3.256 0 0 1-3.01 3.01 47.953 47.953 0 0 1-7.21 0 3.256 3.256 0 0 1-3.01-3.01 47.759 47.759 0 0 1-.1-1.759L6.97 15.53a.75.75 0 0 0 1.06-1.06l-3-3Z"
+                    clip-rule="evenodd" />
+                </svg>
+              </a>
+
+            </li>
+            <li>
+              <a routerLink="wishlist">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+                </svg>
+              </a>
+
+            </li>
+            <li>
+              <a routerLink="cart">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                </svg>
+              </a>
+
+
+            </li>
+            <li><a routerLink="dashboard"> <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                  stroke-width="1.5" stroke="currentColor" class="size-6">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                    d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+                </svg>
+              </a>
+
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+  <div class="category-list-container bg-[#3398C7]  ">
+    <div class="bg-[#3398C7] w-3/4  mx-auto  flex justify-around place-items-center text-[#eaeaea] h-[40px]">
+      <a routerLink="products/0" class="category">All Laptops</a>
+      @if (subcategories.length < 1) {
+        <a routerLink="products/1" class="category">Business Laptops</a>
+        <a routerLink="products/2" class="category">Gaming Laptops</a>
+        <a routerLink="products/3" class="category">Standard Laptops</a>
+        <a routerLink="products/4" class="category">2-in-1 Laptops</a>
+      }@else{
+        @for (item of subcategories; track $index) {
+          <a routerLink="products/{{item.id}}" class="category">{{item.name}}</a>
+        }
+      }
+    </div>
+  </div>
+
+</div>

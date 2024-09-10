@@ -1,0 +1,54 @@
+<div class="flex h-screen" style="max-width:1400px ; margin: 20px auto; height: fit-content;">
+
+  <app-sidebar />
+
+  <div class="container mx-auto p-8">
+    <form class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+                <label for="first-name" class="block text-sm font-medium text-gray-700">First name <span class="text-red-500">*</span></label>
+                <input type="text" id="first-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div>
+                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name <span class="text-red-500">*</span></label>
+                <input type="text" id="last-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <label for="display-name" class="block text-sm font-medium text-gray-700">Display name <span class="text-red-500">*</span></label>
+            <input type="text" id="display-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <p class="mt-1 text-sm text-gray-500">This will be how your name will be displayed in the account section and in reviews</p>
+        </div>
+
+        <div class="mt-4">
+            <label for="email" class="block text-sm font-medium text-gray-700">Email address <span class="text-red-500">*</span></label>
+            <input type="email" id="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+        </div>
+
+        <div class="mt-6">
+            <h3 class="text-lg font-medium text-gray-700 border-b pb-2">Password change</h3>
+
+            <div class="mt-4">
+                <label for="current-password" class="block text-sm font-medium text-gray-700">Current password (leave blank to leave unchanged)</label>
+                <input type="password" id="current-password" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div class="mt-4">
+                <label for="new-password" class="block text-sm font-medium text-gray-700">New password (leave blank to leave unchanged)</label>
+                <input type="password" id="new-password" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+
+            <div class="mt-4">
+                <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm new password</label>
+                <input type="password" id="confirm-password" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            </div>
+        </div>
+
+        <div class="mt-6">
+            <button type="submit" class="w-full md:w-auto bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: #2c91c1;">Save Changes</button>
+        </div>
+    </form>
+ </div>
+</div>

@@ -1,0 +1,51 @@
+  <div class="flex h-screen" style="max-width:1400px ; margin: 20px auto;">
+
+    <app-sidebar />
+    <!-- Main Content -->
+    <div class="flex-1 bg-white p-8">
+      <div style="font-size: 34px; font-weight: bold; color: #1687ac; text-align: center; margin-top: 20px;">
+        Welcome, {{ currentUser?.displayName }}
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+        <!-- Orders -->
+        <div
+          class="flex flex-col items-center p-4 border rounded-lg shadow hover:shadow-lg hover:bg-gray-100 transition duration-300">
+          <img src="https://img.icons8.com/ios/50/000000/purchase-order.png" alt="Orders Icon" class="mb-2">
+          <span class="font-medium text-lg">Orders</span>
+        </div>
+
+        <!-- Addresses -->
+        <div
+          routerLink="/addresses"
+          class="flex flex-col items-center p-4 border rounded-lg shadow hover:shadow-lg hover:bg-gray-100 transition duration-300">
+          <img src="https://img.icons8.com/ios/50/000000/address.png" alt="Addresses Icon" class="mb-2">
+          <span class="font-medium text-lg">Addresses</span>
+        </div>
+
+        <!-- Account Details -->
+        <div
+          routerLink="/accountDetails"
+          class="flex flex-col items-center p-4 border rounded-lg shadow hover:shadow-lg hover:bg-gray-100 transition duration-300">
+          <svg width="64px" height="64px" viewBox="-46.08 -46.08 604.16 604.16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000" stroke="#000000" transform="matrix(1, 0, 0, 1, 0, 0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.024"></g><g id="SVGRepo_iconCarrier"> <title>details</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="Combined-Shape" fill="#303030" transform="translate(64.000000, 64.000000)"> <path d="M384,64 L384,384 L64,384 L64,64 L384,64 Z M341.333333,106.666667 L106.666667,106.666667 L106.666667,341.333333 L341.333333,341.333333 L341.333333,106.666667 Z M320,1.42108547e-14 L320,42.6666667 L42.666,42.666 L42.6666667,320 L1.42108547e-14,320 L1.42108547e-14,1.42108547e-14 L320,1.42108547e-14 Z M298.666667,234.666667 L298.666667,277.333333 L149.333333,277.333333 L149.333333,234.666667 L298.666667,234.666667 Z M298.666667,149.333333 L298.666667,192 L149.333333,192 L149.333333,149.333333 L298.666667,149.333333 Z"> </path> </g> </g> </g></svg>
+          <span class="font-medium text-lg">Account Details</span>
+        </div>
+
+        <!-- Wishlist -->
+        <div
+          class="flex flex-col items-center p-4 border rounded-lg shadow hover:shadow-lg hover:bg-gray-100 transition duration-300" routerLink="/wishlist">
+          <img src="https://img.icons8.com/ios/50/000000/wish-list.png" alt="Wishlist Icon" class="mb-2">
+          <span class="font-medium text-lg">Wishlist</span>
+        </div>
+
+        <!-- Logout -->
+        <div
+          class="flex flex-col items-center p-4 border rounded-lg shadow hover:shadow-lg hover:bg-gray-100 transition duration-300"
+          (click)="logout()">
+          <img src="https://img.icons8.com/ios/50/000000/logout-rounded-left.png" alt="Logout Icon" class="mb-2">
+          <span class="font-medium text-lg">Logout</span>
+        </div>
+      </div>
+    </div>
+  </div>
+

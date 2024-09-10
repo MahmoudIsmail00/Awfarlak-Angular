@@ -1,0 +1,97 @@
+<div class="flex h-screen" style="max-width:1400px ; margin: 20px auto; height: fit-content;">
+
+<app-sidebar />
+<div class="container mx-auto p-8">
+  <h2 class="text-2xl font-semibold mb-6">Shipping address</h2>
+
+  <form class="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div>
+          <label for="first-name" class="block text-sm font-medium text-gray-700">First name <span class="text-red-500">*</span></label>
+          <input type="text" id="first-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+      <div>
+          <label for="last-name" class="block text-sm font-medium text-gray-700">Last name <span class="text-red-500">*</span></label>
+          <input type="text" id="last-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+
+      <div class="md:col-span-2">
+          <label for="company-name" class="block text-sm font-medium text-gray-700">Company name (optional)</label>
+          <input type="text" id="company-name" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+
+      <div class="md:col-span-2">
+          <label for="country-region" class="block text-sm font-medium ">Country / Region <span class="text-red-500">*</span></label>
+          <input type="text" id="country-region" value="Egypt" disabled class="mt-1 block  px-3  cursor-not-allowed">
+      </div>
+
+      <div class="md:col-span-2">
+          <label for="street-address" class="block text-sm font-medium text-gray-700">Street address <span class="text-red-500">*</span></label>
+          <input type="text" id="street-address" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200" placeholder="House number and street name">
+      </div>
+
+      <div class="md:col-span-2">
+          <input type="text" id="apartment" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200" placeholder="Apartment, suite, unit, etc. (optional)">
+      </div>
+
+
+      <div class="md:col-span-2">
+          <label for="town-city" class="block text-sm font-medium text-gray-700">town-city</label>
+          <input type="text" id="town-city" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+      <div class="md:col-span-2">
+          <label for="state-county" class="block text-sm font-medium text-gray-700">State / County <span class="text-red-500">*</span></label>
+          <select id="state-county" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200">
+              <option>Select an option...</option>
+              <option>الاسكندريه</option>
+              <option>اسوان</option>
+              <option>اسيوط</option>
+              <option>البحر الاحمر</option>
+              <option>البحر الاحمر</option>
+              <option> البحيره</option>
+              <option> بنى سويف</option>
+              <option> الدقهليه</option>
+              <option> دمياط</option>
+              <option> الفيوم</option>
+              <option> الغربيه</option>
+              <option> الجيزه</option>
+              <option> الاسماعيليه</option>
+              <option> الفيوم</option>
+              <option> جنوب سينا</option>
+              <option> القليوبيه</option>
+              <option> كفرالشيخ</option>
+              <option> قنا</option>
+              <option> الاقصر</option>
+              <option> المنيا</option>
+              <option> المنوفيه</option>
+              <option> مطروح</option>
+              <option> بورسعيد</option>
+              <option> سوهاج</option>
+              <option> الشرقيه</option>
+              <option> شمال سينا</option>
+              <option> السويس</option>
+              <option> الشرقيه</option>
+              <option> الوادى الجديد</option>
+          </select>
+      </div>
+
+      <div class="md:col-span-2">
+          <label for="postcode" class="block text-sm font-medium text-gray-700">Postcode / ZIP <span class="text-red-500">*</span></label>
+          <input type="text" id="postcode" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+
+      <div class="md:col-span-2">
+          <label for="phone" class="block text-sm font-medium text-gray-700">Phone <span class="text-red-500">*</span></label>
+          <input type="text" id="phone" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring focus:ring-blue-200">
+      </div>
+      <div class="md:col-span-2">
+          <label for="email" class="block text-sm font-medium text-gray-700">Email address <span class="text-red-500">*</span></label>
+          <input type="email" id="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+      </div>
+
+            <div class="md:col-span-2">
+          <button type="submit" class="w-full md:w-auto bg-blue-500 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600 focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="background-color: #2c91c1;">Save Address</button>
+      </div>
+  </form>
+ </div>
+</div>
