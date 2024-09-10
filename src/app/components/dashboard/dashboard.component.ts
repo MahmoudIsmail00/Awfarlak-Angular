@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../Services/authentication/auth.service';
 import { Router, RouterLink } from '@angular/router';
+import { User } from '../../Models/user';
 
 @Component({
   selector: 'app-dashboard',
@@ -10,9 +11,15 @@ import { Router, RouterLink } from '@angular/router';
   imports: [RouterLink],
 })
 export class DashboardComponent implements OnInit {
+  currentUser: User | null = null;
+
   constructor(private authService: AuthService, private router: Router) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.authService.currentUser.subscribe(user => {
+      this.currentUser = user;
+    })
+  }
 
   logout() {
     this.authService.logout();

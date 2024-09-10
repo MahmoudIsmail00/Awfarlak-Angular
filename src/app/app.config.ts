@@ -8,6 +8,7 @@ import { HTTP_INTERCEPTORS, HttpClient, provideHttpClient } from '@angular/commo
 import { ProductsService } from './Services/store/products.service';
 import { CartService } from './Services/cart/cart.service';
 import { JwtInterceptor } from './Services/authentication/JwtInterceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     AuthService,
     ProductsService,
     provideHttpClient(),
-    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, provideAnimationsAsync()
   ],
 };
