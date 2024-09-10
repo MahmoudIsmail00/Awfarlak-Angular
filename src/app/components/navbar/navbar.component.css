@@ -11,3 +11,24 @@
   align-items: center;
   border-radius: 7px;
 }
+button[mat-icon-button] {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button[mat-icon-button] {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+button[mat-icon-button] mat-icon {
+  font-size: 24px;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+button[mat-icon-button]:hover mat-icon {
+  color: #ffcc00;
+}

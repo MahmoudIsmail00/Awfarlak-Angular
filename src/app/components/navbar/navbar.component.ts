@@ -5,24 +5,34 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../Services/authentication/auth.service';
 import { FormsModule } from '@angular/forms';
 import { SubCategory } from '../../Models/subCategory';
+import { ThemeService } from '../../Services/theme.service';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css'],
   standalone: true,
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormsModule , MatIconModule ],
 })
 export class NavbarComponent implements OnInit {
   search = '';
   isDropdownOpen = false;
   subcategories:SubCategory[] =[];
-
+  isDarkMode: boolean;
   constructor(
     private authService: AuthService,
     private productsService: ProductsService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private themeService: ThemeService
+  ) {this.isDarkMode = this.themeService.isDarkMode();}
+
+
+  toggleTheme() {
+    this.isDarkMode = !this.isDarkMode;
+    this.themeService.setDarkMode(this.isDarkMode);
+  }
+
 
   logout() {
     this.authService.logout();
