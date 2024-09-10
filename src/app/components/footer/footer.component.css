@@ -1,6 +1,61 @@
-.sticky-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  z-index: 1000;
+
+.cols{
+  width: 60%;
+}
+p{
+  margin: 0;
+}
+footer{
+  background-color: #F4F4F4;
+  padding: .9375rem 0;
+}
+
+.colHead{
+  color:#333333 ;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+a{
+  text-decoration: none;
+}
+img{
+  width: 150px;
+}
+.row{
+  padding-top: 20px;
+
+}
+p:hover{
+  color: black;
+}
+.innerText,.description{
+  color: #767676 ;
+  margin-top: .9375rem;
+  display: block;
+}
+.description{
+  font-size: .875rem;
+  padding-bottom: 1.875rem;
+}
+.break{
+  border-bottom: #b8b5b5 1px solid;
+  margin-top: 2.5rem;
+}
+.link{
+  color: #242424;
+  font-size: .8rem;
+  font-weight: 600;
+}
+.leftText{
+  display: flex;
+}
+.rights{
+  font-size: .75rem;
+  margin-left: .1875rem;
+  color: #767676;
+}
+.lowFooter{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
 }
