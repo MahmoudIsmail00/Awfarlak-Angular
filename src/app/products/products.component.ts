@@ -19,6 +19,8 @@ export class ProductsComponent implements OnInit {
   images:any;
   filteredProducts: Product[] = [];
   subcategoryId:any;
+  Brands:any[] = [];
+  BrandsQuantity!:[string,number][];
   constructor(private productService: ProductsService,private route: ActivatedRoute) {}
 
   shuffleProducts(products: any) {
@@ -36,23 +38,23 @@ export class ProductsComponent implements OnInit {
       if (this.subcategoryId > 0) {
         this.productService.getProductsbySubCategoryId(this.subcategoryId).subscribe((data: Product[]) => {
           this.products = data;
+          this.Brands = data.map(x=>x.productBrandName);
           // console.log(this.products);
-
+          console.log(this.Brands);
+          this.getBrandsWithQuantites();
           this.filteredProducts = data;  // Initially set filtered products to be all products
         })}
         else if(this.subcategoryId == 0){
           this.productService.getAllProducts().subscribe((data:any)=>{
             this.products = data;
-            // console.log(this.products);
-
           })
         }
     });
 
-
     this.productService.currentSearchTerm.subscribe((term) => {
       this.updateProductList(term);
     });
+
   }
   updateProductList(term: string) {
     this.filteredProducts = this.products.filter((product) =>
@@ -61,5 +63,30 @@ export class ProductsComponent implements OnInit {
   }
   encodeImagePath(imagePath: string): string {
     return imagePath.split(' ').join('%20');
+  }
+  getBrandsWithQuantites(){
+    const map = new Map<string, number>();
+
+    this.Brands.forEach((item: string) => {
+      const normalizedItem = item;
+
+      if (map.has(normalizedItem)) {
+        map.set(normalizedItem, map.get(normalizedItem)! + 1); // Increment count
+      } else {
+        map.set(normalizedItem, 1); // Initialize count
+      }
+    });
+
+    this.BrandsQuantity= Array.from(map.entries());
+
+    console.log(this.BrandsQuantity);
+
+  }
+  filiterItems(name:string){
+    console.log(name);
+
+    this.filteredProducts = this.products.filter(x=>x.productBrandName === name);
+    console.log(this.filteredProducts);
+
   }
 }

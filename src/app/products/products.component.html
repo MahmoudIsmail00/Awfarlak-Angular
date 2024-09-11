@@ -4,21 +4,17 @@
   <aside class="sidebar">
       <!-- Sidebar content such as filters for Brand, Condition, etc. -->
        <div class="widget">
-          <h5 class="widget-title">BRAND</h5>
-          <ul>
-              <li>
-                <a class="widli">
-                  <span class="widliType">Dell</span>
-                  <span class="count">10</span>
-                </a>
-              </li>
-              <li>
-                <a class="widli">
-                  <span class="widliType">HP</span>
-                  <span class="count">15</span>
-                </a>
-              </li>
-          </ul>
+        <h5 class="widget-title">BRAND</h5>
+        <ul>
+        @for (item of BrandsQuantity; track $index) {
+          <li>
+            <a class="widli" (click)="filiterItems(item[0])">
+              <span class="widliType">{{item[0]}}</span>
+              <span class="count">{{item[1]}}</span>
+            </a>
+          </li>
+        }
+        </ul>
        </div>
 
       <h2>CONDITION</h2>
@@ -39,7 +35,7 @@
       <section class="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
         <section
             class="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start " >
-            @for(product of this.products; track product.id){
+            @for(product of this.filteredProducts; track product.id){
                 <app-product [product]="product" />
             }
         </section>
