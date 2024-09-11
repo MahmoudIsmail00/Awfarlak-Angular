@@ -1,5 +1,5 @@
 export interface ProductWithSpecs {
-  id:string,
+  id:number,
   name:string,
   description:string,
   price:string,

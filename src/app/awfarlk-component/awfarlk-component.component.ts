@@ -4,13 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ProductWithSpecs } from '../../Models/productWithSpecs';
 import { CartService } from '../Services/cart/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-awfarlk-component',
   templateUrl: './awfarlk-component.component.html',
   styleUrls: ['./awfarlk-component.component.css'],
   standalone: true,
-  imports: []
+  imports: [NgIf]
 })
 export class AwfarlkComponentComponent implements OnInit {
   productId: string | null = null;

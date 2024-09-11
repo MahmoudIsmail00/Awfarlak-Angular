@@ -40,7 +40,7 @@ export class ProductsComponent implements OnInit {
           this.products = data;
           this.Brands = data.map(x=>x.productBrandName);
           // console.log(this.products);
-          console.log(this.Brands);
+          //console.log(this.Brands);
           this.getBrandsWithQuantites();
           this.filteredProducts = data;  // Initially set filtered products to be all products
         })}
@@ -49,7 +49,7 @@ export class ProductsComponent implements OnInit {
           this.products = data;
           this.Brands = this.products.map((x:any)=>x.productBrandName);
           // console.log(this.products);
-          console.log(this.Brands);
+          //console.log(this.Brands);
           this.getBrandsWithQuantites();
           this.filteredProducts = data;
           })
@@ -84,14 +84,14 @@ export class ProductsComponent implements OnInit {
 
     this.BrandsQuantity= Array.from(map.entries());
 
-    console.log(this.BrandsQuantity);
+    //console.log(this.BrandsQuantity);
 
   }
   filiterItems(name:string){
     console.log(name);
 
     this.filteredProducts = this.products.filter(x=>x.productBrandName === name);
-    console.log(this.filteredProducts);
+    //console.log(this.filteredProducts);
 
   }
 }

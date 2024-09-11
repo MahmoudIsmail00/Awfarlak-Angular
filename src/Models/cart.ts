@@ -3,6 +3,6 @@ interface CartItems {
 }
 
 export interface Cart {
-  id: string;
+  id: number;
   items: CartItems;
 }

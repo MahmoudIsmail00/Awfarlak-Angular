@@ -7,9 +7,8 @@ import { NgFor } from '@angular/common';
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
-  standalone : true,
-  imports : [NgFor]
-
+  standalone: true,
+  imports: [NgFor]
 })
 export class CartComponent implements OnInit {
   usercartItems: { product: ProductWithSpecs; quantity: number }[] = [];
@@ -17,25 +16,25 @@ export class CartComponent implements OnInit {
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
-    this.usercartItems = this.cartService.getCartProducts();
+    this.cartService.cart$.subscribe(cartItems => {
+      this.usercartItems = cartItems;
+    });
   }
 
-  increaseProductQuantity(productId: string) {
+  increaseProductQuantity(productId: number) {
     this.cartService.increaseProductQuantity(productId);
-    this.usercartItems = this.cartService.getCartProducts(); // Refresh cart items
   }
 
-  decreaseProductQuantity(productId: string) {
+  decreaseProductQuantity(productId: number) {
     this.cartService.decreaseProductQuantity(productId);
-    this.usercartItems = this.cartService.getCartProducts(); // Refresh cart items
   }
 
   calculateTotal(): number {
     return this.cartService.calculateTotal();
   }
 
-  // Helper method to convert price from string to number
   toNumber(value: string): number {
     return parseFloat(value);
   }
+
 }

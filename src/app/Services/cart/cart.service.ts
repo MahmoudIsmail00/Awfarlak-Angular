@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { Cart } from '../../../Models/cart';
 import { environment } from '../environment';
 import { ProductWithSpecs } from '../../../Models/productWithSpecs';
@@ -9,107 +9,114 @@ import { ProductWithSpecs } from '../../../Models/productWithSpecs';
   providedIn: 'root'
 })
 export class CartService {
-  apiUrl = `${environment.apiUrl}/basket/`; // Updated to match API endpoint
-  userCart: Cart = { id: 'unRegisteredUserCartId', items: {} };
-  private cart: { product: ProductWithSpecs; quantity: number }[] = []; // Updated type
+  apiUrl = `${environment.apiUrl}/basket/`;
+  userCart: Cart = { id: 0, items: {} };
+  private cart: { product: ProductWithSpecs; quantity: number }[] = [];
+  private cartSubject = new BehaviorSubject<{ product: ProductWithSpecs; quantity: number }[]>(this.cart);
 
-  constructor(private http: HttpClient) {}
+  cart$ = this.cartSubject.asObservable();
+
+  constructor(private http: HttpClient) {
+    // this.initializeCart().subscribe();
+  }
 
   addToCart(product: ProductWithSpecs, quantity: number): void {
+    console.log('Adding product to cart:', product);
     const existingProduct = this.cart.find(item => item.product.id === product.id);
     if (existingProduct) {
       existingProduct.quantity += quantity;
+      console.log('Product already in cart, updated quantity:', existingProduct);
     } else {
       this.cart.push({ product, quantity });
+      console.log('New product added to cart:', product);
     }
-    console.log('Product added to cart:', product);
-  }
-  getCartProducts(): { product: ProductWithSpecs; quantity: number }[] {
-    return this.cart;
+    this.cartSubject.next(this.cart);
   }
 
   getCartItems(): { product: ProductWithSpecs; quantity: number }[] {
     return this.cart;
   }
 
-  // Fetch the user cart from the server using basket ID
   getUserCart(id: string | null): void {
     if (id) {
-      this.http
-        .get<Cart>(`${this.apiUrl}/${id}`)
-        .pipe(
-          map((cart) => {
-            this.userCart = cart;
-          })
-        )
-        .subscribe(
-          (cart) => console.log('Fetched user cart:', cart),
-          (error) => console.log('Error fetching cart:', error)
-        );
+      this.http.get<Cart>(`${this.apiUrl}/${id}`).pipe(
+        map((cart) => {
+          this.userCart = cart;
+        }),
+        catchError(error => {
+          console.log('Error fetching cart:', error);
+          return throwError(error);
+        })
+      ).subscribe(
+        (cart) => console.log('Fetched user cart:', cart),
+        (error) => console.log('Error fetching cart:', error)
+      );
     } else {
       console.log('User is not registered, no cart ID provided');
     }
   }
 
-  // Initialize a new empty cart for a new user or guest
   initializeCart(): Observable<Cart> {
-    const newCart = { id: this.userCart.id, items: {} }; // Keep the ID if it's already set
+    const newCart = { id: this.userCart.id, items: {} };
     return this.http.post<Cart>(this.apiUrl, newCart).pipe(
       map((cart) => {
         this.userCart = cart;
         return cart;
+      }),
+      catchError(error => {
+        console.log('Error initializing cart:', error);
+        return throwError(error);
       })
     );
   }
 
-  // Get the quantity of a specific product from the cart
   getProductQuantity(id: string): number {
     const cartItem = this.userCart.items[id];
     return cartItem !== undefined ? cartItem : 0;
   }
 
-  // Clear the cart (removes all items but keeps the basket ID)
   clearCart(): void {
-    this.userCart.items = {}; // Reset cart items
-    this.updateUserCartOnServer(); // Save changes to the server
+    this.userCart.items = {};
+    this.updateUserCartOnServer();
   }
 
-  // Update the cart on the server using the POST method
   updateUserCartOnServer(): void {
-    if (this.userCart.id !== 'unRegisteredUserCartId') {
-      this.http
-        .post<Cart>(this.apiUrl, this.userCart) // Using POST to update (as per WebAPI)
-        .subscribe(
-          (response) => console.log('Cart updated successfully', response),
-          (error) => console.log('Error updating cart:', error)
-        );
+    if (this.userCart.id !== 0) {
+      this.http.post<Cart>(this.apiUrl, this.userCart).pipe(
+        catchError(error => {
+          console.log('Error updating cart:', error);
+          return throwError(error);
+        })
+      ).subscribe(
+        (response) => console.log('Cart updated successfully', response),
+        (error) => console.log('Error updating cart:', error)
+      );
     }
   }
 
-  // Increase the quantity of a product in the cart
-  increaseProductQuantity(id: string): void {
+  increaseProductQuantity(id: number): void {
     if (this.userCart.items[id]) {
       this.userCart.items[id] += 1;
     } else {
       this.userCart.items[id] = 1;
     }
-    this.updateUserCartOnServer(); // Update the cart on the server after the change
+    this.cartSubject.next(this.cart);
+    this.updateUserCartOnServer();
   }
 
-  // Decrease the quantity of a product in the cart
-  decreaseProductQuantity(id: string): void {
+  decreaseProductQuantity(id: number): void {
     if (this.userCart.items[id] && this.userCart.items[id] > 1) {
       this.userCart.items[id] -= 1;
     } else {
-      delete this.userCart.items[id]; // Remove the product if quantity is zero
+      delete this.userCart.items[id];
     }
-    this.updateUserCartOnServer(); // Update the cart on the server after the change
+    this.cartSubject.next(this.cart);
+    this.updateUserCartOnServer();
   }
 
-  // Calculate the total price of the cart
   calculateTotal(): number {
     return this.cart.reduce((total, item) => {
-      return total + (parseFloat(item.product.price) * item.quantity);
+      return total + (parseFloat( item.product.price )* item.quantity);
     }, 0);
   }
 }
