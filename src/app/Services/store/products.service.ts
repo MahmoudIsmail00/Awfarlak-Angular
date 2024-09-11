@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Product } from '../../Models/product';
+import { Product } from '../../../Models/product';
 import { AuthService } from '../authentication/auth.service';
 import { environment } from '../environment';
 
@@ -41,17 +41,17 @@ export class ProductsService {
   // Get Product By Id
   getProductbyId(id: number): Observable<Product> {
     const headers = this.getHeaders();
-    return this.http.get<Product>(this.ProductsURL + 'GetProductById/' + id, { headers });
+    return this.http.get<Product>(`${this.ProductsURL}GetProductById/${id}`, { headers });
   }
 
   // Get Products by SubCategory
   getProductsbySubCategoryId(SubCategoryid: number): Observable<Product[]> {
     const headers = this.getHeaders();
-    return this.http.get<Product[]>(this.ProductsURL + 'GetProductsBySubCat/' + SubCategoryid, { headers });
+    return this.http.get<Product[]>(`${this.ProductsURL}GetProductsBySubCat/${SubCategoryid}`, { headers });
   }
 
-  getProductWithSpecs(productId:number):Observable<any>{
+  getProductWithSpecs(productId: number): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.get<any>(this.ProductsURL + 'GetProductWithSpecs/' + productId, { headers });
+    return this.http.get<any>(`${this.ProductsURL}GetProductWithSpecs/${productId}`, { headers });
   }
 }

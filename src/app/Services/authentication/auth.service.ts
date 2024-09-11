@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
-import { User } from '../../Models/user';
+import { User } from '../../../Models/user';
 import { environment } from '../environment';
 
 @Injectable({
@@ -23,7 +23,7 @@ export class AuthService {
 
   public getToken(): string | null {
     return this.currentUserValue?.token || null;
-    
+
   }
 
   login(email: string, password: string): Observable<boolean> {

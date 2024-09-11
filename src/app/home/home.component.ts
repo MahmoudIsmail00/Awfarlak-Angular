@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AwfarlkComponentComponent } from '../awfarlk-component/awfarlk-component.component';
 import { ProductsService } from '../Services/store/products.service';
-import { SubCategory } from '../Models/subCategory';
+import { SubCategory } from '../../Models/subCategory';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',

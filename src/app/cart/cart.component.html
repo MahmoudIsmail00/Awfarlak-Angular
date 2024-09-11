@@ -1,19 +1,4 @@
-<!-- <div class="cart-container">
-  <h1>Your Cart</h1>
-  @for(item of this.usercartItems;track item.product.id){
-
-  <div class="cart-item">
-    <h2>{{ item.product.title }}</h2>
-    <p>{{ item.product.description }}</p>
-    <p>Price: {{ item.product.price }}</p>
-    <p>Quantity: {{ item.quantity }}</p>
-  </div>
-  } -->
-
-
-
-
-<div class="bg-gray-100 h-screen py-8"  style="max-width:1400px ; margin: 20px auto;">
+<div class="bg-gray-100 h-screen py-8" style="max-width: 1400px; margin: 20px auto;">
   <div class="container mx-auto px-4">
     <h1 class="text-2xl font-semibold mb-4">Shopping Cart</h1>
     <div class="flex flex-col md:flex-row gap-4">
@@ -29,27 +14,31 @@
               </tr>
             </thead>
             <tbody>
-              @for(item of this.usercartItems;track item.product.id){
-
-              <tr>
+              <tr *ngFor="let item of usercartItems">
                 <td class="py-4">
                   <div class="flex items-center">
                     <img class="h-16 w-16 mr-4" [src]="item.product.pictureUrl" alt="Product image">
-                    <span class="font-semibold">{{item.product.name}}</span>
+                    <span class="font-semibold">{{ item.product.name }}</span>
                   </div>
                 </td>
-                <td class="py-4">${{item.product.price}}</td>
+                <td class="py-4">{{ item.product.price }} EGP</td>
                 <td class="py-4">
                   <div class="flex items-center">
-                    <button class="border rounded-md py-2 px-4 mr-2">-</button>
-                    <span class="text-center w-8">{{item.quantity}}</span>
-                    <button class="border rounded-md py-2 px-4 ml-2">+</button>
+                    <button
+                      class="border rounded-md py-2 px-4 mr-2"
+                      (click)="decreaseProductQuantity(item.product.id)">
+                      -
+                    </button>
+                    <span class="text-center w-8">{{ item.quantity }}</span>
+                    <button
+                      class="border rounded-md py-2 px-4 ml-2"
+                      (click)="increaseProductQuantity(item.product.id)">
+                      +
+                    </button>
                   </div>
                 </td>
-                <td class="py-4">${{item.quantity*item.product.price}}</td>
+                <td class="py-4">{{ (item.quantity * toNumber(item.product.price)).toFixed(2) }} EGP</td>
               </tr>
-              }
-              <!-- More product rows -->
             </tbody>
           </table>
         </div>
@@ -59,23 +48,24 @@
           <h2 class="text-lg font-semibold mb-4">Summary</h2>
           <div class="flex justify-between mb-2">
             <span>Subtotal</span>
-            <span>${{this.calculateTotal()}}</span>
+            <span>{{ calculateTotal().toFixed(2) }} EGP</span>
           </div>
           <div class="flex justify-between mb-2">
             <span>Taxes</span>
-            <span>$1.99</span>
+            <span>1.99 EGP</span>
           </div>
           <div class="flex justify-between mb-2">
             <span>Shipping</span>
-            <span>$0.00</span>
+            <span>0.00 EGP</span>
           </div>
           <hr class="my-2">
           <div class="flex justify-between mb-2">
             <span class="font-semibold">Total</span>
-            <span class="font-semibold">${{1.99+this.calculateTotal()}}</span>
+            <span class="font-semibold">{{ (calculateTotal() + 1.99).toFixed(2) }} EGP</span>
           </div>
-          <button class="bg-gray-700 text-white py-2 px-4 rounded-lg mt-4 w-full "
-            (click)="createFakeOrder()">Checkout</button>
+          <button class="bg-gray-700 text-white py-2 px-4 rounded-lg mt-4 w-full">
+            Checkout
+          </button>
         </div>
       </div>
     </div>

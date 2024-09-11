@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../Services/store/products.service';
-import { Product } from '../Models/product';
+import { Product } from '../../Models/product';
 import { ProductComponent } from '../product/product.component'
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { NgFor } from '@angular/common';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
   standalone: true,
-  imports: [ProductComponent,RouterLink],
+  imports: [ProductComponent,RouterLink , NgFor],
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];

@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
       (isLoggedIn) => {
         if (isLoggedIn) {
           console.log('Signup successful');
-          this.router.navigate(['products']);
+          this.router.navigate(['products/0']);
         } else {
           console.log('Signup not successful');
         }

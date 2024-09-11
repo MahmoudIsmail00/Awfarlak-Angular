@@ -9,6 +9,9 @@ import { ProductsService } from './Services/store/products.service';
 import { CartService } from './Services/cart/cart.service';
 import { JwtInterceptor } from './Services/authentication/JwtInterceptor';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
@@ -17,6 +20,6 @@ export const appConfig: ApplicationConfig = {
     AuthService,
     ProductsService,
     provideHttpClient(),
-    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, provideAnimationsAsync()
+    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, provideAnimationsAsync(),MatSnackBarModule
   ],
 };

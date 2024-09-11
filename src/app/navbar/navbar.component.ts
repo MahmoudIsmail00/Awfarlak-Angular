@@ -4,7 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../Services/authentication/auth.service';
 import { FormsModule } from '@angular/forms';
-import { SubCategory } from '../Models/subCategory';
+import { SubCategory } from '../../Models/subCategory';
 import { ThemeService } from '../Services/theme.service';
 import { MatIconModule } from '@angular/material/icon';
 

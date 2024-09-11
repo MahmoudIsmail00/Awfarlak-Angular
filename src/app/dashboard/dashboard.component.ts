@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Services/authentication/auth.service';
 import { Router, RouterLink } from '@angular/router';
-import { User } from '../Models/user';
+import { User } from '../../Models/user';
 import { SidebarComponent } from "../sidebar/sidebar.component";
 @Component({
   selector: 'app-dashboard',
