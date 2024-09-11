@@ -54,4 +54,8 @@ export class ProductsService {
     const headers = this.getHeaders();
     return this.http.get<any>(`${this.ProductsURL}GetProductWithSpecs/${productId}`, { headers });
   }
+  getAllSpecs():Observable<any[]>{
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(`${this.ProductsURL}GetProductSpecs/Specs`, { headers });
+  }
 }

@@ -1,3 +1,4 @@
+import { specs } from './../../Models/specs';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../Services/store/products.service';
 import { Product } from '../../Models/product';
@@ -21,6 +22,8 @@ export class ProductsComponent implements OnInit {
   subcategoryId:any;
   Brands:any[] = [];
   BrandsQuantity!:[string,number][];
+  specs:specs[] = [];
+  cpusQuantities!:[string,number][];
   constructor(private productService: ProductsService,private route: ActivatedRoute) {}
 
   shuffleProducts(products: any) {
@@ -31,27 +34,23 @@ export class ProductsComponent implements OnInit {
     return products;
   }
 
-
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
       this.subcategoryId = params.get('id');  // Capture the 'id' from the route, '+' converts it to number
       if (this.subcategoryId > 0) {
         this.productService.getProductsbySubCategoryId(this.subcategoryId).subscribe((data: Product[]) => {
           this.products = data;
-          this.Brands = data.map(x=>x.productBrandName);
-          // console.log(this.products);
-          //console.log(this.Brands);
-          this.getBrandsWithQuantites();
           this.filteredProducts = data;  // Initially set filtered products to be all products
+          this.getBrands();
+          this.getSpecs();
+
         })}
         else if(this.subcategoryId == 0){
           this.productService.getAllProducts().subscribe((data:any)=>{
-          this.products = data;
-          this.Brands = this.products.map((x:any)=>x.productBrandName);
-          // console.log(this.products);
-          //console.log(this.Brands);
-          this.getBrandsWithQuantites();
-          this.filteredProducts = data;
+            this.products = data;
+            this.filteredProducts = data;
+            this.getBrands();
+            this.getSpecs();
           })
         }
     });
@@ -71,7 +70,6 @@ export class ProductsComponent implements OnInit {
   }
   getBrandsWithQuantites(){
     const map = new Map<string, number>();
-
     this.Brands.forEach((item: string) => {
       const normalizedItem = item;
 
@@ -81,17 +79,48 @@ export class ProductsComponent implements OnInit {
         map.set(normalizedItem, 1); // Initialize count
       }
     });
-
     this.BrandsQuantity= Array.from(map.entries());
 
-    //console.log(this.BrandsQuantity);
-
   }
-  filiterItems(name:string){
-    console.log(name);
-
+  filiterItemsByBrandName(name:string){
     this.filteredProducts = this.products.filter(x=>x.productBrandName === name);
-    //console.log(this.filteredProducts);
+  }
+  filiterItemsByCPU(name:string){
+      let filteredSpecs = this.specs.filter(x=>x.cpu == name) ;
+      console.log(filteredSpecs);
+      for (let item of filteredSpecs) {
+        this.filteredProducts.filter(x=>x.id == item.productId);
+      }
+    // console.log(this.filteredProducts);
+  }
 
+  getBrands(){
+    this.Brands = this.products.map(x=>x.productBrandName);
+    this.getBrandsWithQuantites();
+  }
+  getSpecs(){
+    this.specs.splice(0,this.specs.length);
+    this.productService.getAllSpecs().subscribe(data=>{
+      for (let element of this.filteredProducts) {
+        this.specs.push(data.find(x=>x["productId"] == element.id));
+      }
+      console.log(this.specs);
+      this.getSpecsWithQuantities();
+    })
+  }
+  getSpecsWithQuantities(){
+    const map = new Map<string, number>();
+
+    this.specs.forEach((item: any) => {
+      const normalizedItem = item.cpu;
+
+      if (map.has(normalizedItem)) {
+        map.set(normalizedItem, map.get(normalizedItem)! + 1); // Increment count
+      } else {
+        map.set(normalizedItem, 1); // Initialize count
+      }
+    });
+    this.cpusQuantities= Array.from(map.entries());
+    console.log(this.cpusQuantities);
   }
 }
