@@ -17,4 +17,5 @@ export interface ProductWithSpecs {
   warranty:string|null,
   panel:string|null,
   touchscreen:string|null,
+  quantity:number
 }
