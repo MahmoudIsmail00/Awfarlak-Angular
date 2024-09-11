@@ -25,13 +25,13 @@ products! : ProductWithSpecs
 
   increaseQuantity() {
     this.quantity++;
-    this.cartService.increaseProductQuantity(this.products.id);
+    this.cartService.increaseProductQuantity(this.product.id);
   }
 
   decreaseQuantity() {
     if (this.quantity > 0) {
       this.quantity--;
-      this.cartService.decreaseProductQuantity(this.products.id);
+      this.cartService.decreaseProductQuantity(this.product.id);
     }
   }
 

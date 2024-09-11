@@ -21,7 +21,7 @@
                     <span class="font-semibold">{{ item.product.name }}</span>
                   </div>
                 </td>
-                <td class="py-4">{{ item.product.price }} EGP</td>
+                <td class="py-4">{{ item.product.price.toFixed(2) }} EGP</td>
                 <td class="py-4">
                   <div class="flex items-center">
                     <button
@@ -39,7 +39,7 @@
                     </button>
                   </div>
                 </td>
-                <td class="py-4">{{ (item.quantity * toNumber( item.product.price)).toFixed(2) }} EGP</td>
+                <td class="py-4">{{ (item.quantity * item.product.price).toFixed(2) }} EGP</td>
               </tr>
             </tbody>
           </table>

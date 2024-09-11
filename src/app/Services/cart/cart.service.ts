@@ -4,6 +4,7 @@ import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { Cart } from '../../../Models/cart';
 import { environment } from '../environment';
 import { ProductWithSpecs } from '../../../Models/productWithSpecs';
+import { Product } from '../../../Models/product';
 
 @Injectable({
   providedIn: 'root'
@@ -21,18 +22,23 @@ export class CartService {
   }
 
   addToCart(product: ProductWithSpecs, quantity: number): void {
-    console.log('Adding product to cart:', product);
-    const existingProduct = this.cart.find(item => item.product.id === product.id);
-    if (existingProduct) {
-      existingProduct.quantity += quantity;
-      console.log('Product already in cart, updated quantity:', existingProduct);
+    const existingProductIndex = this.cart.findIndex(item => item.product.id === product.id);
+
+    if (existingProductIndex >= 0) {
+      // Update quantity of the existing product
+      this.cart[existingProductIndex].quantity += quantity;
     } else {
+      // Add new product to the cart
       this.cart.push({ product, quantity });
-      console.log('New product added to cart:', product);
     }
+
+    // Update the userCart items
+    this.userCart.items[product.id] = (this.userCart.items[product.id] || 0) + quantity;
     this.cartSubject.next(this.cart);
+    this.updateUserCartOnServer();
   }
 
+  // Other methods remain the same
   getCartItems(): { product: ProductWithSpecs; quantity: number }[] {
     return this.cart;
   }
@@ -70,7 +76,7 @@ export class CartService {
     );
   }
 
-  getProductQuantity(id: string): number {
+  getProductQuantity(id: number): number {
     const cartItem = this.userCart.items[id];
     return cartItem !== undefined ? cartItem : 0;
   }
@@ -94,11 +100,23 @@ export class CartService {
     }
   }
 
+  getProductById(id: number): ProductWithSpecs | undefined {
+    return this.cart.find(item => item.product.id === id)?.product;
+  }
+
   increaseProductQuantity(id: number): void {
     if (this.userCart.items[id]) {
       this.userCart.items[id] += 1;
+      const cartItem = this.cart.find(item => item.product.id === id);
+      if (cartItem) {
+        cartItem.quantity += 1;
+      }
     } else {
-      this.userCart.items[id] = 1;
+      const product = this.getProductById(id);
+      if (product) {
+        this.userCart.items[id] = 1;
+        this.cart.push({ product, quantity: 1 });
+      }
     }
     this.cartSubject.next(this.cart);
     this.updateUserCartOnServer();
@@ -107,8 +125,13 @@ export class CartService {
   decreaseProductQuantity(id: number): void {
     if (this.userCart.items[id] && this.userCart.items[id] > 1) {
       this.userCart.items[id] -= 1;
+      const cartItem = this.cart.find(item => item.product.id === id);
+      if (cartItem) {
+        cartItem.quantity -= 1;
+      }
     } else {
       delete this.userCart.items[id];
+      this.cart = this.cart.filter(item => item.product.id !== id); // Remove the product from local cart
     }
     this.cartSubject.next(this.cart);
     this.updateUserCartOnServer();
@@ -116,7 +139,7 @@ export class CartService {
 
   calculateTotal(): number {
     return this.cart.reduce((total, item) => {
-      return total + (parseFloat( item.product.price )* item.quantity);
+      return total + (item.product.price * item.quantity);
     }, 0);
   }
 }

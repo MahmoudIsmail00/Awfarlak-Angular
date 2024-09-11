@@ -2,7 +2,7 @@ export interface ProductWithSpecs {
   id:number,
   name:string,
   description:string,
-  price:string,
+  price:number,
   pictureUrl:string,
   productSubCategoryName :string,
   productBrandName :string,

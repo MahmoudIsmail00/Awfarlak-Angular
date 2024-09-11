@@ -32,9 +32,4 @@ export class CartComponent implements OnInit {
   calculateTotal(): number {
     return this.cartService.calculateTotal();
   }
-
-  toNumber(value: string): number {
-    return parseFloat(value);
-  }
-
 }
