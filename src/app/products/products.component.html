@@ -1,16 +1,48 @@
-<!-- <div class="bg-white">
-    <div class="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-        <h2 class="sr-only">Products</h2>
 
-        <div class="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"> -->
-<section class="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
-    <section
-        class="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start ">
-        @for(product of this.products; track product.id){
-            <app-product [product]="product" />
-        }
+
+<div class="container">
+  <aside class="sidebar">
+      <!-- Sidebar content such as filters for Brand, Condition, etc. -->
+       <div class="widget">
+          <h5 class="widget-title">BRAND</h5>
+          <ul>
+              <li>
+                <a class="widli">
+                  <span class="widliType">Dell</span>
+                  <span class="count">10</span>
+                </a>
+              </li>
+              <li>
+                <a class="widli">
+                  <span class="widliType">HP</span>
+                  <span class="count">15</span>
+                </a>
+              </li>
+          </ul>
+       </div>
+
+      <h2>CONDITION</h2>
+      <ul>
+          <li>Used: Grade A</li>
+          <li>Used: Grade B</li>
+      </ul>
+      <!-- Add more filter options as needed -->
+  </aside>
+
+  <main class="main-content">
+      <!-- Breadcrumb Navigation -->
+      <nav class="breadcrumb">
+          <a href="#">Home</a> / <a href="#">Laptops</a> / <a href="#">Business Laptops</a>
+      </nav>
+
+      <!-- Product Listings -->
+      <section class="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
+        <section
+            class="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start " >
+            @for(product of this.products; track product.id){
+                <app-product [product]="product" />
+            }
+        </section>
     </section>
-</section>
-<!-- </div>
-    </div>
-</div> -->
+  </main>
+</div>

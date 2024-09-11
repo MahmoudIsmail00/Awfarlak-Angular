@@ -19,7 +19,6 @@
 }
 
 .center-content button {
-  background-color: #0d4399; /* Blue background */
   color: #ffffff; /* White text */
   padding: 8px 16px; /* Padding inside button */
   border-radius: 8px; /* Rounded corners */
@@ -27,6 +26,15 @@
   cursor: pointer; /* Pointer cursor on hover */
 }
 
-.center-content button:hover {
-  background-color: #326dec;
+
+.ReturnToShop{
+  background-color: #2573A3;
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  margin-top: .9375rem;
+  border-radius: 8px;
+  /* margin-bottom: 0rem !important; */
+  font-size: 14px;
+  font-weight: 600;
 }
