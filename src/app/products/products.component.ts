@@ -46,7 +46,12 @@ export class ProductsComponent implements OnInit {
         })}
         else if(this.subcategoryId == 0){
           this.productService.getAllProducts().subscribe((data:any)=>{
-            this.products = data;
+          this.products = data;
+          this.Brands = this.products.map((x:any)=>x.productBrandName);
+          // console.log(this.products);
+          console.log(this.Brands);
+          this.getBrandsWithQuantites();
+          this.filteredProducts = data;
           })
         }
     });
