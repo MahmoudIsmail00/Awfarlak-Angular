@@ -5,6 +5,7 @@ import { Product } from '../../../Models/product';
 import { AuthService } from '../authentication/auth.service';
 import { environment } from '../environment';
 import { WishList } from '../../../Models/wishlist';
+import { ProductWithSpecs } from '../../../Models/productWithSpecs';
 
 @Injectable()
 export class ProductsService {
@@ -49,9 +50,7 @@ export class ProductsService {
   // Get Product By Id
   getProductbyId(id: number): Observable<Product> {
     const headers = this.getHeaders();
-    return this.http.get<Product>(`${this.ProductsURL}GetProductById/${id}`, {
-      headers,
-    });
+    return this.http.get<Product>(`${this.ProductsURL}GetProductById/${id}`, {headers,});
   }
 
   // Get Products by SubCategory
@@ -69,6 +68,10 @@ export class ProductsService {
       `${this.ProductsURL}GetProductWithSpecs/${productId}`,
       { headers }
     );
+  }
+  getProductsWithSpecsBySubCategoryId(subId:number): Observable<ProductWithSpecs[]>{
+    const headers = this.getHeaders();
+    return this.http.get<ProductWithSpecs[]>(`${this.ProductsURL}GetProductsBySubCategoryWithSpecs/${subId}`, {headers,});
   }
   getAllSpecs(): Observable<any[]> {
     const headers = this.getHeaders();

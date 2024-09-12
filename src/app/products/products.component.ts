@@ -2,125 +2,132 @@ import { specs } from './../../Models/specs';
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../Services/store/products.service';
 import { Product } from '../../Models/product';
-import { ProductComponent } from '../product/product.component'
+import { ProductComponent } from '../product/product.component';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NgFor } from '@angular/common';
-
+import { NgFor, NgIf } from '@angular/common';
+import { ProductWithSpecs } from '../../Models/productWithSpecs';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
   standalone: true,
-  imports: [ProductComponent,RouterLink , NgFor],
+  imports: [ProductComponent, RouterLink, NgFor, NgIf],
 })
 export class ProductsComponent implements OnInit {
-  products: Product[] = [];
-  subcategories:any;
-  images:any;
-  filteredProducts: Product[] = [];
-  subcategoryId:any;
-  Brands:any[] = [];
-  BrandsQuantity!:[string,number][];
-  specs:specs[] = [];
-  cpusQuantities!:[string,number][];
-  constructor(private productService: ProductsService,private route: ActivatedRoute) {}
+  allProducts: ProductWithSpecs[] = []; // Unfiltered list of products
+  filteredProducts: ProductWithSpecs[] = []; // Filtered list of products
+  activeFilters: { brandName?: string; cpuName?: string } = {}; // Active filters
+  BrandsQuantity!: [string, number][]; // Quantity of brands
+  CPUsQuantity!: [string, number][]; // Quantity of CPUs
+  subcategoryId: any;
 
-  shuffleProducts(products: any) {
-    for (let i = products.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [products[i], products[j]] = [products[j], products[i]];
-    }
-    return products;
-  }
+  constructor(
+    private productService: ProductsService,
+    private route: ActivatedRoute
+  ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
-      this.subcategoryId = params.get('id');  // Capture the 'id' from the route, '+' converts it to number
-      if (this.subcategoryId > 0) {
-        this.productService.getProductsbySubCategoryId(this.subcategoryId).subscribe((data: Product[]) => {
-          this.products = data;
-          this.filteredProducts = data;  // Initially set filtered products to be all products
-          this.getBrands();
-          this.getSpecs();
-
-        })}
-        else if(this.subcategoryId == 0){
-          this.productService.getAllProducts().subscribe((data:any)=>{
-            this.products = data;
-            this.filteredProducts = data;
-            this.getBrands();
-            this.getSpecs();
-          })
-        }
+    this.route.paramMap.subscribe((params) => {
+      this.subcategoryId = params.get('id');
+      this.loadProducts();
     });
 
+    // Handle search term changes
     this.productService.currentSearchTerm.subscribe((term) => {
       this.updateProductList(term);
     });
-
   }
+
+  // Load products based on subcategory
+  loadProducts() {
+    if (this.subcategoryId > 0) {
+      this.productService.getProductsWithSpecsBySubCategoryId(this.subcategoryId).subscribe((data: ProductWithSpecs[]) => {
+        this.initializeProducts(data);
+      });
+    } else {
+      this.getAllProductsWithSpecs();
+    }
+  }
+
+  // Initialize the product list and compute brand and CPU quantities
+  initializeProducts(data: ProductWithSpecs[]) {
+    this.allProducts = data;
+    this.filteredProducts = [...this.allProducts];
+    this.BrandsQuantity = this.getQuantities(this.allProducts.map(p => p.productBrandName));
+    this.CPUsQuantity = this.getQuantities(this.allProducts.map(p => p.cpu));
+  }
+
+  // Filter products by search term
   updateProductList(term: string) {
-    this.filteredProducts = this.products.filter((product) =>
+    this.filteredProducts = this.allProducts.filter((product) =>
       product.name.toLowerCase().includes(term.toLowerCase())
     );
   }
-  encodeImagePath(imagePath: string): string {
-    return imagePath.split(' ').join('%20');
-  }
-  getBrandsWithQuantites(){
+
+  // Compute the quantities of each brand or CPU
+  getQuantities(items: any[]): [string, number][] {
     const map = new Map<string, number>();
-    this.Brands.forEach((item: string) => {
-      const normalizedItem = item;
+    items.forEach(item => map.set(item, (map.get(item) || 0) + 1));
+    return Array.from(map.entries());
+  }
 
-      if (map.has(normalizedItem)) {
-        map.set(normalizedItem, map.get(normalizedItem)! + 1); // Increment count
-      } else {
-        map.set(normalizedItem, 1); // Initialize count
-      }
+  // Filter products by brand name
+  filterItemsByBrandName(brandName: string) {
+    this.activeFilters.brandName = brandName;
+    this.applyFilters();
+  }
+
+  // Filter products by CPU name
+  filterItemsByCPUName(cpuName: string) {
+    this.activeFilters.cpuName = cpuName;
+    this.applyFilters();
+  }
+
+  // Remove a specific filter
+  removeFilter(filterKey: keyof typeof this.activeFilters) {
+    delete this.activeFilters[filterKey];
+    this.applyFilters();
+  }
+
+  // Clear all filters
+  clearAllFilters() {
+    this.activeFilters = {};
+    this.applyFilters();
+  }
+
+  // Apply the active filters
+  private applyFilters() {
+    this.filteredProducts = [...this.allProducts];
+
+    if (this.activeFilters.brandName) {
+      this.filteredProducts = this.filteredProducts.filter(
+        (x) => x.productBrandName === this.activeFilters.brandName
+      );
+    }
+
+    if (this.activeFilters.cpuName) {
+      this.filteredProducts = this.filteredProducts.filter(
+        (x) => x.cpu === this.activeFilters.cpuName
+      );
+    }
+  }
+
+  // Fetch all products and their specs
+  getAllProductsWithSpecs() {
+    forkJoin({
+      products: this.productService.getAllProducts(),
+      specs: this.productService.getAllSpecs(),
+    }).subscribe(({ products, specs }) => {
+      const combinedProducts = products.map((product: Product) => {
+        const productSpec = specs.find((spec: specs) => spec.productId === product.id);
+        return {
+          ...product,
+          ...productSpec,
+        } as ProductWithSpecs;
+      });
+      this.initializeProducts(combinedProducts);
     });
-    this.BrandsQuantity= Array.from(map.entries());
-
-  }
-  filiterItemsByBrandName(name:string){
-    this.filteredProducts = this.products.filter(x=>x.productBrandName === name);
-  }
-  filiterItemsByCPU(name:string){
-      let filteredSpecs = this.specs.filter(x=>x.cpu == name) ;
-      console.log(filteredSpecs);
-      for (let item of filteredSpecs) {
-        this.filteredProducts.filter(x=>x.id == item.productId);
-      }
-    // console.log(this.filteredProducts);
-  }
-
-  getBrands(){
-    this.Brands = this.products.map(x=>x.productBrandName);
-    this.getBrandsWithQuantites();
-  }
-  getSpecs(){
-    this.specs.splice(0,this.specs.length);
-    this.productService.getAllSpecs().subscribe(data=>{
-      for (let element of this.filteredProducts) {
-        this.specs.push(data.find(x=>x["productId"] == element.id));
-      }
-      console.log(this.specs);
-      this.getSpecsWithQuantities();
-    })
-  }
-  getSpecsWithQuantities(){
-    const map = new Map<string, number>();
-
-    this.specs.forEach((item: any) => {
-      const normalizedItem = item.cpu;
-
-      if (map.has(normalizedItem)) {
-        map.set(normalizedItem, map.get(normalizedItem)! + 1); // Increment count
-      } else {
-        map.set(normalizedItem, 1); // Initialize count
-      }
-    });
-    this.cpusQuantities= Array.from(map.entries());
-    console.log(this.cpusQuantities);
   }
 }

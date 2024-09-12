@@ -17,7 +17,7 @@
           <span class="woocommerce-Price-amount amount">{{product.price}}<bdi>&nbsp;<span
                 class="woocommerce-Price-currencySymbol">EGP</span></bdi></span></span>
       </div>
-      <p class="stock-status">المتوفر في المخزون فقط 1</p>
+      <p class="stock-status" style="font-weight: 900;">المتوفر في المخزون {{product.quantity}}</p>
       <div class="actions">
         <button class="add-to-cart" (click)="addToCart()">إضافة إلى السلة</button>
         <div class="wishlist-compare">

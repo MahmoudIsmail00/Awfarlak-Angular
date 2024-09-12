@@ -1,5 +1,3 @@
-
-
 <div class="container">
   <aside class="sidebar">
       <!-- Sidebar content such as filters for Brand, Condition, etc. -->
@@ -8,7 +6,7 @@
         <ul>
         @for (item of BrandsQuantity; track $index) {
           <li>
-            <a class="widli" (click)="filiterItemsByBrandName(item[0])">
+            <a class="widli" (click)="filterItemsByBrandName(item[0])">
               <span class="widliType">{{item[0]}}</span>
               <span class="count">{{item[1]}}</span>
             </a>
@@ -20,9 +18,9 @@
        <div class="widget">
         <h5 class="widget-title">CPU</h5>
         <ul>
-        @for (item of cpusQuantities; track $index) {
+        @for (item of CPUsQuantity; track $index) {
           <li>
-            <a class="widli">
+            <a class="widli" (click)="filterItemsByCPUName(item[0])">
               <span class="widliType">{{item[0]}}</span>
               <span class="count">{{item[1]}}</span>
             </a>
@@ -39,14 +37,29 @@
           <a href="#">Home</a> / <a href="#">Laptops</a> / <a href="#">Business Laptops</a>
       </nav>
 
-      <!-- Product Listings -->
-      <section class="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
-        <section
-            class="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start " >
-            @for(product of this.filteredProducts; track product.id){
-                <app-product [product]="product" />
-            }
-        </section>
+      <!-- Active Filters Section -->
+    <div class="active-filters-container" *ngIf="activeFilters.brandName || activeFilters.cpuName">
+      <span class="filter" (click)="clearAllFilters()">✖ Clear filters</span>
+
+      <!-- Brand Filter -->
+      <span class="filter" *ngIf="activeFilters.brandName" (click)="removeFilter('brandName')">
+        ✖ {{ activeFilters.brandName }}
+      </span>
+
+      <!-- CPU Filter -->
+      <span class="filter" *ngIf="activeFilters.cpuName" (click)="removeFilter('cpuName')">
+        ✖ {{ activeFilters.cpuName }}
+      </span>
+    </div>
+
+    <!-- Product Listings -->
+    <section class="container mx-auto p-10 md:py-12 px-0 md:p-8 md:px-0">
+      <section class="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
+        @for(product of this.filteredProducts; track product.id){
+            <app-product [product]="product"></app-product>
+        }
+      </section>
     </section>
+
   </main>
 </div>
