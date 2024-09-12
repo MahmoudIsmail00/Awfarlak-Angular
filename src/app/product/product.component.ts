@@ -37,7 +37,7 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.quantity = this.cartService.getProductQuantity(this.product.id);
+    //this.quantity = this.cartService.getProductQuantity(this.product.id);
   }
 
   addToCart() {

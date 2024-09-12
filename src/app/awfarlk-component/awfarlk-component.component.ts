@@ -6,7 +6,6 @@ import { CartService } from '../Services/cart/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
-import { Product } from '../../Models/product';
 
 @Component({
   selector: 'app-awfarlk-component',
@@ -18,7 +17,6 @@ import { Product } from '../../Models/product';
 export class AwfarlkComponentComponent implements OnInit {
   productId: string | null = null;
   product!: ProductWithSpecs;
-
 
   constructor(
     private productService: ProductsService,
@@ -36,7 +34,6 @@ export class AwfarlkComponentComponent implements OnInit {
         this.productService.getProductWithSpecs(idNumber).subscribe(
           (data: ProductWithSpecs) => {
             this.product = data;
-
             console.log('Product fetched:', this.product); // Log the product data
           },
           (error) => {
@@ -51,24 +48,26 @@ export class AwfarlkComponentComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
     if (user && user.WishList) {
       user.WishList.data.push(this.productId!);
-      alert('item has been added to wishlist successfully!');
+      alert('Item has been added to wishlist successfully!');
       localStorage.setItem('currentUser', JSON.stringify(user));
     } else {
       console.error('User or Wishlist data is missing');
     }
   }
+
   addToCompareList() {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
     if (!user.CompareList.data.includes(this.product.id.toString())) {
-      if(user.CompareList.data.length < 4){
+      if (user.CompareList.data.length < 4) {
         user.CompareList.data.push(this.product.id.toString());
-        alert('item has been added to compare list successfully!');
-      }else{
+        alert('Item has been added to compare list successfully!');
+      } else {
         alert('Maximum 4 items in the compare list');
       }
     }
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
+
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, 1);
@@ -90,5 +89,4 @@ export class AwfarlkComponentComponent implements OnInit {
       console.error('Product is not initialized');
     }
   }
-
 }

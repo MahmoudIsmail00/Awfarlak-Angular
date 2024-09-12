@@ -17,32 +17,35 @@
               <tr *ngFor="let item of usercartItems">
                 <td class="py-4">
                   <div class="flex items-center">
-                    <img class="h-16 w-16 mr-4" [src]="item.product.pictureUrl" [alt]="item.product.name">
-                    <span class="font-semibold">{{ item.product.name }}</span>
+                    <img class="h-16 w-16 mr-4" [src]="item.PictureUrl" [alt]="item.ProductName">
+                    <span class="font-semibold">{{ item.ProductName }}</span>
                   </div>
                 </td>
-                <td class="py-4">{{ item.product.price.toFixed(2) }} EGP</td>
+                <td class="py-4">{{ item.Price.toFixed(2) }} EGP</td>
                 <td class="py-4">
                   <div class="flex items-center">
                     <button
                       class="border rounded-md py-2 px-4 mr-2"
-                      (click)="decreaseProductQuantity(item.product.id)"
+                      (click)="decreaseProductQuantity(item.Id)"
                       aria-label="Decrease quantity">
                       -
                     </button>
-                    <span class="text-center w-8">{{ item.quantity }}</span>
+                    <span class="text-center w-8">{{ item.Quantity }}</span>
                     <button
                       class="border rounded-md py-2 px-4 ml-2"
-                      (click)="increaseProductQuantity(item.product.id)"
+                      (click)="increaseProductQuantity(item.Id)"
                       aria-label="Increase quantity">
                       +
                     </button>
                   </div>
                 </td>
-                <td class="py-4">{{ (item.quantity * item.product.price).toFixed(2) }} EGP</td>
+                <td class="py-4">{{ (item.Quantity * item.Price).toFixed(2) }} EGP</td>
               </tr>
             </tbody>
           </table>
+          <button *ngIf="!isCartCleared" class="bg-red-500 text-white py-2 px-4 rounded-lg mt-4 w-full" (click)="clearCart()">
+            Clear Cart
+          </button>
         </div>
       </div>
       <div class="md:w-1/4">

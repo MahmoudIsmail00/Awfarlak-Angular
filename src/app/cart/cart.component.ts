@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../Services/cart/cart.service';
-import { ProductWithSpecs } from '../../Models/productWithSpecs';
-import { NgFor } from '@angular/common';
+import { BasketItemDto } from '../../Models/customerBasket';
+import { NgFor, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
   standalone: true,
-  imports: [NgFor]
+  imports: [NgFor,NgIf]
 })
 export class CartComponent implements OnInit {
-  usercartItems: { product: ProductWithSpecs; quantity: number }[] = [];
+  usercartItems: BasketItemDto[] = [];
+  isCartCleared = false;
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.cartService.cart$.subscribe(cartItems => {
       this.usercartItems = cartItems;
+    });
+    this.cartService.isCartCleared$.subscribe(isCleared => {
+      this.isCartCleared = isCleared;
     });
   }
 
@@ -31,5 +35,9 @@ export class CartComponent implements OnInit {
 
   calculateTotal(): number {
     return this.cartService.calculateTotal();
+  }
+
+  clearCart() {
+    this.cartService.clearCart();
   }
 }
