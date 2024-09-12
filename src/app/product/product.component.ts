@@ -15,7 +15,7 @@ import { ProductWithSpecs } from '../../Models/productWithSpecs';
   imports: [FormsModule, RouterLink],
 })
 export class ProductComponent implements OnInit {
-  @Input() product!: Product; // Define an input property
+  @Input() product!: ProductWithSpecs; // Define an input property
   quantity = 0;
   products!: ProductWithSpecs;
   constructor(
