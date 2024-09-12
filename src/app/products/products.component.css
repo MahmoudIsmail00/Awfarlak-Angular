@@ -141,3 +141,31 @@ body {
 .filter:hover {
   background-color: #e0e0e0;
 }
+
+.pagination-controls{
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+  border-color: #333;
+  border: 2px;
+  border-radius: 5px;
+  border-style: solid;
+  margin-left: 280px;
+  margin-right: 280px;
+}
+.pagination-controls ::ng-deep .ngx-pagination .current {
+  background: #2c91c1;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.pagination-controls ::ng-deep .ngx-pagination :hover {
+  background: #2c91c1;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s, color 0.3s;
+  
+}

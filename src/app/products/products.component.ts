@@ -7,13 +7,14 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgFor, NgIf } from '@angular/common';
 import { ProductWithSpecs } from '../../Models/productWithSpecs';
 import { forkJoin } from 'rxjs';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.css'],
   standalone: true,
-  imports: [ProductComponent, RouterLink, NgFor, NgIf],
+  imports: [ProductComponent, RouterLink, NgFor, NgIf, NgxPaginationModule],
 })
 export class ProductsComponent implements OnInit {
   allProducts: ProductWithSpecs[] = []; // Unfiltered list of products
@@ -22,6 +23,7 @@ export class ProductsComponent implements OnInit {
   BrandsQuantity!: [string, number][]; // Quantity of brands
   CPUsQuantity!: [string, number][]; // Quantity of CPUs
   subcategoryId: any;
+  page: number = 1;
 
   constructor(
     private productService: ProductsService,
@@ -43,9 +45,11 @@ export class ProductsComponent implements OnInit {
   // Load products based on subcategory
   loadProducts() {
     if (this.subcategoryId > 0) {
-      this.productService.getProductsWithSpecsBySubCategoryId(this.subcategoryId).subscribe((data: ProductWithSpecs[]) => {
-        this.initializeProducts(data);
-      });
+      this.productService
+        .getProductsWithSpecsBySubCategoryId(this.subcategoryId)
+        .subscribe((data: ProductWithSpecs[]) => {
+          this.initializeProducts(data);
+        });
     } else {
       this.getAllProductsWithSpecs();
     }
@@ -55,8 +59,10 @@ export class ProductsComponent implements OnInit {
   initializeProducts(data: ProductWithSpecs[]) {
     this.allProducts = data;
     this.filteredProducts = [...this.allProducts];
-    this.BrandsQuantity = this.getQuantities(this.allProducts.map(p => p.productBrandName));
-    this.CPUsQuantity = this.getQuantities(this.allProducts.map(p => p.cpu));
+    this.BrandsQuantity = this.getQuantities(
+      this.allProducts.map((p) => p.productBrandName)
+    );
+    this.CPUsQuantity = this.getQuantities(this.allProducts.map((p) => p.cpu));
   }
 
   // Filter products by search term
@@ -69,7 +75,7 @@ export class ProductsComponent implements OnInit {
   // Compute the quantities of each brand or CPU
   getQuantities(items: any[]): [string, number][] {
     const map = new Map<string, number>();
-    items.forEach(item => map.set(item, (map.get(item) || 0) + 1));
+    items.forEach((item) => map.set(item, (map.get(item) || 0) + 1));
     return Array.from(map.entries());
   }
 
@@ -121,7 +127,9 @@ export class ProductsComponent implements OnInit {
       specs: this.productService.getAllSpecs(),
     }).subscribe(({ products, specs }) => {
       const combinedProducts = products.map((product: Product) => {
-        const productSpec = specs.find((spec: specs) => spec.productId === product.id);
+        const productSpec = specs.find(
+          (spec: specs) => spec.productId === product.id
+        );
         return {
           ...product,
           ...productSpec,
