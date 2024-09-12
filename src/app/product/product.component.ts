@@ -1,3 +1,4 @@
+import { CompareList } from './../../Models/comparelist';
 import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../../Models/product';
 import { FormsModule } from '@angular/forms';
@@ -16,7 +17,7 @@ import { ProductWithSpecs } from '../../Models/productWithSpecs';
 export class ProductComponent implements OnInit {
   @Input() product!: Product; // Define an input property
   quantity = 0;
-products! : ProductWithSpecs
+  products!: ProductWithSpecs;
   constructor(
     private cartService: CartService,
     private snackBar: MatSnackBar,
@@ -44,24 +45,34 @@ products! : ProductWithSpecs
       this.cartService.addToCart(this.products, 1); // Ensure addToCart method accepts Product and quantity as number
 
       // Show snackbar with button to navigate to cart
-      this.snackBar.open('Product added to cart!', 'Go to Cart', {
-        duration: 5000, // Duration in milliseconds
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-      }).onAction().subscribe(() => {
-        this.router.navigate(['/cart']); // Adjust route as necessary
-      });
+      this.snackBar
+        .open('Product added to cart!', 'Go to Cart', {
+          duration: 5000, // Duration in milliseconds
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        })
+        .onAction()
+        .subscribe(() => {
+          this.router.navigate(['/cart']); // Adjust route as necessary
+        });
 
-      console.log("Product added to cart");
+      console.log('Product added to cart');
     }
   }
   addToWishList() {
     console.log('clicked');
     const user = JSON.parse(localStorage.getItem('currentUser')!);
-    if(!user.WishList.data.includes(this.product.id.toString())){
+    if (!user.WishList.data.includes(this.product.id.toString())) {
       user.WishList.data.push(this.product.id.toString());
       alert('added to wishlist!');
     }
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
+
+  addToCompareList() {
+    console.log('clicked');
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    user.CompareList.data.push(this.product.id.toString());
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 }

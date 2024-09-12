@@ -1,8 +1,9 @@
 <div class="text-gray-800" style="margin-left: 20px; font-weight: bold; font-size: 30px;">
   <span>{{subCategory.name}}</span>
 </div>
-<div class="flex category-1" style="margin:40px 10px">
+<div class="flex category-1 " style="margin:40px 10px">
   @for (item of products; track $index) {
+    
   <div class="wd-carousel-item wd-slide-visible wd-full-visible wd-slide-next"
     style="width: 233.333px; margin-right: 50px;">
     <div
@@ -69,7 +70,7 @@
                 </a>
               </div>
               <div style="margin: 13px 10px 0 0">
-                <a>
+                <a (click)="addToCompareList()">
                   <svg height="20px" width="20px" version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve"
                     fill="#000000">
