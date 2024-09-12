@@ -1,7 +1,6 @@
 <div class="flex" style="max-width:1400px ; margin: 20px auto;">
-  <app-sidebar />
   <!-- Main Content -->
-  @if(compareList.length==0){
+  @if(compareList.length == 0){
   <div class="flex-1 p-8 bg-white">
     <div class="center-content">
       <svg width="400" height="400" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,15 +54,14 @@
           <li><span>Condition</span><span>Used: Grade B</span></li>
           <li><span>Brand</span><span>{{product.productBrandName}}</span></li>
           <li><span>Model</span><span>{{product.name}}</span></li>
-          <li><span>CPU</span><span>xxxx</span></li>
-          <li><span>GPU</span><span>xxxx</span></li>
-          <li><span>Total RAM</span><span>xxxx</span></li>
-          <li><span>Total Storage</span><span>xxxx</span></li>
-          <li><span>Form Factor</span><span>xxxx</span></li>
-          <li><span>Screen Size</span><span>xxxx"</span></li>
-          <li><span>Keyboard</span><span>xxxx</span></li>
-          <li><span>Warranty</span><span>xxxx</span></li>
-          <li><span>Quantity In Stock</span><span>xxxx</span></li>
+          <li><span>CPU</span><span>{{product.cpu}}</span></li>
+          <li><span>GPU</span><span>{{product.gpu}}</span></li>
+          <li><span>Total RAM</span><span>{{product.ram}}</span></li>
+          <li><span>Total Storage</span><span>{{product.storage}}</span></li>
+          <li><span>Screen Size</span><span>{{product.screen}}"</span></li>
+          <li><span>Keyboard</span><span>{{product.keyboard}}</span></li>
+          <li><span>Warranty</span><span>{{product.warranty}}</span></li>
+          <li><span>Quantity In Stock</span><span>{{product.quantity}}</span></li>
         </ul>
       </div>
 

@@ -60,7 +60,6 @@ export class ProductComponent implements OnInit {
     }
   }
   addToWishList() {
-    console.log('clicked');
     const user = JSON.parse(localStorage.getItem('currentUser')!);
     if (!user.WishList.data.includes(this.product.id.toString())) {
       user.WishList.data.push(this.product.id.toString());
@@ -70,9 +69,15 @@ export class ProductComponent implements OnInit {
   }
 
   addToCompareList() {
-    console.log('clicked');
     const user = JSON.parse(localStorage.getItem('currentUser')!);
-    user.CompareList.data.push(this.product.id.toString());
+    if (!user.CompareList.data.includes(this.product.id.toString())) {
+      if(user.CompareList.data.length < 4){
+        user.CompareList.data.push(this.product.id.toString());
+        alert('item has been added to compare list successfully!');
+      }else{
+        alert('Maximum 4 items in the compare list');
+      }
+    }
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
 }

@@ -51,12 +51,24 @@ export class AwfarlkComponentComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
     if (user && user.WishList) {
       user.WishList.data.push(this.productId!);
+      alert('item has been added to wishlist successfully!');
       localStorage.setItem('currentUser', JSON.stringify(user));
     } else {
       console.error('User or Wishlist data is missing');
     }
   }
-
+  addToCompareList() {
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    if (!user.CompareList.data.includes(this.product.id.toString())) {
+      if(user.CompareList.data.length < 4){
+        user.CompareList.data.push(this.product.id.toString());
+        alert('item has been added to compare list successfully!');
+      }else{
+        alert('Maximum 4 items in the compare list');
+      }
+    }
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, 1);
