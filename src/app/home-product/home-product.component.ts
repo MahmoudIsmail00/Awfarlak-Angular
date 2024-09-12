@@ -15,33 +15,47 @@ import { ProductWithSpecs } from '../../Models/productWithSpecs';
   imports: [RouterLink, RouterOutlet],
 })
 export class HomeProductComponent implements OnInit {
-
-  @Input() subCategory!:SubCategory;
+  @Input() subCategory!: SubCategory;
   product!: ProductWithSpecs;
-  products:Product[]=[];
+  products: Product[] = [];
 
-  constructor(private ProductsService:ProductsService,private cartService: CartService ,private snackBar: MatSnackBar,
-    private router: Router) {}
+  constructor(
+    private ProductsService: ProductsService,
+    private cartService: CartService,
+    private snackBar: MatSnackBar,
+    private router: Router
+  ) {}
+  addToWishList() {
+    console.log('clicked');
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    user.WishList.data.push(this.product.id);
 
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
   ngOnInit() {
-      this.ProductsService.getProductsbySubCategoryId(this.subCategory.id).subscribe((data:Product[])=>{
-        this.products = data;
-      })
+    this.ProductsService.getProductsbySubCategoryId(
+      this.subCategory.id
+    ).subscribe((data: Product[]) => {
+      this.products = data;
+    });
   }
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, 1); // Ensure addToCart method accepts ProductWithSpecs and quantity as number
 
       // Show snackbar with button to navigate to cart
-      this.snackBar.open('Product added to cart!', 'Go to Cart', {
-        duration: 5000, // Duration in milliseconds
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-      }).onAction().subscribe(() => {
-        this.router.navigate(['/cart']); // Adjust route as necessary
-      });
+      this.snackBar
+        .open('Product added to cart!', 'Go to Cart', {
+          duration: 5000, // Duration in milliseconds
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        })
+        .onAction()
+        .subscribe(() => {
+          this.router.navigate(['/cart']); // Adjust route as necessary
+        });
 
-      console.log("Product added to cart");
+      console.log('Product added to cart');
     }
   }
 }

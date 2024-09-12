@@ -1468,10 +1468,10 @@ div.br_alabel.berocket_alabel_id_21759 > span {
   src: url("https://www.awfarlak.com/wp-content/themes/woodmart/fonts/woodmart-font-1-400.woff2?v=7.6.0")
     format("woff2");
 } */
-.oldPrice{
+.oldPrice {
   text-decoration-line: line-through;
-    text-decoration-color: red;
-    text-decoration-style: solid;
-    color: #BBBBBB;
-    font-size: .9rem;
+  text-decoration-color: red;
+  text-decoration-style: solid;
+  color: #bbbbbb;
+  font-size: 0.9rem;
 }

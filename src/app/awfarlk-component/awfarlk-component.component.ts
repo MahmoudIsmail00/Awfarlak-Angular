@@ -12,7 +12,7 @@ import { NgIf } from '@angular/common';
   templateUrl: './awfarlk-component.component.html',
   styleUrls: ['./awfarlk-component.component.css'],
   standalone: true,
-  imports: [NgIf]
+  imports: [NgIf],
 })
 export class AwfarlkComponentComponent implements OnInit {
   productId: string | null = null;
@@ -27,31 +27,41 @@ export class AwfarlkComponentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe(params => {
+    this.route.paramMap.subscribe((params) => {
       this.productId = params.get('id'); // This is a string
       if (this.productId) {
         const idNumber = parseInt(this.productId, 10); // Convert to number
-        this.productService.getProductWithSpecs(idNumber).subscribe((data: ProductWithSpecs) => {
-          this.product = data;
-        });
+        this.productService
+          .getProductWithSpecs(idNumber)
+          .subscribe((data: ProductWithSpecs) => {
+            this.product = data;
+          });
       }
     });
   }
-
+  addToWishList() {
+    console.log('clicked');
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    user.WishList.data.push(this.productId);
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, 1); // Ensure addToCart method accepts ProductWithSpecs and quantity as number
 
       // Show snackbar with button to navigate to cart
-      this.snackBar.open('Product added to cart!', 'Go to Cart', {
-        duration: 5000, // Duration in milliseconds
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-      }).onAction().subscribe(() => {
-        this.router.navigate(['/cart']); // Adjust route as necessary
-      });
+      this.snackBar
+        .open('Product added to cart!', 'Go to Cart', {
+          duration: 5000, // Duration in milliseconds
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        })
+        .onAction()
+        .subscribe(() => {
+          this.router.navigate(['/cart']); // Adjust route as necessary
+        });
 
-      console.log("Product added to cart");
+      console.log('Product added to cart');
     }
   }
 }
