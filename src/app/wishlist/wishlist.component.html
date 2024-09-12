@@ -3,7 +3,8 @@
 
 
   @if(wishListProducts.length == 0){
-  <div class="emptylist">
+
+  <div class=" emptylist">
     <svg xmlns="http://www.w3.org/2000/svg" height="320" width="320"
       viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
       <path fill="#c7c7c7"
@@ -26,9 +27,9 @@
         class="wd-product wd-with-labels wd-hover-icons product-grid-item product type-product post-19950 status-publish instock product_cat-standard-laptops product_tag-used-laptop has-post-thumbnail shipping-taxable purchasable product-type-simple"
         data-loop="2" data-id="19950">
 
-        <div class="product-wrapper" routerLink="/product-details/{{item.id}}">
+        <div class="product-wrapper">
           <div class="product-element-top wd-quick-shop">
-            <a routerLink="/product-details/{{item.id}}" class="product-image-link">
+            <a class="product-image-link">
               <div class="product-labels labels-rounded">
                 <span class="attribute-label product-label label-term-used-grade-a label-attribute-pa_condition">Used:
                   Grade A</span>
@@ -58,7 +59,7 @@
             </a>
 
             <div class="hover-img">
-              <a routerLink="/product-details/{{item.id}}" aria-label="Product image"></a>
+              <a aria-label="Product image"></a>
             </div>
 
             <div class="wrapp-buttons">
