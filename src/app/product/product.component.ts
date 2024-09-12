@@ -17,7 +17,7 @@ import { ProductWithSpecs } from '../../Models/productWithSpecs';
 export class ProductComponent implements OnInit {
   @Input() product!: ProductWithSpecs; // Define an input property
   quantity = 0;
-  products!: ProductWithSpecs;
+
   constructor(
     private cartService: CartService,
     private snackBar: MatSnackBar,
@@ -42,7 +42,7 @@ export class ProductComponent implements OnInit {
 
   addToCart() {
     if (this.product) {
-      this.cartService.addToCart(this.products, 1); // Ensure addToCart method accepts Product and quantity as number
+      this.cartService.addToCart(this.product, 1); // Ensure addToCart method accepts Product and quantity as number
 
       // Show snackbar with button to navigate to cart
       this.snackBar

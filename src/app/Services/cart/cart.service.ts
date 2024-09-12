@@ -1,13 +1,13 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { Cart } from '../../../Models/cart';
 import { environment } from '../environment';
 import { ProductWithSpecs } from '../../../Models/productWithSpecs';
-import { Product } from '../../../Models/product';
+import { ProductsService } from '../store/products.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CartService {
   apiUrl = `${environment.apiUrl}/basket/`;
@@ -17,28 +17,60 @@ export class CartService {
 
   cart$ = this.cartSubject.asObservable();
 
-  constructor(private http: HttpClient) {
-    // this.initializeCart().subscribe();
+  constructor(private http: HttpClient, private productService: ProductsService) {
+    this.initializeCartFromLocalStorage();
+  }
+
+  private getToken(): string | null {
+    return localStorage.getItem('authToken');
+  }
+
+  private getHeaders(): HttpHeaders {
+    const token = this.getToken();
+    return new HttpHeaders({ Authorization: `Bearer ${token}` });
+  }
+
+  private saveCartToLocalStorage() {
+    localStorage.setItem('cart', JSON.stringify(this.userCart));
+  }
+
+  private loadCartFromLocalStorage() {
+    const cart = localStorage.getItem('cart');
+    if (cart) {
+      try {
+        this.userCart = JSON.parse(cart);
+        this.cart = Object.entries(this.userCart.items).map(([id, quantity]) => {
+          const productId = parseInt(id, 10);
+          const product = this.getProductById(productId);
+          return product ? { product, quantity } : null;
+        }).filter(item => item !== null) as { product: ProductWithSpecs; quantity: number }[];
+        this.cartSubject.next(this.cart);
+      } catch (error) {
+        console.error('Error loading cart from local storage:', error);
+      }
+    }
+  }
+
+  private initializeCartFromLocalStorage() {
+    this.loadCartFromLocalStorage();
   }
 
   addToCart(product: ProductWithSpecs, quantity: number): void {
-    const existingProductIndex = this.cart.findIndex(item => item.product.id === product.id);
 
+    const existingProductIndex = this.cart.findIndex(item => item.product.id === product.id);
     if (existingProductIndex >= 0) {
-      // Update quantity of the existing product
       this.cart[existingProductIndex].quantity += quantity;
     } else {
-      // Add new product to the cart
       this.cart.push({ product, quantity });
     }
 
-    // Update the userCart items
     this.userCart.items[product.id] = (this.userCart.items[product.id] || 0) + quantity;
+
     this.cartSubject.next(this.cart);
+    this.saveCartToLocalStorage();
     this.updateUserCartOnServer();
   }
 
-  // Other methods remain the same
   getCartItems(): { product: ProductWithSpecs; quantity: number }[] {
     return this.cart;
   }
@@ -48,10 +80,11 @@ export class CartService {
       this.http.get<Cart>(`${this.apiUrl}/${id}`).pipe(
         map((cart) => {
           this.userCart = cart;
+          this.saveCartToLocalStorage(); // Save cart to local storage
         }),
         catchError(error => {
           console.log('Error fetching cart:', error);
-          return throwError(error);
+          return throwError(() => new Error('Error fetching cart'));
         })
       ).subscribe(
         (cart) => console.log('Fetched user cart:', cart),
@@ -67,11 +100,12 @@ export class CartService {
     return this.http.post<Cart>(this.apiUrl, newCart).pipe(
       map((cart) => {
         this.userCart = cart;
+        this.saveCartToLocalStorage(); // Save new cart to local storage
         return cart;
       }),
       catchError(error => {
         console.log('Error initializing cart:', error);
-        return throwError(error);
+        return throwError(() => new Error('Error initializing cart'));
       })
     );
   }
@@ -83,15 +117,17 @@ export class CartService {
 
   clearCart(): void {
     this.userCart.items = {};
+    this.cart = [];
+    this.saveCartToLocalStorage();
     this.updateUserCartOnServer();
   }
 
   updateUserCartOnServer(): void {
     if (this.userCart.id !== 0) {
-      this.http.post<Cart>(this.apiUrl, this.userCart).pipe(
+      this.http.post<Cart>(this.apiUrl, this.userCart, { headers: this.getHeaders() }).pipe(
         catchError(error => {
           console.log('Error updating cart:', error);
-          return throwError(error);
+          return throwError(() => new Error('Error updating cart'));
         })
       ).subscribe(
         (response) => console.log('Cart updated successfully', response),
@@ -101,6 +137,7 @@ export class CartService {
   }
 
   getProductById(id: number): ProductWithSpecs | undefined {
+    // Simulate fetching product by ID. Implement according to your data source.
     return this.cart.find(item => item.product.id === id)?.product;
   }
 
@@ -119,6 +156,7 @@ export class CartService {
       }
     }
     this.cartSubject.next(this.cart);
+    this.saveCartToLocalStorage();
     this.updateUserCartOnServer();
   }
 
@@ -131,15 +169,19 @@ export class CartService {
       }
     } else {
       delete this.userCart.items[id];
-      this.cart = this.cart.filter(item => item.product.id !== id); // Remove the product from local cart
+      this.cart = this.cart.filter(item => item.product.id !== id);
     }
     this.cartSubject.next(this.cart);
+    this.saveCartToLocalStorage();
     this.updateUserCartOnServer();
   }
 
   calculateTotal(): number {
     return this.cart.reduce((total, item) => {
-      return total + (item.product.price * item.quantity);
+      if (item.product && item.product.price) {
+        return total + (item.product.price * item.quantity);
+      }
+      return total;
     }, 0);
   }
 }

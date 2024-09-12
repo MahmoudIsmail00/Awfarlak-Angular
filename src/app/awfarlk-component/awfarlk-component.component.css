@@ -185,3 +185,10 @@
 .specs-list span:first-child {
   color: #000;
 }
+
+/* In your global styles or component-specific styles */
+.custom-snackbar {
+  background-color: #2196f3; /* Customize the background color */
+  color: #fff; /* Customize the text color */
+}
+

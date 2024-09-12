@@ -32,6 +32,7 @@ export class ProductsService {
     });
   }
 
+
   getAllBrands(): Observable<any[]> {
     const headers = this.getHeaders();
     return this.http.get<any[]>(this.ProductsURL + 'GetProductBrands/Brands', {

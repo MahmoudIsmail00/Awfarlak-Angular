@@ -19,7 +19,7 @@
       </div>
       <p class="stock-status" style="font-weight: 900;">المتوفر في المخزون {{product.quantity}}</p>
       <div class="actions">
-        <button class="add-to-cart" (click)="addToCart()">إضافة إلى السلة</button>
+        <button class="add-to-cart" (click)="addToCart()" [disabled]="!product">إضافة إلى السلة</button>
         <div class="wishlist-compare">
           <span style="padding: 10px;">
             <svg width="16px" height="16px" viewBox="0 0 24.00 24.00" fill="none" xmlns="http://www.w3.org/2000/svg">
