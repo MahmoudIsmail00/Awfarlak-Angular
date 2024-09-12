@@ -26,20 +26,6 @@ export class HomeProductComponent implements OnInit {
     private snackBar: MatSnackBar,
     private router: Router
   ) {}
-  addToWishList() {
-    console.log('clicked');
-    const user = JSON.parse(localStorage.getItem('currentUser')!);
-    user.WishList.data.push(this.product.id);
-
-    localStorage.setItem('currentUser', JSON.stringify(user));
-  }
-  addToCompareList() {
-    console.log('clicked');
-    const user = JSON.parse(localStorage.getItem('currentUser')!);
-    user.CompareList.data.push(this.product.id);
-
-    localStorage.setItem('currentUser', JSON.stringify(user));
-  }
   ngOnInit() {
     this.ProductsService.getProductsWithSpecsBySubCategoryId(
       this.subCategory.id
@@ -47,6 +33,53 @@ export class HomeProductComponent implements OnInit {
       this.products = data;
     });
   }
+
+
+  
+
+  addToWishList() {
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    if (user && user.WishList) {
+      user.WishList.data.push(this.product.id);
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.snackBar.open('Item has been added to wishlist successfully!', 'View Wishlist', {
+        duration: 5000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar'],
+      }).onAction().subscribe(() => {
+        this.router.navigate(['/wishlist']);
+      });
+    } else {
+      console.error('User or Wishlist data is missing');
+    }
+  }
+
+  addToCompareList() {
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    if (!user.CompareList.data.includes(this.product.id.toString())) {
+      if (user.CompareList.data.length < 4) {
+        user.CompareList.data.push(this.product.id.toString());
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.snackBar.open('Item has been added to compare list successfully!', 'View Compare List', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar'],
+        }).onAction().subscribe(() => {
+          this.router.navigate(['/compare']);
+        });
+      } else {
+        this.snackBar.open('Maximum 4 items in the compare list', '', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar'],
+        });
+      }
+    }
+  }
+
   addToCart() {
     if (this.product) {
       this.cartService.addToCart(this.product, 1); // Ensure addToCart method accepts ProductWithSpecs and quantity as number

@@ -59,25 +59,48 @@ export class ProductComponent implements OnInit {
       console.log('Product added to cart');
     }
   }
+  
+
   addToWishList() {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
     if (!user.WishList.data.includes(this.product.id.toString())) {
       user.WishList.data.push(this.product.id.toString());
-      alert('added to wishlist!');
+      localStorage.setItem('currentUser', JSON.stringify(user));
+      this.snackBar.open('Item has been added to wishlist successfully!', 'View Wishlist', {
+        duration: 5000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar'],
+      }).onAction().subscribe(() => {
+        this.router.navigate(['/wishlist']);
+      });
+    } else {
+      console.error('User or Wishlist data is missing');
     }
-    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
   addToCompareList() {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
     if (!user.CompareList.data.includes(this.product.id.toString())) {
-      if(user.CompareList.data.length < 4){
+      if (user.CompareList.data.length < 4) {
         user.CompareList.data.push(this.product.id.toString());
-        alert('item has been added to compare list successfully!');
-      }else{
-        alert('Maximum 4 items in the compare list');
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.snackBar.open('Item has been added to compare list successfully!', 'View Compare List', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar'],
+        }).onAction().subscribe(() => {
+          this.router.navigate(['/compare']);
+        });
+      } else {
+        this.snackBar.open('Maximum 4 items in the compare list', '', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar'],
+        });
       }
     }
-    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 }

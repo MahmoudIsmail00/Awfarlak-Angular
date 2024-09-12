@@ -25,3 +25,48 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+
+/* In your global styles or component-specific styles */
+.custom-snackbar {
+  background-color: #191a1c; /* Customize the background color */
+  color: #fff; /* Customize the text color */
+  padding: 16px; /* Add padding */
+  border-radius: 8px; /* Add border radius */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add box shadow */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out; /* Add transition effects */
+}
+
+.custom-snackbar .mat-simple-snackbar-action {
+  color: #ffeb3b; /* Customize the action button color */
+  font-weight: bold; /* Make the action button text bold */
+}
+
+.custom-snackbar .mat-simple-snackbar-message {
+  background-color: transparent; /* Ensure no background color */
+  color: inherit; /* Inherit text color */
+}
+
+.custom-snackbar-enter {
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.custom-snackbar-enter-active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.custom-snackbar-exit {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.custom-snackbar-exit-active {
+  transform: translateY(100%);
+  opacity: 0;
+}

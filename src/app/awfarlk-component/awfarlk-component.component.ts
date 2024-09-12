@@ -48,8 +48,15 @@ export class AwfarlkComponentComponent implements OnInit {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
     if (user && user.WishList) {
       user.WishList.data.push(this.productId!);
-      alert('Item has been added to wishlist successfully!');
       localStorage.setItem('currentUser', JSON.stringify(user));
+      this.snackBar.open('Item has been added to wishlist successfully!', 'View Wishlist', {
+        duration: 5000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar'],
+      }).onAction().subscribe(() => {
+        this.router.navigate(['/wishlist']);
+      });
     } else {
       console.error('User or Wishlist data is missing');
     }
@@ -60,12 +67,24 @@ export class AwfarlkComponentComponent implements OnInit {
     if (!user.CompareList.data.includes(this.product.id.toString())) {
       if (user.CompareList.data.length < 4) {
         user.CompareList.data.push(this.product.id.toString());
-        alert('Item has been added to compare list successfully!');
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        this.snackBar.open('Item has been added to compare list successfully!', 'View Compare List', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar'],
+        }).onAction().subscribe(() => {
+          this.router.navigate(['/compare']);
+        });
       } else {
-        alert('Maximum 4 items in the compare list');
+        this.snackBar.open('Maximum 4 items in the compare list', '', {
+          duration: 5000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar'],
+        });
       }
     }
-    localStorage.setItem('currentUser', JSON.stringify(user));
   }
 
   addToCart() {
