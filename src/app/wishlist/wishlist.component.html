@@ -3,7 +3,7 @@
 
 
   @if(wishListProducts.length == 0){
-    <div class="emptylist">
+  <div class="emptylist">
     <svg xmlns="http://www.w3.org/2000/svg" height="320" width="320"
       viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
       <path fill="#c7c7c7"
@@ -19,8 +19,8 @@
   }
   @else {
   <div class="flex category-1" style="margin:40px 10px">
-    @for (item of wishListProducts; track $index) {
-    <div class="wd-carousel-item wd-slide-visible wd-full-visible wd-slide-next"
+    @for (item of wishListProducts; track $index) { <div
+      class="wd-carousel-item wd-slide-visible wd-full-visible wd-slide-next"
       style="width: 233.333px; margin-right: 50px;">
       <div
         class="wd-product wd-with-labels wd-hover-icons product-grid-item product type-product post-19950 status-publish instock product_cat-standard-laptops product_tag-used-laptop has-post-thumbnail shipping-taxable purchasable product-type-simple"
@@ -30,7 +30,8 @@
           <div class="product-element-top wd-quick-shop">
             <a routerLink="/product-details/{{item.id}}" class="product-image-link">
               <div class="product-labels labels-rounded">
-                <span class="attribute-label product-label label-term-used-grade-a label-attribute-pa_condition">Used: Grade A</span>
+                <span class="attribute-label product-label label-term-used-grade-a label-attribute-pa_condition">Used:
+                  Grade A</span>
               </div>
               <img loading="lazy" decoding="async" width="300" height="300" [src]="item.pictureUrl"
                 class="attachment-medium size-medium wd-lazy-load wd-lazy-none wd-loaded" alt="" data-recalc-dims="1">
@@ -41,14 +42,14 @@
                       <div
                         class="br_alabel br_alabel_type_custom br_alabel_template_type_css berocket_alabel_id_21759 br_alabel_better_compatibility br_alabel_msc"
                         style="display: flex; flex-wrap: wrap; place-content: center; width: 74px; height: 114px;"
-                        data-mobilescale="0.8"><span><i style="background-color: #f16543; border-color: #f16543;"
-                            class="template-span-before "></i><i
-                            style="background-color: #f16543; border-color: #f16543;" class="template-i "></i><i
-                            style="background-color: #f16543; border-color: #f16543;" class="template-i-before "></i><i
-                            style="background-color: #f16543; border-color: #f16543;" class="template-i-after "></i><b
-                            style="text-align: center;z-index: 100;" class="br-labels-css br-labels-css-22"><span
-                              class="b_span_text">Special
-                              Offer</span></b></span>
+                        data-mobilescale="0.8">
+
+                        <button class="delete-button" (click)="removeFromWishlist(item.id)">
+                          <span class="material-icons">❌</span>
+                        </button>
+
+
+
                       </div>
                     </div>
                   </div>

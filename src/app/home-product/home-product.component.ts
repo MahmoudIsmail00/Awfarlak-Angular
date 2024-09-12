@@ -32,6 +32,13 @@ export class HomeProductComponent implements OnInit {
 
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
+  addToCompareList() {
+    console.log('clicked');
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    user.CompareList.data.push(this.product.id);
+
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
   ngOnInit() {
     this.ProductsService.getProductsbySubCategoryId(
       this.subCategory.id

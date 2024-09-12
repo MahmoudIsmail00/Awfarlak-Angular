@@ -1,3 +1,4 @@
+import { CompareList } from './../../../Models/comparelist';
 import { WishList } from './../../../Models/wishlist';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -33,9 +34,9 @@ export class AuthService {
       .post<any>(`${this.apiUrl}/login`, { email, password })
       .pipe(
         map((response) => {
-          response.WishList =
-            response.WishList ||
-            ({ data: [] } as WishList);
+          response.WishList = response.WishList || ({ data: [] } as WishList);
+          response.CompareList =
+            response.CompareList || ({ data: [] } as CompareList);
           localStorage.setItem('currentUser', JSON.stringify(response));
           this.currentUserSubject.next(response);
           return true;
@@ -58,6 +59,8 @@ export class AuthService {
     return this.http.post<any>(`${this.apiUrl}/register`, newUser).pipe(
       map((response) => {
         response.WishList = response.WishList || ({ data: [] } as WishList);
+        response.CompareList =
+          response.CompareList || ({ data: [] } as CompareList);
         localStorage.setItem('currentUser', JSON.stringify(response));
         this.currentUserSubject.next(response);
         return true;
