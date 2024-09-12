@@ -55,4 +55,13 @@ products! : ProductWithSpecs
       console.log("Product added to cart");
     }
   }
+  addToWishList() {
+    console.log('clicked');
+    const user = JSON.parse(localStorage.getItem('currentUser')!);
+    if(!user.WishList.data.includes(this.product.id.toString())){
+      user.WishList.data.push(this.product.id.toString());
+      alert('added to wishlist!');
+    }
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
 }

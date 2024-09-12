@@ -1,9 +1,9 @@
 <div class="flex" style="max-width:1400px ; margin: 20px auto;">
   <app-sidebar />
+
+
   @if(wishListProducts.length == 0){
-
-
-  <div class="emptylist">
+    <div class="emptylist">
     <svg xmlns="http://www.w3.org/2000/svg" height="320" width="320"
       viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
       <path fill="#c7c7c7"
@@ -29,9 +29,8 @@
         <div class="product-wrapper" routerLink="/product-details/{{item.id}}">
           <div class="product-element-top wd-quick-shop">
             <a routerLink="/product-details/{{item.id}}" class="product-image-link">
-              <div class="product-labels labels-rounded"><span
-                  class="attribute-label product-label label-term-used-grade-a label-attribute-pa_condition">Used: Grade
-                  A</span>
+              <div class="product-labels labels-rounded">
+                <span class="attribute-label product-label label-term-used-grade-a label-attribute-pa_condition">Used: Grade A</span>
               </div>
               <img loading="lazy" decoding="async" width="300" height="300" [src]="item.pictureUrl"
                 class="attachment-medium size-medium wd-lazy-load wd-lazy-none wd-loaded" alt="" data-recalc-dims="1">
@@ -135,9 +134,6 @@
                   class="woocommerce-Price-amount amount" style="color: #2573a3;"><bdi>{{item.price}}&nbsp;<span
                       class="woocommerce-Price-currencySymbol">EGP</span></bdi></span></ins><span
                 class="screen-reader-text">السعر الحالي هو: 13,500&nbsp;EGP.</span></span>
-
-
-
           </div>
         </div>
       </div>

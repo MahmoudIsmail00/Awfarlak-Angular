@@ -368,7 +368,9 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(25px) translateZ(0);
+
     }
+
     .wd-product.wd-hover-icons .wd-buttons {
       display: inline-flex;
       align-items: stretch;
@@ -959,6 +961,7 @@
     opacity: 0;
     visibility: hidden;
     transform: translateY(25px) translateZ(0);
+    cursor: pointer;
   }
   .wd-product.wd-hover-icons .wd-buttons {
     display: inline-flex;

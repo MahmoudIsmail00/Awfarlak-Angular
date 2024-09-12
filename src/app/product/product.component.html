@@ -1,5 +1,5 @@
 <section>
-  <div routerLink="/product-details/{{product.id}}" class="wd-carousel-item wd-slide-visible wd-full-visible wd-slide-next" style="width: 233.333px; margin-right: 50px;">
+  <div class="wd-carousel-item wd-slide-visible wd-full-visible wd-slide-next" style="width: 233.333px; margin-right: 50px;">
     <div
       class="wd-product wd-with-labels wd-hover-icons product-grid-item product type-product post-19950 status-publish instock product_cat-standard-laptops product_tag-used-laptop has-post-thumbnail shipping-taxable purchasable product-type-simple"
       data-loop="2" data-id="19950">
@@ -32,7 +32,7 @@
             </div>
           </a>
 
-          <div class="hover-img">
+          <div class="hover-img pointerCursor">
             <a routerLink="/product-details/{{product.id}}" aria-label="Product image"></a>
           </div>
 
@@ -58,7 +58,7 @@
                 </a>
               </div>
               <div style="margin: 10px 10px 0 0">
-                <a>
+                <a (click)="addToWishList()" class="pointer">
                   <svg width="25px" height="25px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g id="Interface / Heart_02"> <path id="Vector" d="M19.2373 6.23731C20.7839 7.78395 20.8432 10.2727 19.3718 11.8911L11.9995 20.0001L4.62812 11.8911C3.15679 10.2727 3.21605 7.7839 4.76269 6.23726C6.48961 4.51034 9.33372 4.66814 10.8594 6.5752L12 8.00045L13.1396 6.57504C14.6653 4.66798 17.5104 4.51039 19.2373 6.23731Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g> </g></svg>
                 </a>
               </div>
