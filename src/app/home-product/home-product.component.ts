@@ -6,18 +6,19 @@ import { ProductsService } from '../Services/store/products.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../Services/cart/cart.service';
 import { ProductWithSpecs } from '../../Models/productWithSpecs';
+import { ProductComponent } from "../product/product.component";
 
 @Component({
   selector: 'app-home-product',
   templateUrl: './home-product.component.html',
   styleUrls: ['./home-product.component.css'],
   standalone: true,
-  imports: [RouterLink, RouterOutlet],
+  imports: [RouterLink, RouterOutlet, ProductComponent],
 })
 export class HomeProductComponent implements OnInit {
   @Input() subCategory!: SubCategory;
   product!: ProductWithSpecs;
-  products: Product[] = [];
+  products: ProductWithSpecs[] = [];
 
   constructor(
     private ProductsService: ProductsService,
@@ -40,9 +41,9 @@ export class HomeProductComponent implements OnInit {
     localStorage.setItem('currentUser', JSON.stringify(user));
   }
   ngOnInit() {
-    this.ProductsService.getProductsbySubCategoryId(
+    this.ProductsService.getProductsWithSpecsBySubCategoryId(
       this.subCategory.id
-    ).subscribe((data: Product[]) => {
+    ).subscribe((data: ProductWithSpecs[]) => {
       this.products = data;
     });
   }

@@ -3,8 +3,8 @@
 </div>
 <div class="flex category-1 " style="margin:40px 10px">
   @for (item of products; track $index) {
-    
-  <div class="wd-carousel-item wd-slide-visible wd-full-visible wd-slide-next"
+
+  <!-- <div class="wd-carousel-item wd-slide-visible wd-full-visible wd-slide-next"
     style="width: 233.333px; margin-right: 50px;">
     <div
       class="wd-product wd-with-labels wd-hover-icons product-grid-item product type-product post-19950 status-publish instock product_cat-standard-laptops product_tag-used-laptop has-post-thumbnail shipping-taxable purchasable product-type-simple"
@@ -124,6 +124,7 @@
       </div>
     </div>
 
-  </div>
-  }
+  </div> -->
+  <app-product [product]="item" />
+}
 </div>
