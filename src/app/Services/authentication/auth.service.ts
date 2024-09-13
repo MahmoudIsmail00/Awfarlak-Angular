@@ -49,6 +49,8 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('currentUser');
+    localStorage.removeItem('cart');
+   localStorage.removeItem('isCartCleared');
     this.currentUserSubject.next(null);
   }
 
@@ -74,7 +76,7 @@ export class AuthService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
       console.error(`${operation} failed: ${error.message}`);
-      
+
       return throwError(() => new Error(`${operation} failed: ${error.message}`));
     };
   }

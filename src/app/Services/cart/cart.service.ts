@@ -124,12 +124,30 @@ export class CartService {
 
 
   clearCart(): void {
-    this.userCart.basketItems = [];
-    this.cartSubject.next(this.userCart.basketItems);
-    this.isCartCleared.next(true);
-    this.saveCartToLocalStorage();
-    this.updateUserCartOnServer();
+    const token = this.getToken();
+    if (token && this.userCart.id) {
+      const headers = this.getHeaders();
+      this.http.delete(`${this.apiUrl}DeleteBasketById?id=${this.userCart.id}`, { headers })
+        .pipe(
+          catchError(error => {
+            console.log('Error clearing cart:', error);
+            return throwError(() => new Error('Error clearing cart'));
+          })
+        ).subscribe(() => {
+
+          this.userCart.basketItems = [];
+          this.cartSubject.next(this.userCart.basketItems);
+          this.isCartCleared.next(true);
+
+          
+          localStorage.removeItem('cart');
+          localStorage.removeItem('isCartCleared');
+        });
+    } else {
+      console.error('No token or cart ID found');
+    }
   }
+
 
   increaseProductQuantity(id: number): void {
     const item = this.userCart.basketItems.find(item => item.Id === id);
