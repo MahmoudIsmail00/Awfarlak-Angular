@@ -1,17 +1,26 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, throwError } from 'rxjs';
-import { BasketItemDto , CustomerBasketDto } from '../../../Models/customerBasket';
+import { BasketItemDto, CustomerBasketDto } from '../../../Models/customerBasket';
 import { environment } from '../environment';
 import { ProductWithSpecs } from '../../../Models/productWithSpecs';
 import { ProductsService } from '../store/products.service';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   apiUrl = `${environment.apiUrl}/basket/`;
-  userCart: CustomerBasketDto = { id: '', basketItems: [], shippingPrice: 0 };
+  userCart: CustomerBasketDto = {
+    id: '',
+    basketItems: [],
+    deliveryMethodId: 0,
+    shippingPrice: 0,
+    paymentIntentId: '',
+    clientSecret: ''
+  };
+
   private cartSubject = new BehaviorSubject<BasketItemDto[]>(this.userCart.basketItems);
   isCartCleared = new BehaviorSubject<boolean>(false);
 
@@ -23,7 +32,12 @@ export class CartService {
   }
 
   private getToken(): string | null {
-    return localStorage.getItem('authToken');
+    const token = localStorage.getItem('currentUser');
+    if (token) {
+      const parsedToken = JSON.parse(token);
+      return parsedToken.token;
+    }
+    return null;
   }
 
   private getHeaders(): HttpHeaders {
@@ -56,7 +70,13 @@ export class CartService {
     this.loadCartFromLocalStorage();
   }
 
+
   addToCart(product: ProductWithSpecs, quantity: number): void {
+    // debugger;
+    if (!this.userCart.id) {
+      this.userCart.id = uuidv4();
+    }
+
     const existingProductIndex = this.userCart.basketItems.findIndex(item => item.Id === product.id);
     if (existingProductIndex >= 0) {
       this.userCart.basketItems[existingProductIndex].Quantity += quantity;
@@ -67,8 +87,8 @@ export class CartService {
         Price: product.price,
         Quantity: quantity,
         PictureUrl: product.pictureUrl,
-        productBrandName: product.productBrandName,
-        productTypeName: product.productTypeName,
+        brand: product.productBrandName,
+        type: "laptop",
       };
       this.userCart.basketItems.push(newItem);
     }
@@ -79,26 +99,36 @@ export class CartService {
     this.updateUserCartOnServer();
   }
 
+  updateUserCartOnServer(): void {
+    const token = this.getToken();
+    if (!token) {
+      console.error('No token found');
+      return;
+    }
+
+    const headers = this.getHeaders();
+    console.log('Sending request with headers:', headers);
+    console.log('Payload:', this.userCart);
+
+    this.http.post<CustomerBasketDto>(this.apiUrl + 'updateBasket', this.userCart, { headers }).pipe(
+      catchError(error => {
+        console.log('Error updating cart:', error);
+        return throwError(() => new Error('Error updating cart'));
+      })
+    ).subscribe(
+      response => console.log('Cart updated successfully', response),
+      error => console.log('Error updating cart:', error)
+    );
+  }
+
+
+
   clearCart(): void {
     this.userCart.basketItems = [];
     this.cartSubject.next(this.userCart.basketItems);
     this.isCartCleared.next(true);
     this.saveCartToLocalStorage();
     this.updateUserCartOnServer();
-  }
-
-  updateUserCartOnServer(): void {
-    if (this.userCart.id) {
-      this.http.post<CustomerBasketDto>(this.apiUrl + "updateBasket", this.userCart, { headers: this.getHeaders() }).pipe(
-        catchError(error => {
-          //console.log('Error updating cart:', error);
-          return throwError(() => new Error('Error updating cart'));
-        })
-      ).subscribe(
-        (response) => console.log('Cart updated successfully', response),
-        //(error) => console.log('Error updating cart:', error)
-      );
-    }
   }
 
   increaseProductQuantity(id: number): void {
