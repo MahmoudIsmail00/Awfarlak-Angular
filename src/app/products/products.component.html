@@ -2,7 +2,8 @@
   <aside class="sidebar">
       <!-- Sidebar content such as filters for Brand, Condition, etc. -->
        <div class="widget">
-        <h5 class="widget-title">BRAND</h5>
+         <h5 class="widget-title">BRAND</h5>
+        <div class="scrollable-filter">
         <ul>
         @for (item of BrandsQuantity; track $index) {
           <li>
@@ -14,9 +15,11 @@
         }
         </ul>
        </div>
+      </div>
 
        <div class="widget">
-        <h5 class="widget-title">CPU</h5>
+         <h5 class="widget-title">CPU</h5>
+        <div class="scrollable-filter">
         <ul>
         @for (item of CPUsQuantity; track $index) {
           <li>
@@ -27,10 +30,12 @@
           </li>
         }
         </ul>
+        </div>
        </div>
 
        <div class="widget">
-        <h5 class="widget-title">RAM</h5>
+         <h5 class="widget-title">RAM</h5>
+        <div class="scrollable-filter">
         <ul>
         @for (item of RamsQuantity; track $index) {
           <li>
@@ -42,9 +47,11 @@
         }
         </ul>
        </div>
+      </div>
 
        <div class="widget">
-        <h5 class="widget-title">GPU</h5>
+         <h5 class="widget-title">GPU</h5>
+        <div class="scrollable-filter">
         <ul>
         @for (item of GPUQuantity; track $index) {
           <li>
@@ -56,9 +63,11 @@
         }
         </ul>
        </div>
+      </div>
 
        <div class="widget">
-        <h5 class="widget-title">STORAGE</h5>
+         <h5 class="widget-title">STORAGE</h5>
+        <div class="scrollable-filter">
         <ul>
         @for (item of StorageQuantity; track $index) {
           <li>
@@ -70,9 +79,11 @@
         }
         </ul>
        </div>
+      </div>
 
        <div class="widget">
-        <h5 class="widget-title">SCREEN</h5>
+         <h5 class="widget-title">SCREEN</h5>
+        <div class="scrollable-filter">
         <ul>
         @for (item of ScreenQuantity; track $index) {
           <li>
@@ -84,6 +95,7 @@
         }
         </ul>
        </div>
+      </div>
       <!-- Add more filter options as needed -->
   </aside>
 
