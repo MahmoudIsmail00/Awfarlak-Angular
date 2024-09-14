@@ -148,7 +148,7 @@
             <!-- @for(product of this.filteredProducts; track product.id){
                 <app-product [product]="product" />
             } -->
-            <div *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 4, currentPage: page }">
+            <div *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 8, currentPage: page }">
               <app-product [product]="product"></app-product>
             </div>
           </section>
