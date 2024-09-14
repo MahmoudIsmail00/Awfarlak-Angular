@@ -139,7 +139,7 @@ export class CartService {
           this.cartSubject.next(this.userCart.basketItems);
           this.isCartCleared.next(true);
 
-          
+
           localStorage.removeItem('cart');
           localStorage.removeItem('isCartCleared');
         });

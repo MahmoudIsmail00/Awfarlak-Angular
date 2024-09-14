@@ -19,9 +19,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
 export class ProductsComponent implements OnInit {
   allProducts: ProductWithSpecs[] = []; // Unfiltered list of products
   filteredProducts: ProductWithSpecs[] = []; // Filtered list of products
-  activeFilters: { brandName?: string; cpuName?: string } = {}; // Active filters
+  activeFilters: { brandName?: string; cpuName?: string; ramName?: string; gpuName?: string; storageName?: string; screenName?:string} = {}; // Active filters
   BrandsQuantity!: [string, number][]; // Quantity of brands
   CPUsQuantity!: [string, number][]; // Quantity of CPUs
+  RamsQuantity!: [string, number][]; // Quantity of Rams
+  GPUQuantity!: [string, number][]; // Quantity of GPUs
+  StorageQuantity!: [string, number][]; // Quantity of Storages
+  ScreenQuantity!: [string, number][]; // Quantity of Screens
   subcategoryId: any;
   page: number = 1;
 
@@ -59,10 +63,12 @@ export class ProductsComponent implements OnInit {
   initializeProducts(data: ProductWithSpecs[]) {
     this.allProducts = data;
     this.filteredProducts = [...this.allProducts];
-    this.BrandsQuantity = this.getQuantities(
-      this.allProducts.map((p) => p.productBrandName)
-    );
+    this.BrandsQuantity = this.getQuantities(this.allProducts.map((p) => p.productBrandName));
     this.CPUsQuantity = this.getQuantities(this.allProducts.map((p) => p.cpu));
+    this.RamsQuantity = this.getQuantities(this.allProducts.map((p) => p.ram));
+    this.GPUQuantity = this.getQuantities(this.allProducts.map((p) => p.gpu));
+    this.StorageQuantity = this.getQuantities(this.allProducts.map((p) => p.storage));
+    this.ScreenQuantity = this.getQuantities(this.allProducts.map((p) => p.screen));
   }
 
   // Filter products by search term
@@ -91,6 +97,30 @@ export class ProductsComponent implements OnInit {
     this.applyFilters();
   }
 
+  // Filter products by Ram name
+  filterItemsByRamName(ramName: string) {
+    this.activeFilters.ramName = ramName;
+    this.applyFilters();
+  }
+
+  // Filter products by gpu name
+  filterItemsByGpuName(gpuName: string) {
+    this.activeFilters.gpuName = gpuName;
+    this.applyFilters();
+  }
+
+  // Filter products by storage name
+  filterItemsByStorageName(storageName: string) {
+    this.activeFilters.storageName = storageName;
+    this.applyFilters();
+  }
+
+  // Filter products by Screen name
+  filterItemsByScreenName(screenName: string) {
+    this.activeFilters.screenName = screenName;
+    this.applyFilters();
+  }
+
   // Remove a specific filter
   removeFilter(filterKey: keyof typeof this.activeFilters) {
     delete this.activeFilters[filterKey];
@@ -116,6 +146,30 @@ export class ProductsComponent implements OnInit {
     if (this.activeFilters.cpuName) {
       this.filteredProducts = this.filteredProducts.filter(
         (x) => x.cpu === this.activeFilters.cpuName
+      );
+    }
+
+    if (this.activeFilters.ramName) {
+      this.filteredProducts = this.filteredProducts.filter(
+        (x) => x.ram === this.activeFilters.ramName
+      );
+    }
+
+    if (this.activeFilters.gpuName) {
+      this.filteredProducts = this.filteredProducts.filter(
+        (x) => x.gpu === this.activeFilters.gpuName
+      );
+    }
+
+    if (this.activeFilters.storageName) {
+      this.filteredProducts = this.filteredProducts.filter(
+        (x) => x.storage === this.activeFilters.storageName
+      );
+    }
+
+    if (this.activeFilters.screenName) {
+      this.filteredProducts = this.filteredProducts.filter(
+        (x) => x.screen === this.activeFilters.screenName
       );
     }
   }

@@ -28,6 +28,62 @@
         }
         </ul>
        </div>
+
+       <div class="widget">
+        <h5 class="widget-title">RAM</h5>
+        <ul>
+        @for (item of RamsQuantity; track $index) {
+          <li>
+            <a class="widli" (click)="filterItemsByRamName(item[0])">
+              <span class="widliType">{{item[0]}} GB</span>
+              <span class="count">{{item[1]}}</span>
+            </a>
+          </li>
+        }
+        </ul>
+       </div>
+
+       <div class="widget">
+        <h5 class="widget-title">GPU</h5>
+        <ul>
+        @for (item of GPUQuantity; track $index) {
+          <li>
+            <a class="widli" (click)="filterItemsByGpuName(item[0])">
+              <span class="widliType">{{item[0]}}</span>
+              <span class="count">{{item[1]}}</span>
+            </a>
+          </li>
+        }
+        </ul>
+       </div>
+
+       <div class="widget">
+        <h5 class="widget-title">STORAGE</h5>
+        <ul>
+        @for (item of StorageQuantity; track $index) {
+          <li>
+            <a class="widli" (click)="filterItemsByStorageName(item[0])">
+              <span class="widliType">{{item[0]}} GB</span>
+              <span class="count">{{item[1]}}</span>
+            </a>
+          </li>
+        }
+        </ul>
+       </div>
+
+       <div class="widget">
+        <h5 class="widget-title">SCREEN</h5>
+        <ul>
+        @for (item of ScreenQuantity; track $index) {
+          <li>
+            <a class="widli" (click)="filterItemsByScreenName(item[0])">
+              <span class="widliType">{{item[0]}}</span>
+              <span class="count">{{item[1]}}</span>
+            </a>
+          </li>
+        }
+        </ul>
+       </div>
       <!-- Add more filter options as needed -->
   </aside>
 
@@ -38,7 +94,7 @@
       </nav>
 
       <!-- Active Filters Section -->
-    <div class="active-filters-container" *ngIf="activeFilters.brandName || activeFilters.cpuName">
+    <div class="active-filters-container" *ngIf="activeFilters.brandName || activeFilters.cpuName || activeFilters.ramName || activeFilters.gpuName || activeFilters.storageName || activeFilters.screenName">
       <span class="filter" (click)="clearAllFilters()">✖ Clear filters</span>
 
       <!-- Brand Filter -->
@@ -50,6 +106,28 @@
       <span class="filter" *ngIf="activeFilters.cpuName" (click)="removeFilter('cpuName')">
         ✖ {{ activeFilters.cpuName }}
       </span>
+
+       <!-- RAM Filter -->
+       <span class="filter" *ngIf="activeFilters.ramName" (click)="removeFilter('ramName')">
+        ✖ {{ activeFilters.ramName }} GB
+      </span>
+
+      <!-- GPU Filter -->
+      <span class="filter" *ngIf="activeFilters.gpuName" (click)="removeFilter('gpuName')">
+        ✖ {{ activeFilters.gpuName }}
+      </span>
+
+      <!-- Storage Filter -->
+      <span class="filter" *ngIf="activeFilters.storageName" (click)="removeFilter('storageName')">
+        ✖ {{ activeFilters.storageName }} GB
+      </span>
+
+      <!-- Screens Filter -->
+      <span class="filter" *ngIf="activeFilters.screenName" (click)="removeFilter('screenName')">
+        ✖ {{ activeFilters.screenName }}
+      </span>
+
+
     </div>
 
     <!-- Product Listings -->
@@ -57,10 +135,10 @@
       <section class="p-5 md:p-0 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-10 items-start">
             <!-- @for(product of this.filteredProducts; track product.id){
                 <app-product [product]="product" />
-            } -->         
+            } -->
             <div *ngFor="let product of filteredProducts | paginate: { itemsPerPage: 4, currentPage: page }">
               <app-product [product]="product"></app-product>
-            </div>                                         
+            </div>
           </section>
         </section>
 
