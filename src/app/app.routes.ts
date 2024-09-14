@@ -18,6 +18,10 @@ import { AllAddressesComponent } from './all-addresses/all-addresses.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { CheckoutAddressComponent } from './checkout/checkout-address/checkout-address.component';
+import { CheckoutDeliveryComponent } from './checkout/checkout-delivery/checkout-delivery.component';
+import { CheckoutReviewComponent } from './checkout/checkout-review/checkout-review.component';
+import { CheckoutPaymentComponent } from './checkout/checkout-payment/checkout-payment.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -36,7 +40,15 @@ export const routes: Routes = [
   { path: 'accountDetails', component: AccountDetailsComponent },
   { path: 'compare', component: CompareComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
-  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, children: [
+    { path: '', redirectTo: 'address', pathMatch: 'full' },
+    { path: 'address', component: CheckoutAddressComponent },
+    { path: 'delivery', component: CheckoutDeliveryComponent },
+    { path: 'review', component: CheckoutReviewComponent },
+    { path: 'payment', component: CheckoutPaymentComponent }
+  ]
+},
+{ path: '', redirectTo: '/checkout/address', pathMatch: 'full' },
   {
     path: 'dashboard',
     component: DashboardComponent,

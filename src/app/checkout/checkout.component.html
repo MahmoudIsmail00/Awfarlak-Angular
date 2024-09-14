@@ -1,119 +1,35 @@
-<div class="bg-gray-100 h-screen py-8" style="max-width: 1400px; margin: 20px auto;">
-  <div class="container mx-auto px-4">
-    <h1 class="text-2xl font-semibold mb-4">Checkout</h1>
-    <div class="flex flex-col md:flex-row gap-4">
-      <!-- Address Section -->
-      <div class="md:w-1/2">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h2 class="text-lg font-semibold mb-4">Shipping Address</h2>
-          <form (ngSubmit)="submitOrder()">
-            <!-- Shipping Address Fields -->
-            <input type="text" [(ngModel)]="address.firstName" name="firstName" placeholder="First Name" class="border rounded-md w-full mb-2">
-            <input type="text" [(ngModel)]="address.lastName" name="lastName" placeholder="Last Name" class="border rounded-md w-full mb-2">
-            <input type="text" [(ngModel)]="address.street" name="street" placeholder="Street" class="border rounded-md w-full mb-2">
-            <input type="text" [(ngModel)]="address.city" name="city" placeholder="City" class="border rounded-md w-full mb-2">
-            <input type="text" [(ngModel)]="address.state" name="state" placeholder="State" class="border rounded-md w-full mb-2">
-            <input type="text" [(ngModel)]="address.zipCode" name="zipCode" placeholder="Zip Code" class="border rounded-md w-full mb-2">
+<!-- checkout.component.html -->
+<div class="container">
+  <div class="flex flex-col items-center max-w-6xl mx-auto py-8 outlet">
+    <!-- Navigation -->
+    <nav class="flex justify-around w-full bg-gray-100 py-3 px-6 rounded-md shadow mb-8">
+      <a routerLink="/checkout/address" routerLinkActive="onActive" class="px-6 py-3 bg-gray-300 rounded-md">Address</a>
+      <a routerLink="/checkout/delivery" routerLinkActive="onActive" class="px-6 py-3 bg-gray-300 rounded-md">Delivery</a>
+      <a routerLink="/checkout/review" routerLinkActive="onActive" class="px-6 py-3 bg-gray-300 rounded-md">Review</a>
+      <a routerLink="/checkout/payment" routerLinkActive="onActive" class="px-6 py-3 bg-gray-300 rounded-md">Payment</a>
+    </nav>
 
-            <h3 class="text-md font-semibold mb-2">Delivery Method</h3>
-            <select [(ngModel)]="deliveryMethodId" name="deliveryMethod" class="border rounded-md w-full mb-4">
-              <option *ngFor="let method of deliveryMethods" [value]="method.id">
-                {{ method.name }} - {{ method.price | currency }}
-              </option>
-            </select>
-          </form>
-        </div>
-      </div>
+    <!-- Content Section -->
+    <div class="bg-white w-full p-10 rounded-lg shadow-lg">
+      <router-outlet></router-outlet>
+    </div>
 
-      <!-- Product Details and Payment Section -->
-      <div class="md:w-1/2">
-        <div class="bg-white rounded-lg shadow-md p-6">
-          <h3 class="text-md font-semibold mb-2">Order Review</h3>
-          <div id="order_review" class="woocommerce-checkout-review-order">
-            <div class="wd-table-wrapper">
-              <table class="shop_table woocommerce-checkout-review-order-table">
-                <thead>
-                  <tr>
-                    <th class="product-name">Product</th>
-                    <th class="product-total">Subtotal</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let item of usercartItems">
-                    <td class="product-name">
-                      {{ item.ProductName }} <strong class="product-quantity">× {{ item.Quantity }}</strong>
-                    </td>
-                    <td class="product-total">
-                      <span class="woocommerce-Price-amount amount">{{ (item.Quantity * item.Price) | currency }}</span>
-                    </td>
-                  </tr>
-                </tbody>
-                <tfoot>
-                  <tr class="cart-subtotal">
-                    <th>Subtotal</th>
-                    <td><span class="woocommerce-Price-amount amount">{{ calculateTotal() | currency }}</span></td>
-                  </tr>
-                  <tr class="cart-discount coupon-discount">
-                    <th>Discount</th>
-                    <td>-<span class="woocommerce-Price-amount amount">1,000 EGP</span></td>
-                  </tr>
-                  <tr class="woocommerce-shipping-totals shipping shipping__table--multiple">
-                    <th>Shipping</th>
-                    <td>
-                      <select name="shipping_method[0]" id="shipping_method_0" class="shipping_method">
-                        <option value="free_shipping:2" selected="selected">Home Delivery (Free)</option>
-                        <option value="flat_rate:1">Home Delivery: 50 EGP</option>
-                        <!-- Add more options as needed -->
-                      </select>
-                    </td>
-                  </tr>
-                  <tr class="order-total">
-                    <th>Total</th>
-                    <td><strong><span class="woocommerce-Price-amount amount">{{ (calculateTotal() - 1000 + 50) | currency }}</span></strong></td>
-                  </tr>
-                </tfoot>
-              </table>
-            </div>
-          </div>
 
-          <h3 class="text-md font-semibold mb-2">Payment</h3>
-          <div id="payment" class="woocommerce-checkout-payment">
-            <ul class="wc_payment_methods payment_methods methods">
-              <li class="wc_payment_method payment_method_cod">
-                <input id="payment_method_cod" type="radio" class="input-radio" name="payment_method" value="cod" checked="checked">
-                <label for="payment_method_cod">Cash on delivery</label>
-                <div class="payment_box payment_method_cod">
-                  <p>Pay with cash upon delivery.</p>
-                </div>
-              </li>
-              <li class="wc_payment_method payment_method_kashier_card">
-                <input id="payment_method_kashier_card" type="radio" class="input-radio" name="payment_method" value="kashier_card">
-                <label for="payment_method_kashier_card">
-                  Card <img src="https://example.com/credit-card.svg" alt="Credit Card">
-                </label>
-                <div class="payment_box payment_method_kashier_card" style="display: none;">
-                  <p>Pay with your Credit Card.</p>
-                  <!-- Add your card payment UI here -->
-                </div>
-              </li>
-              <li class="wc_payment_method payment_method_kashier_wallet">
-                <input id="payment_method_kashier_wallet" type="radio" class="input-radio" name="payment_method" value="kashier_wallet">
-                <label for="payment_method_kashier_wallet">
-                  Mobile Wallet <img src="https://example.com/meeza-wallet.svg" alt="Mobile Wallet">
-                </label>
-                <div class="payment_box payment_method_kashier_wallet" style="display: none;">
-                  <p>Pay with your Mobile Wallet.</p>
-                  <!-- Add your wallet payment UI here -->
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          <button type="submit" class="bg-gray-700 text-white py-2 px-4 rounded-lg mt-4 w-full">
-            Place Order
-          </button>
-        </div>
-      </div>
+  </div>
+  <!-- Order Summary -->
+  <div class="border border-gray-200 rounded-md shadow-lg p-6 mt-8 w-full max-w-md" >
+    <h3 class="text-xl font-semibold mb-4">Order Summary</h3>
+    <div class="flex justify-between mb-2">
+      <p>Order subtotal</p>
+      <p>$380.00</p>
+    </div>
+    <div class="flex justify-between mb-2">
+      <p>Shipping and handling</p>
+      <p>$10.00</p>
+    </div>
+    <div class="flex justify-between font-bold">
+      <p>Total</p>
+      <p>$390.00</p>
     </div>
   </div>
 </div>
