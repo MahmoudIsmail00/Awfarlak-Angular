@@ -1,20 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../Services/cart/cart.service';
+import { OrderService } from '../Services/order/order.service'; // Import the OrderService
 import { BasketItemDto } from '../../Models/customerBasket';
-import { NgFor, NgIf } from '@angular/common';
+import { AddressDto, OrderDto } from '../../Models/order'; // Import your models
+import { CommonModule, NgFor, NgIf } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.css'],
   standalone: true,
-  imports: [NgFor,NgIf]
+  imports: [NgFor, NgIf ]
 })
 export class CartComponent implements OnInit {
   usercartItems: BasketItemDto[] = [];
   isCartCleared = false;
 
-  constructor(private cartService: CartService) {}
+
+  constructor(private cartService: CartService, private orderService: OrderService , private router: Router) {}
 
   ngOnInit() {
     this.cartService.cart$.subscribe(cartItems => {
@@ -23,6 +28,8 @@ export class CartComponent implements OnInit {
     this.cartService.isCartCleared$.subscribe(isCleared => {
       this.isCartCleared = isCleared;
     });
+
+   
   }
 
   increaseProductQuantity(productId: number) {
@@ -40,4 +47,10 @@ export class CartComponent implements OnInit {
   clearCart() {
     this.cartService.clearCart();
   }
+
+  goToCheckout() {
+    this.router.navigate(['/checkout']);
+  }
+
+
 }

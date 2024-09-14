@@ -17,6 +17,7 @@ import { WishlistComponent } from './wishlist/wishlist.component';
 import { AllAddressesComponent } from './all-addresses/all-addresses.component';
 import { ShippingAddressComponent } from './shipping-address/shipping-address.component';
 import { AccountDetailsComponent } from './account-details/account-details.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -35,6 +36,7 @@ export const routes: Routes = [
   { path: 'accountDetails', component: AccountDetailsComponent },
   { path: 'compare', component: CompareComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  { path: 'checkout', component: CheckoutComponent, canActivate: [AuthGuard] },
   {
     path: 'dashboard',
     component: DashboardComponent,

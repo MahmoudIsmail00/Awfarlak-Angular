@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, throwError } from 'rxjs';
+import { BehaviorSubject, catchError, Observable, of, tap, throwError } from 'rxjs';
 import { BasketItemDto, CustomerBasketDto } from '../../../Models/customerBasket';
 import { environment } from '../environment';
 import { ProductWithSpecs } from '../../../Models/productWithSpecs';
@@ -40,8 +40,9 @@ export class CartService {
     return null;
   }
 
-  private getHeaders(): HttpHeaders {
+  private getHeaders(): HttpHeaders | null {
     const token = this.getToken();
+    if (!token) return null; // Return null if no token is found
     return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 
@@ -68,11 +69,19 @@ export class CartService {
 
   private initializeCartFromLocalStorage() {
     this.loadCartFromLocalStorage();
+    if (this.userCart.basketItems.length === 0) {
+      this.isCartCleared.next(true);
+    } else {
+      this.isCartCleared.next(false);
+    }
   }
 
+  private handleError(error: any) {
+    console.error('An error occurred:', error);
+    return throwError(() => new Error('An error occurred; please try again.'));
+  }
 
   addToCart(product: ProductWithSpecs, quantity: number): void {
-    // debugger;
     if (!this.userCart.id) {
       this.userCart.id = uuidv4();
     }
@@ -100,54 +109,41 @@ export class CartService {
   }
 
   updateUserCartOnServer(): void {
-    const token = this.getToken();
-    if (!token) {
-      console.error('No token found');
+    const headers = this.getHeaders();
+    if (!headers) {
+      console.error('No token found, unable to update cart.');
       return;
     }
 
-    const headers = this.getHeaders();
-    console.log('Sending request with headers:', headers);
-    console.log('Payload:', this.userCart);
-
     this.http.post<CustomerBasketDto>(this.apiUrl + 'updateBasket', this.userCart, { headers }).pipe(
-      catchError(error => {
-        console.log('Error updating cart:', error);
-        return throwError(() => new Error('Error updating cart'));
-      })
+      catchError(this.handleError)
     ).subscribe(
       response => console.log('Cart updated successfully', response),
       error => console.log('Error updating cart:', error)
     );
   }
 
-
-
   clearCart(): void {
-    const token = this.getToken();
-    if (token && this.userCart.id) {
-      const headers = this.getHeaders();
-      this.http.delete(`${this.apiUrl}DeleteBasketById?id=${this.userCart.id}`, { headers })
-        .pipe(
-          catchError(error => {
-            console.log('Error clearing cart:', error);
-            return throwError(() => new Error('Error clearing cart'));
-          })
-        ).subscribe(() => {
-
-          this.userCart.basketItems = [];
-          this.cartSubject.next(this.userCart.basketItems);
-          this.isCartCleared.next(true);
-
-
-          localStorage.removeItem('cart');
-          localStorage.removeItem('isCartCleared');
-        });
-    } else {
+    const headers = this.getHeaders();
+    if (!headers || !this.userCart.id) {
       console.error('No token or cart ID found');
+      return;
     }
-  }
 
+    this.http.delete(`${this.apiUrl}DeleteBasketById?id=${this.userCart.id}`, { headers })
+      .pipe(
+        catchError(this.handleError)
+      )
+      .subscribe(() => {
+        this.userCart.basketItems = [];
+        this.userCart.id = ''; // Reset cart ID after clearing the cart
+        this.cartSubject.next(this.userCart.basketItems);
+        this.isCartCleared.next(true);
+
+        localStorage.removeItem('cart');
+        localStorage.removeItem('isCartCleared');
+      });
+  }
 
   increaseProductQuantity(id: number): void {
     const item = this.userCart.basketItems.find(item => item.Id === id);
@@ -178,4 +174,6 @@ export class CartService {
   calculateTotal(): number {
     return this.userCart.basketItems.reduce((total, item) => total + (item.Price * item.Quantity), 0);
   }
+
+
 }
