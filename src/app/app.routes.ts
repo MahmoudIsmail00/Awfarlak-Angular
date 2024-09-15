@@ -1,3 +1,4 @@
+import { AdminDashboardCategoriesComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories.component';
 import { Routes } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
 import { AboutComponent } from './about/about.component';
@@ -22,6 +23,10 @@ import { CheckoutAddressComponent } from './checkout/checkout-address/checkout-a
 import { CheckoutDeliveryComponent } from './checkout/checkout-delivery/checkout-delivery.component';
 import { CheckoutReviewComponent } from './checkout/checkout-review/checkout-review.component';
 import { CheckoutPaymentComponent } from './checkout/checkout-payment/checkout-payment.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+import { AdminDashboardProductsComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products.component';
+import { AdminDashboardBrandsComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands.component';
+import { AdminDashboardDeliveryComponent } from './admin-dashboard/admin-dashboard-delivery/admin-dashboard-delivery.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -40,6 +45,14 @@ export const routes: Routes = [
   { path: 'accountDetails', component: AccountDetailsComponent },
   { path: 'compare', component: CompareComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
+  { path: 'adminDashboard', component: AdminDashboardComponent, children: [
+    { path: '', redirectTo: 'admin-products', pathMatch: 'full' },
+    { path: 'admin-products', component: AdminDashboardProductsComponent },
+    { path: 'admin-categories', component: AdminDashboardCategoriesComponent },
+    { path: 'admin-brands', component: AdminDashboardBrandsComponent },
+    { path: 'admin-delivery', component: AdminDashboardDeliveryComponent },
+    ]
+  },
   { path: 'checkout', component: CheckoutComponent, children: [
     { path: '', redirectTo: 'address', pathMatch: 'full' },
     { path: 'address', component: CheckoutAddressComponent },
