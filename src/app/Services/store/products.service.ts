@@ -47,7 +47,13 @@ export class ProductsService {
       { headers }
     );
   }
-
+  getAllDeliveryMethods(): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(
+      this.ProductsURL + 'GetDeliveryMethods/Delivery',
+      { headers }
+    );
+  }
   // Get Product By Id
   getProductbyId(id: number): Observable<Product> {
     const headers = this.getHeaders();
@@ -95,5 +101,5 @@ export class ProductsService {
   }
 
 
-  
+
 }

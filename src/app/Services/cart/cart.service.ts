@@ -51,7 +51,7 @@ export class CartService {
     localStorage.setItem('isCartCleared', JSON.stringify(this.isCartCleared.value));
   }
 
-  private loadCartFromLocalStorage() {
+   loadCartFromLocalStorage() {
     const cart = localStorage.getItem('cart');
     const isCartCleared = localStorage.getItem('isCartCleared');
     if (cart) {

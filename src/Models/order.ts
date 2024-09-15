@@ -38,6 +38,8 @@ export interface OrderResultDto {
 
 export interface DeliveryMethod {
   id: number;
-  name: string;
+  shortName: string;
   price: number;
+  description?:string;
+  deliveryTime?:string;
 }

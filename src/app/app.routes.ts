@@ -27,6 +27,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 import { AdminDashboardProductsComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products.component';
 import { AdminDashboardBrandsComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands.component';
 import { AdminDashboardDeliveryComponent } from './admin-dashboard/admin-dashboard-delivery/admin-dashboard-delivery.component';
+import { AdminDashboardOrdersComponent } from './admin-dashboard/admin-dashboard-orders/admin-dashboard-orders.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -51,6 +52,7 @@ export const routes: Routes = [
     { path: 'admin-categories', component: AdminDashboardCategoriesComponent },
     { path: 'admin-brands', component: AdminDashboardBrandsComponent },
     { path: 'admin-delivery', component: AdminDashboardDeliveryComponent },
+    { path: 'admin-orders', component: AdminDashboardOrdersComponent },
     ]
   },
   { path: 'checkout', component: CheckoutComponent, children: [
