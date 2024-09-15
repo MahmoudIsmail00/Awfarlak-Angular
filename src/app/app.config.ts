@@ -1,5 +1,5 @@
 import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
+import { PreloadAllModules, provideRouter, ROUTES, withComponentInputBinding, withPreloading } from '@angular/router';
 
 import { routes } from './app.routes';
 import { AuthGuard } from './Services/authentication/authguard';
@@ -20,6 +20,11 @@ export const appConfig: ApplicationConfig = {
     AuthService,
     ProductsService,
     provideHttpClient(),
-    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, provideAnimationsAsync(),MatSnackBarModule
+    CartService,{ provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }, provideAnimationsAsync(),MatSnackBarModule ,
+    provideRouter(routes ,
+      withComponentInputBinding(),
+      withPreloading(PreloadAllModules),
+     ),
+
   ],
 };

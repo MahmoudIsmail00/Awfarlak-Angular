@@ -1,28 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../Services/authentication/auth.service';
 import { Router, RouterLink } from '@angular/router';
 import { User } from '../../Models/user';
 import { SidebarComponent } from "../sidebar/sidebar.component";
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-all-addresses',
   standalone: true,
-  imports: [SidebarComponent,RouterLink],
+  imports: [SidebarComponent, RouterLink, NgIf],
   templateUrl: './all-addresses.component.html',
-  styleUrl: './all-addresses.component.css'
+  styleUrls: ['./all-addresses.component.css']
 })
-export class AllAddressesComponent {
-  constructor(private authService: AuthService, private router: Router) {}
+export class AllAddressesComponent implements OnInit {
   currentUser: User | null = null;
+
+  constructor(private authService: AuthService, private router: Router) {}
+
   ngOnInit() {
     this.authService.currentUser.subscribe(user => {
       this.currentUser = user;
-    })
+    });
   }
+
 
   logout() {
     this.authService.logout();
     this.router.navigate(['login']);
   }
-}
 
+  hasShippingAddress(): boolean {
+    return this.currentUser?.address !== undefined && this.currentUser.address !== null;
+  }
+
+  getShippingAddress(): string {
+    const address = this.currentUser?.address;
+    return address ? `
+      ${address.firstName} ${address.lastName}
+      ${address.street},
+      ${address.city},
+      ${address.state},
+      ${address.zipCode}
+    ` : '';
+  }
+}

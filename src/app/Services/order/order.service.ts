@@ -16,6 +16,8 @@ export class OrderService {
     return this.http.post<OrderResultDto>(this.baseUrl + "CreateOrder", orderDto);
   }
 
+
+
   getAllDeliveryMethods(): Observable<DeliveryMethod[]> {
     return this.http.get<DeliveryMethod[]>(`${this.baseUrl}GetAllDeliveryMethods`);
   }
