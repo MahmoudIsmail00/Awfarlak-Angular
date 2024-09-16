@@ -10,7 +10,7 @@ export interface AddressDto {
 export interface OrderDto{
   basketId : string;
   buyerEmail : string;
-  deliveryMethodId : number | null;
+  deliveryMethodId : number ;
   shippingAddress: AddressDto;
 }
 

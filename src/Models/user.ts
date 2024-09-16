@@ -9,5 +9,7 @@ export interface User {
   cartId?: string;
   token?: string;
   address: AddressDto;
+  roles: string[];
 }
+
 

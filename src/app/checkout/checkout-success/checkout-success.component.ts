@@ -22,7 +22,7 @@ export class CheckoutSuccessComponent implements OnInit {
 
   ngOnInit(): void {
     const navigation = this.location.getState() as any;
-    console.log('Navigation State:', navigation); 
+    console.log('Navigation State:', navigation);
     if (navigation) {
       this.order = navigation.order as OrderResultDto;
       this.address = navigation.address as AddressDto;

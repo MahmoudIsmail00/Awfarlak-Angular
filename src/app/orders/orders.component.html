@@ -1,0 +1,20 @@
+<div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+  <h1 class="text-3xl font-bold mb-6 text-center">Your Orders</h1>
+  <div *ngFor="let order of orders" class="bg-gray-100 p-6 rounded-md shadow mb-6">
+    <h2 class="text-xl font-semibold mb-4">Order ID: {{ order.id }}</h2>
+    <p><strong>Order Code:</strong> {{ order.id }}</p>
+    <p><strong>Buyer Email:</strong> {{ order.buyerEmail }}</p>
+    <p><strong>Total:</strong> {{ order.total | currency }}</p>
+    <div class="mt-4">
+      <h3 class="text-lg font-semibold">Products:</h3>
+      <div *ngFor="let item of order.orderItems" class="mb-4 p-4 bg-white shadow rounded-md flex items-center">
+        <img [src]="item.pictureUrl" alt="{{ item.productName }}" class="w-16 h-16 object-cover rounded-md mr-4">
+        <div>
+          <p class="font-semibold">{{ item.productName }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Price: {{ item.price | currency }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

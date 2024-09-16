@@ -6,8 +6,6 @@ import { BehaviorSubject, catchError, map, Observable, throwError } from 'rxjs';
 import { User } from '../../../Models/user';
 import { environment } from '../environment';
 import { AddressDto } from '../../../Models/order';
-import { ShippingAddressComponent } from '../../shipping-address/shipping-address.component';
-import { ShippingAddress } from '../../../Models/shippingaddress';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +40,8 @@ export class AuthService {
         response.CompareList = response.CompareList || ({ data: [] } as CompareList);
 
 
+        response.roles = response.roles || [];
+
         localStorage.setItem('currentUser', JSON.stringify(response));
         this.currentUserSubject.next(response);
 
@@ -54,6 +54,8 @@ export class AuthService {
             this.updateCurrentUser(updatedUser);
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
           }
+          console.log('Login response:', response);
+
         });
 
         return true;
@@ -61,6 +63,7 @@ export class AuthService {
       catchError(this.handleError<boolean>('login'))
     );
   }
+
 
 
 

@@ -29,6 +29,7 @@ export class CheckoutComponent implements OnInit {
   basketId:  string = '';
   total: number = 0;
 
+
   constructor(
     private cartService: CartService,
     private orderService: OrderService,
@@ -37,7 +38,7 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-   
+
     this.cartService.cart$.subscribe(cartItems => {
       this.usercartItems = cartItems;
       this.calculateTotals();
@@ -55,6 +56,7 @@ export class CheckoutComponent implements OnInit {
 
     this.buyerEmail = this.authService.getUserEmail();
     this.basketId = this.cartService.userCart.id;
+    this.address = this.authService.getUserAddress();
   }
 
   calculateTotal(): number {
@@ -80,28 +82,36 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder(): void {
-    const orderData = {
+    
+    if (!this.buyerEmail || !this.basketId || !this.address) {
+      alert('Please ensure all details are filled out.');
+      return;
+    }
+
+    const orderDto: OrderDto = {
       buyerEmail: this.buyerEmail,
       basketId: this.basketId,
-      total: this.total,
-      products: this.cartService.userCart.basketItems,
-      id: this.generateOrderId()
+      deliveryMethodId: 10,
+      shippingAddress: this.address
     };
 
-    console.log('Navigating with state:', {
-      order: orderData,
-      total: this.total,
-      address: this.authService.getUserAddress()
-    });
-
-    this.router.navigate(['/checkout/success'], {
-      state: {
-        order: orderData,
-        total: this.total,
-        address: this.authService.getUserAddress()
+    this.orderService.createOrder(orderDto).subscribe(
+      (orderResult) => {
+        this.router.navigate(['/checkout/success'], {
+          state: {
+            order: orderResult,
+            total: this.total,
+            address: this.address
+          }
+        });
+      },
+      (error) => {
+        console.error('Error creating order:', error);
+        alert('There was a problem placing your order. Please try again.');
       }
-    });
+    );
   }
+
 
   generateOrderId(): string {
     return Math.random().toString(36).substring(2, 10).toUpperCase();
