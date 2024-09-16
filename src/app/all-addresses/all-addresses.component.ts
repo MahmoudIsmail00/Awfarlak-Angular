@@ -18,10 +18,13 @@ export class AllAddressesComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
-    this.authService.currentUser.subscribe(user => {
-      this.currentUser = user;
-    });
+    const storedUser = localStorage.getItem('currentUser');
+    if (storedUser) {
+      const parsedUser: User = JSON.parse(storedUser);
+      this.currentUser = parsedUser;
+    }
   }
+
 
 
   logout() {

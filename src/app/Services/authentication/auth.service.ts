@@ -18,11 +18,13 @@ export class AuthService {
   public currentUser: Observable<User | null>;
 
   constructor(private http: HttpClient) {
+    const savedUser = localStorage.getItem('currentUser');
     this.currentUserSubject = new BehaviorSubject<User | null>(
-      JSON.parse(localStorage.getItem('currentUser')!)
+      savedUser ? JSON.parse(savedUser) : null
     );
     this.currentUser = this.currentUserSubject.asObservable();
   }
+
 
   public get currentUserValue(): User | null {
     return this.currentUserSubject.value;
@@ -38,8 +40,11 @@ export class AuthService {
       map((response) => {
         response.WishList = response.WishList || ({ data: [] } as WishList);
         response.CompareList = response.CompareList || ({ data: [] } as CompareList);
+
+
         localStorage.setItem('currentUser', JSON.stringify(response));
         this.currentUserSubject.next(response);
+
         this.getCurrentUserAddress().subscribe(address => {
           if (address) {
             const updatedUser: User = {
@@ -47,6 +52,7 @@ export class AuthService {
               address: address
             };
             this.updateCurrentUser(updatedUser);
+            localStorage.setItem('currentUser', JSON.stringify(updatedUser));
           }
         });
 
@@ -55,6 +61,8 @@ export class AuthService {
       catchError(this.handleError<boolean>('login'))
     );
   }
+
+
 
   logout() {
     localStorage.removeItem('currentUser');
@@ -86,7 +94,7 @@ export class AuthService {
     const headers = new HttpHeaders({ Authorization: `Bearer ${this.getToken()}` });
     return this.http.get<AddressDto>(`${this.apiUrl}/getaddress`, { headers }).pipe(
       map(address => {
-        console.log('Fetched Address:', address); 
+        console.log('Fetched Address:', address);
         return address;
       }),
       catchError(error => {
@@ -109,8 +117,11 @@ export class AuthService {
 
   updateUserAddress(address: AddressDto): Observable<void> {
     const headers = new HttpHeaders({ Authorization: `Bearer ${this.getToken()}` });
-    return this.http.put<void>(`${this.apiUrl}/updateAddress`, address, { headers });
+    return this.http.put<void>(`${this.apiUrl}/updateAddress`, address, { headers }).pipe(
+      catchError(this.handleError<void>('updateUserAddress'))
+    );
   }
+
 
   updateCurrentUser(updatedUser: User): void {
     this.currentUserSubject.next(updatedUser);

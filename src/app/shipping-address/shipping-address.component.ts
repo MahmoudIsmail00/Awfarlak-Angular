@@ -62,31 +62,33 @@ loadAddress(): void {
 }
 
 
-  saveAddress(): void {
-    if (this.addressForm.valid) {
-      const updatedAddress: AddressDto = this.addressForm.value;
-      this.authService.updateUserAddress(updatedAddress).subscribe(
-        () => {
-          const currentUser = this.authService.currentUserValue || {} as User;
-          const updatedUser: User = {
-            ...currentUser,
-            address: updatedAddress,
-            email: currentUser.email || '',
-          };
-          this.authService.updateCurrentUser(updatedUser);
-          this.snackBar.open('Address updated successfully!', '', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
-          setTimeout(() => {
-            this.router.navigate(['addresses']);
-          });
-        },
-        error => console.error('Error updating address:', error)
-      );
-    }
+saveAddress(): void {
+  if (this.addressForm.valid) {
+    const updatedAddress: AddressDto = this.addressForm.value;
+    this.authService.updateUserAddress(updatedAddress).subscribe(
+      () => {
+        const currentUser = this.authService.currentUserValue || {} as User;
+        const updatedUser: User = {
+          ...currentUser,
+          address: updatedAddress,
+          email: currentUser.email || '',
+        };
+        this.authService.updateCurrentUser(updatedUser);
+        localStorage.setItem('currentUser', JSON.stringify(updatedUser)); 
+        this.snackBar.open('Address updated successfully!', '', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+        setTimeout(() => {
+          this.router.navigate(['addresses']);
+        });
+      },
+      error => console.error('Error updating address:', error)
+    );
   }
+}
+
 
 
 
