@@ -35,6 +35,7 @@ import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-s
 import { AdminDashboardCategoriesEditFormComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories-edit-form/admin-dashboard-categories-edit-form.component';
 import { AdminDashboardBrandsNewFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-new-form/admin-dashboard-brands-new-form.component';
 import { AdminDashboardBrandsEditFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-edit-form/admin-dashboard-brands-edit-form.component';
+import { AdminGuard } from './Services/authentication/adminguard';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -53,7 +54,7 @@ export const routes: Routes = [
   { path: 'accountDetails', component: AccountDetailsComponent },
   { path: 'compare', component: CompareComponent, canActivate: [AuthGuard] },
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
-  { path: 'adminDashboard', component: AdminDashboardComponent, children: [
+  { path: 'adminDashboard', component: AdminDashboardComponent,  canActivate: [AdminGuard], children: [
     { path: '', redirectTo: 'admin-products', pathMatch: 'full' },
 
     { path: 'admin-categories', component: AdminDashboardCategoriesComponent },
