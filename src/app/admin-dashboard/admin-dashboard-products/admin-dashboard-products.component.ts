@@ -57,12 +57,12 @@ export class AdminDashboardProductsComponent  implements OnInit{
       alert('Product has been deleted successfully!')
       this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
         window.location.reload();
-      });;
+      });
     }else{
       alert('Product has has not been deleted !')
       this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
         window.location.reload();
-      });;
+      });
     }
 
   }

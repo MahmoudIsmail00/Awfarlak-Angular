@@ -77,7 +77,7 @@ export class AdminDashboardProductsNewFormComponent implements OnInit{
       console.log(newprod);
       // e.g., pass this to a service to create a product
       this.productsService.createNewProduct(newprod).subscribe(data=>{});
-      alert('Product Has been added Successfully!')
+      alert('Product Has been added Successfully!');
       this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
         window.location.reload();
       });

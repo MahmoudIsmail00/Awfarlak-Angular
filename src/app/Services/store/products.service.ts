@@ -6,6 +6,8 @@ import { AuthService } from '../authentication/auth.service';
 import { environment } from '../environment';
 import { WishList } from '../../../Models/wishlist';
 import { ProductWithSpecs, ProductWithSpecsCreationDTO } from '../../../Models/productWithSpecs';
+import { SubCategoryWithType } from '../../../Models/subCategory';
+import { Brand } from '../../../Models/brand';
 
 @Injectable()
 export class ProductsService {
@@ -86,6 +88,34 @@ export class ProductsService {
       headers,
     });
   }
+  getAllTypes(): Observable<any[]> {
+    const headers = this.getHeaders();
+    return this.http.get<any[]>(`${this.ProductsURL}GetAllTypes`, {
+      headers,
+    });
+  }
+   //create new subcategory
+   createNewSubCategory(subCategory:SubCategoryWithType):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.post<SubCategoryWithType>(`${this.ProductsURL}CreateNewSubCategory`, subCategory ,{headers});
+  }
+  // Get subcategory By Id
+  getsubcategorybyId(id: number): Observable<SubCategoryWithType> {
+    const headers = this.getHeaders();
+    return this.http.get<SubCategoryWithType>(`${this.ProductsURL}GetSubCategoryById/${id}`, {headers,});
+  }
+
+  //update Product
+  UpdateExistingSubCategory(SubCategoryId:number|null,subCategory:SubCategoryWithType):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.put<ProductWithSpecsCreationDTO>(`${this.ProductsURL}UpdateSubCategory/${SubCategoryId}`, subCategory ,{headers});
+  }
+
+  //Delete subcategory
+  DeleteSubcategory(id:number):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.delete<any>(`${this.ProductsURL}DeleteSubCategory/${id}`, {headers,});
+  }
 
   getWishListProducts(userWishList: WishList): Product[] {
     this.getAllProducts().subscribe((products: Product[]) => {
@@ -116,5 +146,27 @@ export class ProductsService {
   DeleteProduct(id:number):Observable<any>{
     const headers = this.getHeaders();
     return this.http.delete<any>(`${this.ProductsURL}DeleteProduct/${id}`, {headers,});
+  }
+
+
+  //////////////////////////////////// Brands ////////////////////////////////////////////
+  CreateNewBrand(brand:Brand):Observable<Brand>{
+    const headers = this.getHeaders();
+    return this.http.post<Brand>(`${this.ProductsURL}CreateNewBrand`, brand ,{headers});
+  }
+
+  UpdateExistingBrand(brandId:number,brand:Brand):Observable<Brand>{
+    const headers = this.getHeaders();
+    return this.http.put<Brand>(`${this.ProductsURL}UpdateBrand/${brandId}`, brand ,{headers});
+  }
+
+  DeleteBrand(id:number):Observable<Brand>{
+    const headers = this.getHeaders();
+    return this.http.delete<Brand>(`${this.ProductsURL}DeleteBrand/${id}`, {headers,});
+  }
+
+  GetBrandById(id: number): Observable<Brand> {
+    const headers = this.getHeaders();
+    return this.http.get<Brand>(`${this.ProductsURL}GetBrandById/${id}`, {headers,});
   }
 }

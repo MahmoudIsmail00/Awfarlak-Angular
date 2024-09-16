@@ -1,3 +1,4 @@
+import { AdminDashboardCategoriesNewFormComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories-new-form/admin-dashboard-categories-new-form.component';
 import { AdminDashboardProductsEditFormComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products-edit-form/admin-dashboard-products-edit-form.component';
 import { AdminDashboardCategoriesComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories.component';
 import { Routes } from '@angular/router';
@@ -31,6 +32,9 @@ import { AdminDashboardDeliveryComponent } from './admin-dashboard/admin-dashboa
 import { AdminDashboardOrdersComponent } from './admin-dashboard/admin-dashboard-orders/admin-dashboard-orders.component';
 import { AdminDashboardProductsNewFormComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products-new-form/admin-dashboard-products-new-form.component';
 import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-success.component';
+import { AdminDashboardCategoriesEditFormComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories-edit-form/admin-dashboard-categories-edit-form.component';
+import { AdminDashboardBrandsNewFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-new-form/admin-dashboard-brands-new-form.component';
+import { AdminDashboardBrandsEditFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-edit-form/admin-dashboard-brands-edit-form.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -51,11 +55,20 @@ export const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
   { path: 'adminDashboard', component: AdminDashboardComponent, children: [
     { path: '', redirectTo: 'admin-products', pathMatch: 'full' },
-    { path: 'admin-products', component: AdminDashboardProductsComponent },
+
     { path: 'admin-categories', component: AdminDashboardCategoriesComponent },
+    { path: 'admin-categories-new', component: AdminDashboardCategoriesNewFormComponent },
+    { path: 'admin-categories-edit/:id', component: AdminDashboardCategoriesEditFormComponent },
+
     { path: 'admin-brands', component: AdminDashboardBrandsComponent },
+    { path: 'admin-brands-new', component: AdminDashboardBrandsNewFormComponent },
+    { path: 'admin-brands-edit/:id', component: AdminDashboardBrandsEditFormComponent },
+
+
     { path: 'admin-delivery', component: AdminDashboardDeliveryComponent },
     { path: 'admin-orders', component: AdminDashboardOrdersComponent },
+
+    { path: 'admin-products', component: AdminDashboardProductsComponent },
     { path: 'admin-product-new', component: AdminDashboardProductsNewFormComponent },
     { path: 'admin-product-edit/:id', component: AdminDashboardProductsEditFormComponent },
     ]
