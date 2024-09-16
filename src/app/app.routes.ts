@@ -28,6 +28,7 @@ import { AdminDashboardProductsComponent } from './admin-dashboard/admin-dashboa
 import { AdminDashboardBrandsComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands.component';
 import { AdminDashboardDeliveryComponent } from './admin-dashboard/admin-dashboard-delivery/admin-dashboard-delivery.component';
 import { AdminDashboardOrdersComponent } from './admin-dashboard/admin-dashboard-orders/admin-dashboard-orders.component';
+import { AdminDashboardProductsNewFormComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products-new-form/admin-dashboard-products-new-form.component';
 import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-success.component';
 
 export const routes: Routes = [
@@ -54,6 +55,7 @@ export const routes: Routes = [
     { path: 'admin-brands', component: AdminDashboardBrandsComponent },
     { path: 'admin-delivery', component: AdminDashboardDeliveryComponent },
     { path: 'admin-orders', component: AdminDashboardOrdersComponent },
+    { path: 'admin-product-new', component: AdminDashboardProductsNewFormComponent },
     ]
   },
   { path: 'checkout', component: CheckoutComponent, children: [
