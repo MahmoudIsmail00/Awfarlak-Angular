@@ -5,7 +5,7 @@ import { Product } from '../../../Models/product';
 import { AuthService } from '../authentication/auth.service';
 import { environment } from '../environment';
 import { WishList } from '../../../Models/wishlist';
-import { ProductWithSpecs } from '../../../Models/productWithSpecs';
+import { ProductWithSpecs, ProductWithSpecsCreationDTO } from '../../../Models/productWithSpecs';
 
 @Injectable()
 export class ProductsService {
@@ -100,6 +100,15 @@ export class ProductsService {
     return [];
   }
 
+  //create new product
+  createNewProduct(product:ProductWithSpecsCreationDTO):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.post<ProductWithSpecsCreationDTO>(`${this.ProductsURL}CreateProductWithSpecs`, product ,{headers});
+  }
 
-
+  //Delete Product
+  DeleteProduct(id:number):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.delete<any>(`${this.ProductsURL}DeleteProduct/${id}`, {headers,});
+  }
 }
