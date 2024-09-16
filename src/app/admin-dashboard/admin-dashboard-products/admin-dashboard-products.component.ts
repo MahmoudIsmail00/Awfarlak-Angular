@@ -23,6 +23,11 @@ export class AdminDashboardProductsComponent  implements OnInit{
     this.getAllProductsWithSpecs();
 
   }
+
+  ngOnChanges(): void {
+    this.getAllProductsWithSpecs();
+  }
+
    // Fetch all products and their specs
    getAllProductsWithSpecs() {
     forkJoin({
@@ -48,6 +53,8 @@ export class AdminDashboardProductsComponent  implements OnInit{
     this.productService.DeleteProduct(id).subscribe(data=>{});
     this.products.filter(x=>x.id != id);
     alert('Product has been deleted successfully!')
-    this.router.navigate(['/adminDashboard/admin-products']);
+    this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
+      window.location.reload();
+    });;
   }
 }
