@@ -1,1 +1,57 @@
-<p>checkout-success works!</p>
+<div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
+  <h1 class="text-3xl font-bold mb-6 text-center text-green-600">Order Success!</h1>
+  <div class="bg-gray-100 p-6 rounded-md shadow mb-6">
+   
+
+    <div class="grid grid-cols-2 gap-4 mb-2">
+      <p class="font-light">Order ID:</p>
+      <p class="font-semibold text-right">{{ order?.id || 'N/A' }}</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-2">
+      <p class="font-light">Order Code:</p>
+      <p class="font-semibold text-right">{{ orderCode }}</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-2">
+      <p class="font-light">Buyer Email:</p>
+      <p class="font-semibold text-right">{{ order?.buyerEmail || 'Unknown' }}</p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-2">
+      <p class="font-light">Address:</p>
+      <p class="font-semibold text-right">
+        {{ address?.firstName || 'Unknown' }} {{ address?.lastName || '' }},
+        {{ address?.street || 'Unknown' }},
+        {{ address?.city || 'Unknown' }},
+        {{ address?.state || 'Unknown' }},
+        {{ address?.zipCode || 'Unknown' }}
+      </p>
+    </div>
+
+    <div class="grid grid-cols-2 gap-4 mb-2">
+      <p class="font-light">Total:</p>
+      <p class="font-semibold text-right">{{ total.toFixed(2) }} EGP</p>
+    </div>
+
+    <div class="mt-6">
+      <h3 class="text-lg font-semibold mb-4">Products:</h3>
+      <div *ngFor="let item of products" class="mb-4 p-4 bg-white shadow rounded-md flex items-center">
+        <img [src]="item.PictureUrl" alt="{{ item.ProductName }}" class="w-16 h-16 object-cover rounded-md mr-4">
+        <div>
+          <p class="font-semibold">{{ item.ProductName }}</p>
+          <p>Quantity: {{ item.Quantity }}</p>
+          <p>Price: {{ item.Price }} EGP</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button
+    (click)="router.navigate(['/'])"
+    class="block w-full bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600 text-center"
+    aria-label="Return to Home"
+  >
+    Return to Home
+  </button>
+</div>

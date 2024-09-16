@@ -1,32 +1,47 @@
-<!-- checkout-address.component.html -->
-<div class="w-full max-w-2xl mx-auto">
-  <h2 class="text-2xl font-bold mb-6">Shipping Address</h2>
-  <form class="grid grid-cols-2 gap-6">
-    <div>
-      <label class="block text-sm font-medium">First Name</label>
-      <input type="text" placeholder="First Name" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+<form [formGroup]="addressForm" (click)="submitOrder()" class="grid grid-cols-2 gap-6">
+  <div>
+    <label class="block text-sm font-medium">First Name</label>
+    <input formControlName="firstName" placeholder="First Name" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+    <div *ngIf="addressForm.get('firstName')?.invalid && addressForm.get('firstName')?.touched" class="text-red-500 text-sm">
+      First name is required.
     </div>
-    <div>
-      <label class="block text-sm font-medium">Last Name</label>
-      <input type="text" placeholder="Last Name" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Last Name</label>
+    <input formControlName="lastName" placeholder="Last Name" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+    <div *ngIf="addressForm.get('lastName')?.invalid && addressForm.get('lastName')?.touched" class="text-red-500 text-sm">
+      Last name is required.
     </div>
-    <div>
-      <label class="block text-sm font-medium">Street</label>
-      <input type="text" placeholder="Street" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Street</label>
+    <input formControlName="street" placeholder="Street" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+    <div *ngIf="addressForm.get('street')?.invalid && addressForm.get('street')?.touched" class="text-red-500 text-sm">
+      Street is required.
     </div>
-    <div>
-      <label class="block text-sm font-medium">City</label>
-      <input type="text" placeholder="City" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+  </div>
+  <div>
+    <label class="block text-sm font-medium">City</label>
+    <input formControlName="city" placeholder="City" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+    <div *ngIf="addressForm.get('city')?.invalid && addressForm.get('city')?.touched" class="text-red-500 text-sm">
+      City is required.
     </div>
-    <div>
-      <label class="block text-sm font-medium">Country</label>
-      <input type="text" placeholder="Country" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+  </div>
+  <div>
+    <label class="block text-sm font-medium">State</label>
+    <input formControlName="state" placeholder="State" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+    <div *ngIf="addressForm.get('state')?.invalid && addressForm.get('state')?.touched" class="text-red-500 text-sm">
+      State is required.
     </div>
-
-
-    <!-- Button should be placed alone at the bottom -->
-    <div class="col-span-2 mt-6">
-      <button type="submit" class="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600">Go to Delivery</button>
+  </div>
+  <div>
+    <label class="block text-sm font-medium">Zip Code</label>
+    <input formControlName="zipCode" placeholder="Zip Code" class="mt-1 w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-400">
+    <div *ngIf="addressForm.get('zipCode')?.invalid && addressForm.get('zipCode')?.touched" class="text-red-500 text-sm">
+      Zip code is required and must be 5 digits.
     </div>
-  </form>
-</div>
+  </div>
+  <div class="col-span-2 mt-6">
+    <button type="submit" [disabled]="addressForm.invalid" class="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600">Go to Delivery</button>
+  </div>
+</form>

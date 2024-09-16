@@ -28,6 +28,7 @@ import { AdminDashboardProductsComponent } from './admin-dashboard/admin-dashboa
 import { AdminDashboardBrandsComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands.component';
 import { AdminDashboardDeliveryComponent } from './admin-dashboard/admin-dashboard-delivery/admin-dashboard-delivery.component';
 import { AdminDashboardOrdersComponent } from './admin-dashboard/admin-dashboard-orders/admin-dashboard-orders.component';
+import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-success.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -60,7 +61,8 @@ export const routes: Routes = [
     { path: 'address', component: CheckoutAddressComponent },
     { path: 'delivery', component: CheckoutDeliveryComponent },
     { path: 'review', component: CheckoutReviewComponent },
-    { path: 'payment', component: CheckoutPaymentComponent }
+    { path: 'payment', component: CheckoutPaymentComponent },
+    {path: 'success' , component : CheckoutSuccessComponent}
   ]
 },
 { path: '', redirectTo: '/checkout/address', pathMatch: 'full' },

@@ -18,7 +18,7 @@
             <h3 class="text-md font-semibold mb-2">Delivery Method</h3>
             <select [(ngModel)]="deliveryMethodId" name="deliveryMethod" class="border rounded-md w-full mb-4">
               <option *ngFor="let method of deliveryMethods" [value]="method.id">
-                {{ method.name }} - {{ method.price | currency }}
+                {{// method.name }} - {{ method.price | currency }}
               </option>
             </select>
           </form>

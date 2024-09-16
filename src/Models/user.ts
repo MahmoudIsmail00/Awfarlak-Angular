@@ -8,6 +8,6 @@ export interface User {
   age?: number;
   cartId?: string;
   token?: string;
-  address?: AddressDto; 
+  address: AddressDto;
 }
 

@@ -69,7 +69,9 @@
             <span class="font-semibold">{{ (calculateTotal() + 1.99).toFixed(2) }} EGP</span>
           </div>
 
-          <button class="bg-gray-700 text-white py-2 px-4 rounded-lg mt-4 w-full" (click)="goToCheckout()">
+          <button class="bg-gray-700 text-white py-2 px-4 rounded-lg mt-4 w-full"
+                  [disabled]="usercartItems.length === 0"
+                  (click)="goToCheckout()">
             PROCEED TO CHECKOUT
           </button>
         </div>

@@ -38,27 +38,29 @@ export class ShippingAddressComponent implements OnInit {
     this.loadAddress();
   }
 
-  loadAddress(): void {
-    this.authService.getCurrentUserAddress().subscribe(user => {
-      if (user && user.address) {
-        console.log('Address loaded from API:', user.address);
-        this.addressForm.patchValue(user.address);
-        this.isEditing = true;
-      } else {
-        const storedUser = localStorage.getItem('currentUser');
-        if (storedUser) {
-          const parsedUser: User = JSON.parse(storedUser);
-          if (parsedUser.address) {
-            console.log('Address loaded from local storage:', parsedUser.address);
-            this.addressForm.patchValue(parsedUser.address);
-            this.isEditing = true;
-          }
+ // In your component
+loadAddress(): void {
+  this.authService.getCurrentUserAddress().subscribe(address => {
+    if (address) {
+      console.log('Address loaded from API:', address);
+      this.addressForm.patchValue(address);
+      this.isEditing = true;
+    } else {
+      const storedUser = localStorage.getItem('currentUser');
+      if (storedUser) {
+        const parsedUser: User = JSON.parse(storedUser);
+        if (parsedUser.address) {
+          console.log('Address loaded from local storage:', parsedUser.address);
+          this.addressForm.patchValue(parsedUser.address);
+          this.isEditing = true;
         }
       }
-    }, error => {
-      console.error('Error loading address:', error);
-    });
-  }
+    }
+  }, error => {
+    console.error('Error loading address:', error);
+  });
+}
+
 
   saveAddress(): void {
     if (this.addressForm.valid) {

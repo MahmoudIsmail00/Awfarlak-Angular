@@ -16,3 +16,8 @@
 .cart-item p {
   margin: 5px 0;
 }
+
+.bg-gray-700:disabled {
+  background-color: #cbd5e0; 
+  cursor: not-allowed;
+}

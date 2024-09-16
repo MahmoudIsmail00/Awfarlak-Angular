@@ -56,8 +56,6 @@ export class AuthService {
     );
   }
 
-
-
   logout() {
     localStorage.removeItem('currentUser');
     localStorage.removeItem('cart');
@@ -84,11 +82,13 @@ export class AuthService {
     );
   }
 
-
-
-  getCurrentUserAddress(): Observable<User> {
+  getCurrentUserAddress(): Observable<AddressDto> {
     const headers = new HttpHeaders({ Authorization: `Bearer ${this.getToken()}` });
-    return this.http.get<User>(`${this.apiUrl}/getaddress`, { headers }).pipe(
+    return this.http.get<AddressDto>(`${this.apiUrl}/getaddress`, { headers }).pipe(
+      map(address => {
+        console.log('Fetched Address:', address); 
+        return address;
+      }),
       catchError(error => {
         console.error('Error fetching address:', error);
         return throwError(() => new Error('Error fetching address'));
@@ -97,6 +97,16 @@ export class AuthService {
   }
 
 
+  getUserEmail(): string | null {
+    const currentUser = this.currentUserSubject.value;
+    return currentUser ? currentUser.email : null;
+  }
+
+  getUserAddress(): AddressDto | null {
+    const currentUser = this.currentUserSubject.value;
+    return currentUser ? currentUser.address : null;
+  }
+
   updateUserAddress(address: AddressDto): Observable<void> {
     const headers = new HttpHeaders({ Authorization: `Bearer ${this.getToken()}` });
     return this.http.put<void>(`${this.apiUrl}/updateAddress`, address, { headers });
@@ -104,9 +114,7 @@ export class AuthService {
 
   updateCurrentUser(updatedUser: User): void {
     this.currentUserSubject.next(updatedUser);
-    localStorage.setItem('currentUser', JSON.stringify(updatedUser));
   }
-
 
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
@@ -115,4 +123,3 @@ export class AuthService {
     };
   }
 }
-
