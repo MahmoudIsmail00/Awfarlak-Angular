@@ -1,3 +1,4 @@
+import { AdminDashboardProductsEditFormComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products-edit-form/admin-dashboard-products-edit-form.component';
 import { AdminDashboardCategoriesComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories.component';
 import { Routes } from '@angular/router';
 import { ProductsComponent } from './products/products.component';
@@ -56,6 +57,7 @@ export const routes: Routes = [
     { path: 'admin-delivery', component: AdminDashboardDeliveryComponent },
     { path: 'admin-orders', component: AdminDashboardOrdersComponent },
     { path: 'admin-product-new', component: AdminDashboardProductsNewFormComponent },
+    { path: 'admin-product-edit/:id', component: AdminDashboardProductsEditFormComponent },
     ]
   },
   { path: 'checkout', component: CheckoutComponent, children: [

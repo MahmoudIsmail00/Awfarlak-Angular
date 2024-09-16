@@ -106,6 +106,12 @@ export class ProductsService {
     return this.http.post<ProductWithSpecsCreationDTO>(`${this.ProductsURL}CreateProductWithSpecs`, product ,{headers});
   }
 
+  //update Product
+  UpdateExistingProduct(productId:number|null,product:ProductWithSpecsCreationDTO):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.put<ProductWithSpecsCreationDTO>(`${this.ProductsURL}UpdateProductWithSpecs/${productId}`, product ,{headers});
+  }
+
   //Delete Product
   DeleteProduct(id:number):Observable<any>{
     const headers = this.getHeaders();

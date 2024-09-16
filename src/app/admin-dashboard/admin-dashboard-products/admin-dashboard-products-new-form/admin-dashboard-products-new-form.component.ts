@@ -39,7 +39,7 @@ export class AdminDashboardProductsNewFormComponent implements OnInit{
       keyboard: ['', Validators.required],
       warranty: ['', Validators.required],
       panel: ['', Validators.required],
-      touchscreen: [false, Validators.required],
+      touchscreen: [false],
       quantity: [0, Validators.required],
       brandId: [0, Validators.required],
       subCategoryId: [0, Validators.required]
@@ -67,7 +67,7 @@ export class AdminDashboardProductsNewFormComponent implements OnInit{
         keyboard: this.newProductForm.value.keyboard || null,
         warranty: this.newProductForm.value.warranty || null,
         panel: this.newProductForm.value.panel || null,
-        touchscreen: this.newProductForm.value.touchscreen || false,
+        touchscreen: false,
         quantity: this.newProductForm.value.quantity,
         subCategoryId: this.newProductForm.value.subCategoryId,
         brandId: this.newProductForm.value.brandId
@@ -77,11 +77,12 @@ export class AdminDashboardProductsNewFormComponent implements OnInit{
       console.log(newprod);
       // e.g., pass this to a service to create a product
       this.productsService.createNewProduct(newprod).subscribe(data=>{});
+      alert('Product Has been added Successfully!')
       this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
         window.location.reload();
       });
     } else {
-      console.error("Form is invalid");
+      alert("Form is invalid");
     }
   }
 }

@@ -50,11 +50,20 @@ export class AdminDashboardProductsComponent  implements OnInit{
 
   }
   DeleteProduct(id:number){
-    this.productService.DeleteProduct(id).subscribe(data=>{});
-    this.products.filter(x=>x.id != id);
-    alert('Product has been deleted successfully!')
-    this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
-      window.location.reload();
-    });;
+    let res = confirm('Are you sure you want to delete this product?');
+    if(res){
+      this.productService.DeleteProduct(id).subscribe(data=>{});
+      this.products.filter(x=>x.id != id);
+      alert('Product has been deleted successfully!')
+      this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
+        window.location.reload();
+      });;
+    }else{
+      alert('Product has has not been deleted !')
+      this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
+        window.location.reload();
+      });;
+    }
+
   }
 }
