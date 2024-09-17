@@ -1,12 +1,10 @@
 <div class="text-gray-800" style="margin-left: 20px; font-weight: bold; font-size: 30px;">
   <span>{{subCategory.name}}</span>
 </div>
-<div class="flex category-1 " style="margin:40px 10px">
-  <div *ngFor="let item of products | paginate: { itemsPerPage: 5, currentPage: page }">
+<div class="flex category-1 " style="margin:40px 10px; max-width: 1200px;flex-wrap: wrap;">
+  <div *ngFor="let item of products ">
     <app-product [product]="item" />
   </div>
 
 </div>
-<div class="pagination-controls my-5">
-  <pagination-controls class="pagination-controls-btns" (pageChange)="page = $event" previousLabel="Prev"></pagination-controls>
-</div>
+

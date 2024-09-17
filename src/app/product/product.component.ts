@@ -59,7 +59,7 @@ export class ProductComponent implements OnInit {
       console.log('Product added to cart');
     }
   }
-  
+
 
   addToWishList() {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
