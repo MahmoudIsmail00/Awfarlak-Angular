@@ -4,8 +4,8 @@ export interface BasketItemDto {
   Price: number;
   Quantity: number;
   PictureUrl: string;
-  brand: string;
-  type: string;
+  brand?: string;
+  type?: string;
 }
 
 

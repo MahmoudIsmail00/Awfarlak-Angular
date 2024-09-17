@@ -1,7 +1,7 @@
 <div class="max-w-4xl mx-auto p-8 bg-white shadow-lg rounded-lg">
   <h1 class="text-3xl font-bold mb-6 text-center text-green-600">Order Success!</h1>
   <div class="bg-gray-100 p-6 rounded-md shadow mb-6">
-   
+
 
     <div class="grid grid-cols-2 gap-4 mb-2">
       <p class="font-light">Order ID:</p>
@@ -37,11 +37,11 @@
     <div class="mt-6">
       <h3 class="text-lg font-semibold mb-4">Products:</h3>
       <div *ngFor="let item of products" class="mb-4 p-4 bg-white shadow rounded-md flex items-center">
-        <img [src]="item.PictureUrl" alt="{{ item.ProductName }}" class="w-16 h-16 object-cover rounded-md mr-4">
+        <img [src]="item.pictureUrl" alt="{{ item.productName }}" class="w-16 h-16 object-cover rounded-md mr-4">
         <div>
-          <p class="font-semibold">{{ item.ProductName }}</p>
-          <p>Quantity: {{ item.Quantity }}</p>
-          <p>Price: {{ item.Price }} EGP</p>
+          <p class="font-semibold">{{ item.productName }}</p>
+          <p>Quantity: {{ item.quantity }}</p>
+          <p>Price: {{ item.price }} EGP</p>
         </div>
       </div>
     </div>

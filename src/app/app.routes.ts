@@ -38,6 +38,7 @@ import { AdminDashboardBrandsEditFormComponent } from './admin-dashboard/admin-d
 import { AdminGuard } from './Services/authentication/adminguard';
 import { AdminDashboardUsersComponent } from './admin-dashboard/admin-dashboard-users/admin-dashboard-users.component';
 import { AdminDashboardUsersEditUserComponent } from './admin-dashboard/admin-dashboard-users/admin-dashboard-users-edit-user/admin-dashboard-users-edit-user.component';
+import { OrdersComponent } from './orders/orders.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -52,6 +53,7 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'alert', component: AlertComponent },
   { path: 'addresses', component: AllAddressesComponent },
+  { path: 'orders', component: OrdersComponent },
   { path: 'shippingAddress', component: ShippingAddressComponent },
   { path: 'accountDetails', component: AccountDetailsComponent },
   { path: 'compare', component: CompareComponent, canActivate: [AuthGuard] },
