@@ -131,15 +131,15 @@ export class ProductsService {
   }
 
   //create new product
-  createNewProduct(product:ProductWithSpecsCreationDTO):Observable<any>{
+  createNewProduct(product: FormData): Observable<any> {
     const headers = this.getHeaders();
-    return this.http.post<ProductWithSpecsCreationDTO>(`${this.ProductsURL}CreateProductWithSpecs`, product ,{headers});
-  }
+    return this.http.post<FormData>(`${this.ProductsURL}CreateProductWithSpecs`, product, { headers });
+}
 
   //update Product
-  UpdateExistingProduct(productId:number|null,product:ProductWithSpecsCreationDTO):Observable<any>{
+  UpdateExistingProduct(productId:number|null,product:FormData):Observable<any>{
     const headers = this.getHeaders();
-    return this.http.put<ProductWithSpecsCreationDTO>(`${this.ProductsURL}UpdateProductWithSpecs/${productId}`, product ,{headers});
+    return this.http.put<FormData>(`${this.ProductsURL}UpdateProductWithSpecs/${productId}`, product ,{headers});
   }
 
   //Delete Product

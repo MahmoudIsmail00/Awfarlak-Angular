@@ -1,56 +1,73 @@
-import { ProductWithSpecs } from './../../../../Models/productWithSpecs';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router, ActivatedRoute, RouterLink } from '@angular/router';
+import { ProductsService } from '../../../Services/store/products.service';
 import { Brand } from '../../../../Models/brand';
 import { SubCategory } from '../../../../Models/subCategory';
 import { ProductWithSpecsCreationDTO } from '../../../../Models/productWithSpecs';
-import { ProductsService } from '../../../Services/store/products.service';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-admin-dashboard-products-edit-form',
   standalone: true,
-  imports: [ReactiveFormsModule,NgIf,RouterLink],
+  imports: [ReactiveFormsModule, RouterLink , NgIf],
   templateUrl: './admin-dashboard-products-edit-form.component.html',
-  styleUrl: './admin-dashboard-products-edit-form.component.css'
+  styleUrls: ['./admin-dashboard-products-edit-form.component.css']
 })
 export class AdminDashboardProductsEditFormComponent implements OnInit {
-
-  oldProductForm: FormGroup;
+  editProductForm: FormGroup;
   brands: Brand[] = [];
   subcategories: SubCategory[] = [];
-  oldProduct!: ProductWithSpecsCreationDTO;
   productId: number | null = null;
+  existingImageUrl: string = '';
+  imageFile?: File | null = null;
+
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService,
     private router: Router,
     private route: ActivatedRoute
   ) {
-    this.oldProductForm = this.fb.group({
+    this.editProductForm = this.fb.group({
       name: ['', Validators.required],
-      price: [0, Validators.required],
+      price: [0, [Validators.required, Validators.min(0)]],
       description: ['', Validators.required],
-      pictureUrl: ['', Validators.required],
-      storage: ['', Validators.required],
-      ram: ['', Validators.required],
-      cpu: ['', Validators.required],
-      gpu: ['', Validators.required],
-      screen: ['', Validators.required],
-      color: ['', Validators.required],
-      keyboard: ['', Validators.required],
-      warranty: ['', Validators.required],
-      panel: ['', Validators.required],
+      pictureUrl: [''],
+      imageFile: [null],
+      storage: [null],
+      ram: [null],
+      cpu: [null],
+      gpu: [null],
+      screen: [null],
+      color: [null],
+      keyboard: [null],
+      warranty: [null],
+      panel: [null],
       touchscreen: [false],
-      quantity: [0, Validators.required],
-      brandId: [0, Validators.required],
-      subCategoryId: [0, Validators.required]
+      quantity: [0, [Validators.required, Validators.min(0)]],
+      brandId: [null, Validators.required],
+      subCategoryId: [null, Validators.required]
     });
   }
+
+  ngOnInit(): void {
+    this.productsService.getAllBrands().subscribe(data => this.brands = data);
+    this.productsService.getAllSubCategories().subscribe(data => this.subcategories = data);
+
+
+    this.route.paramMap.subscribe(params => {
+      this.productId = Number(params.get('id'));
+      if (this.productId) {
+        this.loadProductData(this.productId);
+      }
+    });
+  }
+
   loadProductData(productId: number): void {
-    this.productsService.getProductWithSpecs(productId).subscribe((product: ProductWithSpecs) => {
-      this.oldProductForm.patchValue({
+    this.productsService.getProductWithSpecs(productId).subscribe((product) => {
+      this.existingImageUrl = product.pictureUrl;
+      this.editProductForm.patchValue({
         name: product.name,
         price: product.price,
         description: product.description,
@@ -66,58 +83,58 @@ export class AdminDashboardProductsEditFormComponent implements OnInit {
         panel: product.panel,
         touchscreen: product.touchscreen,
         quantity: product.quantity,
-        brandId: this.brands.find(x=>x.name == product.productBrandName)?.id,
-        subCategoryId: this.subcategories.find(x=>x.name == product.productSubCategoryName)?.id
+        brandId: this.brands.find(b => b.name === product.productBrandName)?.id,
+        subCategoryId: this.subcategories.find(s => s.name === product.productSubCategoryName)?.id
       });
     });
   }
-  ngOnInit(): void {
-    this.productsService.getAllBrands().subscribe(data => {
-      this.brands = data;
-    });
-    this.productsService.getAllSubCategories().subscribe(data => {
-      this.subcategories = data;
-    });
 
-    // Get the product ID from the route and fetch the product if editing
-    this.route.paramMap.subscribe(params => {
-      this.productId = Number(params.get('id')); // Assuming the product ID is passed in the route
+  onFileChange(event: Event) {
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.imageFile = file;
+    } else {
+      this.imageFile = null;
+    }
+  }
 
-      if (this.productId) {
-        this.loadProductData(this.productId);
+  updateProduct() {
+    debugger;
+    if (this.editProductForm.valid && this.productId !== null) {
+      const formData = new FormData();
+      const controls = this.editProductForm.controls;
+      Object.keys(controls).forEach(key => {
+        const control = controls[key];
+        if (control.value !== null && control.value !== undefined) {
+          if (key !== 'imageFile') {
+            formData.append(key, control.value.toString());
+          }
+        }
+      });
+      if (this.imageFile) {
+        formData.append('ImageFile', this.imageFile, this.imageFile.name);
       }
-    });
 
-  }
-  UpdateProduct(){
-    if (this.oldProductForm.valid) {
-      // Map form values to the Product object
-      let updatedprod: ProductWithSpecsCreationDTO = {
-        id: 0,
-        name: this.oldProductForm.value.name,
-        description: this.oldProductForm.value.description,
-        price: this.oldProductForm.value.price,
-        pictureUrl: this.oldProductForm.value.pictureUrl,
-        storage: this.oldProductForm.value.storage || null,
-        ram: this.oldProductForm.value.ram || null,
-        cpu: this.oldProductForm.value.cpu || null,
-        gpu: this.oldProductForm.value.gpu || null,
-        screen: this.oldProductForm.value.screen || null,
-        color: this.oldProductForm.value.color || null,
-        keyboard: this.oldProductForm.value.keyboard || null,
-        warranty: this.oldProductForm.value.warranty || null,
-        panel: this.oldProductForm.value.panel || null,
-        touchscreen: false,
-        quantity: this.oldProductForm.value.quantity,
-        subCategoryId: this.oldProductForm.value.subCategoryId,
-        brandId: this.oldProductForm.value.brandId
-      };
+      // else {
 
-    this.productsService.UpdateExistingProduct(this.productId,updatedprod).subscribe(data=>{});
-    alert('Product has been updated');
-    this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
-      window.location.reload();
-    });
+      //   formData.append('PictureUrl', this.existingImageUrl);
+      // }
+      this.productsService.UpdateExistingProduct(this.productId, formData).subscribe({
+        next: () => {
+          alert('Product has been updated successfully!');
+          this.router.navigate(['/adminDashboard/admin-products']);
+        },
+        error: (error: HttpErrorResponse) => {
+          console.error('Error updating product:', error);
+          alert(`Server returned code ${error.status}, error message: ${JSON.stringify(error.error)}`);
+        }
+      });
+    } else {
+      console.log('Form is invalid:', this.editProductForm.errors);
+      alert("Form is invalid. Please check all required fields.");
+    }
   }
-  }
+
 }
+
+
