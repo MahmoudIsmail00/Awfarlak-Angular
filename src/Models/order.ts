@@ -12,6 +12,7 @@ export interface OrderDto{
   buyerEmail : string;
   deliveryMethodId : number ;
   shippingAddress: AddressDto;
+  OrderItems: OrderItemDto[];
 }
 
 

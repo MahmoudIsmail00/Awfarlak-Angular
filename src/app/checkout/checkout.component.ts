@@ -3,7 +3,7 @@ import { CartService } from '../Services/cart/cart.service';
 import { OrderService } from '../Services/order/order.service';
 import { BasketItemDto } from '../../Models/customerBasket';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { AddressDto, OrderDto } from '../../Models/order';
+import { AddressDto, OrderDto, OrderItemDto } from '../../Models/order';
 import { AuthService } from '../Services/authentication/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -13,7 +13,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.css'],
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterOutlet, RouterLinkActive, RouterLink]
+  imports: [CommonModule, FormsModule , RouterLink , RouterOutlet , RouterLinkActive ]
 })
 export class CheckoutComponent implements OnInit {
   usercartItems: BasketItemDto[] = [];
@@ -26,9 +26,9 @@ export class CheckoutComponent implements OnInit {
   address: AddressDto | null = null;
   orderDto: OrderDto | null = null;
   buyerEmail: string | null = null;
-  basketId:  string = '';
+  basketId: string = '';
   total: number = 0;
-
+  selectedDeliveryMethodId: number | null = null;
 
   constructor(
     private cartService: CartService,
@@ -38,21 +38,19 @@ export class CheckoutComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.cartService.cart$.subscribe(cartItems => {
       this.usercartItems = cartItems;
       this.calculateTotals();
     });
 
-
     this.orderService.deliveryMethod$.subscribe(methodId => {
+      this.selectedDeliveryMethodId = methodId;
       this.orderService.getAllDeliveryMethods().subscribe(methods => {
         const selectedMethod = methods.find(method => method.id === methodId);
         this.shipping = selectedMethod ? selectedMethod.price : 0;
         this.calculateTotals();
       });
     });
-
 
     this.buyerEmail = this.authService.getUserEmail();
     this.basketId = this.cartService.userCart.id;
@@ -82,17 +80,24 @@ export class CheckoutComponent implements OnInit {
   }
 
   placeOrder(): void {
-    
+
     if (!this.buyerEmail || !this.basketId || !this.address) {
       alert('Please ensure all details are filled out.');
       return;
     }
 
     const orderDto: OrderDto = {
-      buyerEmail: this.buyerEmail,
       basketId: this.basketId,
-      deliveryMethodId: 10,
-      shippingAddress: this.address
+      buyerEmail: this.buyerEmail,
+      deliveryMethodId:4,
+      shippingAddress: this.address,
+      OrderItems: this.usercartItems.map(item => ({
+        productItemId: item.Id,
+        productName: item.ProductName,
+        pictureUrl: item.PictureUrl,
+        price: item.Price,
+        quantity: item.Quantity
+      }))
     };
 
     this.orderService.createOrder(orderDto).subscribe(
@@ -112,9 +117,7 @@ export class CheckoutComponent implements OnInit {
     );
   }
 
-
   generateOrderId(): string {
     return Math.random().toString(36).substring(2, 10).toUpperCase();
   }
-
 }
