@@ -35,7 +35,6 @@ export class AdminDashboardCategoriesEditFormComponent implements OnInit{
         name: subcategory.name,
         typeId: subcategory.typeId,
       });
-      console.log(this.newCategoryForm.value);
     });
   }
   ngOnInit(): void {
@@ -45,8 +44,6 @@ export class AdminDashboardCategoriesEditFormComponent implements OnInit{
     this.route.paramMap.subscribe(params => {
       this.subCategoryId = Number(params.get('id'));
     });
-
-    console.log(this.subCategoryId);
 
     if(this.subCategoryId){
       this.loadCategoryData(this.subCategoryId);

@@ -36,6 +36,8 @@ import { AdminDashboardCategoriesEditFormComponent } from './admin-dashboard/adm
 import { AdminDashboardBrandsNewFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-new-form/admin-dashboard-brands-new-form.component';
 import { AdminDashboardBrandsEditFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-edit-form/admin-dashboard-brands-edit-form.component';
 import { AdminGuard } from './Services/authentication/adminguard';
+import { AdminDashboardUsersComponent } from './admin-dashboard/admin-dashboard-users/admin-dashboard-users.component';
+import { AdminDashboardUsersEditUserComponent } from './admin-dashboard/admin-dashboard-users/admin-dashboard-users-edit-user/admin-dashboard-users-edit-user.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -56,6 +58,10 @@ export const routes: Routes = [
   { path: 'wishlist', component: WishlistComponent, canActivate: [AuthGuard] },
   { path: 'adminDashboard', component: AdminDashboardComponent,  canActivate: [AdminGuard], children: [
     { path: '', redirectTo: 'admin-products', pathMatch: 'full' },
+
+    { path: 'admin-users', component: AdminDashboardUsersComponent },
+    { path: 'admin-users-edit/:id', component: AdminDashboardUsersEditUserComponent },
+
 
     { path: 'admin-categories', component: AdminDashboardCategoriesComponent },
     { path: 'admin-categories-new', component: AdminDashboardCategoriesNewFormComponent },

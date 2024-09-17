@@ -13,3 +13,21 @@ export interface User {
 }
 
 
+export interface UserDto{
+  userId:string|null,
+  displayName:string,
+  email:string,
+  roles:string[]
+}
+
+export interface UpdateUserRoleDto{
+  email:string,
+  newRole:string
+}
+
+export interface Role{
+  id:string,
+  name:string,
+  normalizedName:string,
+  concurrencyStamp:string|null
+}

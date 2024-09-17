@@ -44,7 +44,6 @@ export class AdminDashboardProductsComponent  implements OnInit{
         } as ProductWithSpecs;
       });
       this.products = combinedProducts;
-      console.log(this.products);
 
     });
 

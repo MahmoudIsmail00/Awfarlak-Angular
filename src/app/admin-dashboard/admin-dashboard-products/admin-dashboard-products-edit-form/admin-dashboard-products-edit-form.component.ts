@@ -69,8 +69,6 @@ export class AdminDashboardProductsEditFormComponent implements OnInit {
         brandId: this.brands.find(x=>x.name == product.productBrandName)?.id,
         subCategoryId: this.subcategories.find(x=>x.name == product.productSubCategoryName)?.id
       });
-      console.log(this.oldProductForm.value);
-
     });
   }
   ngOnInit(): void {
@@ -84,8 +82,6 @@ export class AdminDashboardProductsEditFormComponent implements OnInit {
     // Get the product ID from the route and fetch the product if editing
     this.route.paramMap.subscribe(params => {
       this.productId = Number(params.get('id')); // Assuming the product ID is passed in the route
-
-      console.log(this.productId);
 
       if (this.productId) {
         this.loadProductData(this.productId);

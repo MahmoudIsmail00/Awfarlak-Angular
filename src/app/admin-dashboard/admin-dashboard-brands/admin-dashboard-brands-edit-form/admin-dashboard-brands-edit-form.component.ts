@@ -30,7 +30,6 @@ export class AdminDashboardBrandsEditFormComponent implements OnInit{
     this.route.paramMap.subscribe(params => {
       this.brandId = Number(params.get('id'));
     });
-    console.log(this.brandId);
 
     if(this.brandId){
       this.loadBrandData(this.brandId);
@@ -41,7 +40,6 @@ export class AdminDashboardBrandsEditFormComponent implements OnInit{
       this.newBrandForm.patchValue({
         name: brand.name,
       });
-      console.log(this.newBrandForm.value);
     });
   }
   UpdateBrand(){
