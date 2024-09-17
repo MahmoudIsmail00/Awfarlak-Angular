@@ -2,7 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { environment } from '../environment';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../authentication/auth.service';
-import { Role,  UpdateUserRoleDto,  UserDto } from '../../../Models/user';
+import { Role,  UpdateUserRoleDto,  UserChangePasswordDto,  UserDto } from '../../../Models/user';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -12,7 +12,6 @@ export class UserService implements OnInit {
   UsersURL = `${environment.apiUrl}/Account/`;
   constructor(private http: HttpClient, private authService: AuthService) {}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
   }
 
   private getHeaders(): HttpHeaders {
@@ -44,5 +43,10 @@ export class UserService implements OnInit {
     return this.http.get<UserDto>(this.UsersURL + `GetUserData/${userId}`, {
       headers,
     });
+  }
+
+  ChangePassword(userId:string|null,user:UserChangePasswordDto):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.UsersURL}ChangeDetails/${userId}`,user ,{headers});
   }
 }

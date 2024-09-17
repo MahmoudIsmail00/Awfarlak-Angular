@@ -3,28 +3,16 @@
   <app-sidebar />
 
   <div class="container mx-auto p-8">
-    <form class="bg-white p-6 rounded-lg shadow-lg">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>
-                <label for="first-name" class="block text-sm font-medium text-gray-700">First name <span class="text-red-500">*</span></label>
-                <input type="text" id="first-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-
-            <div>
-                <label for="last-name" class="block text-sm font-medium text-gray-700">Last name <span class="text-red-500">*</span></label>
-                <input type="text" id="last-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-            </div>
-        </div>
-
+    <form [formGroup]="userForm" (ngSubmit)="ChangePassword()" class="bg-white p-6 rounded-lg shadow-lg">
         <div class="mt-4">
-            <label for="display-name" class="block text-sm font-medium text-gray-700">Display name <span class="text-red-500">*</span></label>
-            <input type="text" id="display-name" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <label for="displayName" class="block text-sm font-medium text-gray-700">Display name <span class="text-red-500">*</span></label>
+            <input formControlName="displayName" type="text" id="displayName" name="displayName" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
             <p class="mt-1 text-sm text-gray-500">This will be how your name will be displayed in the account section and in reviews</p>
         </div>
 
         <div class="mt-4">
             <label for="email" class="block text-sm font-medium text-gray-700">Email address <span class="text-red-500">*</span></label>
-            <input type="email" id="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+            <input formControlName="email" type="email" id="email" class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         </div>
 
         <div class="mt-4 ">
@@ -34,7 +22,7 @@
               <!-- Old Password -->
               <div class="mt-4">
                 <label for="current-password" class="block text-sm font-medium text-gray-700">Old Password</label>
-                <input type="password" id="current-password" name="current-password"
+                <input formControlName="oldPassword" type="password" id="current-password" name="current-password"
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter old password">
               </div>
@@ -42,7 +30,7 @@
               <!-- New Password -->
               <div class="mt-4">
                 <label for="new-password" class="block text-sm font-medium text-gray-700">New Password</label>
-                <input type="password" id="new-password" name="new-password"
+                <input formControlName="newPassword" type="password" id="new-password" name="new-password"
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Enter new password">
               </div>
@@ -50,12 +38,10 @@
               <!-- Confirm New Password -->
               <div class="mt-4">
                 <label for="confirm-password" class="block text-sm font-medium text-gray-700">Confirm New Password</label>
-                <input type="password" id="confirm-password" name="confirm-password"
+                <input formControlName="confirmNewPassword" type="password" id="confirm-password" name="confirm-password"
                   class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Confirm new password">
               </div>
-
-
             </fieldset>
           </div>
 

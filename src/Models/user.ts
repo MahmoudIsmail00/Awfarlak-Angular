@@ -31,3 +31,11 @@ export interface Role{
   normalizedName:string,
   concurrencyStamp:string|null
 }
+
+export interface UserChangePasswordDto{
+  userId:string|null,
+  displayName:string,
+  email:string,
+  oldPassword: string,
+  newPassword:string
+}
