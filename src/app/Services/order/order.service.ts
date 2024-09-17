@@ -49,6 +49,11 @@ export class OrderService {
     return this.deliveryMethodSubject.getValue();
   }
 
+  getAllOrders():Observable<OrderResultDto[]>{
+    const headers = new HttpHeaders({ Authorization: `Bearer ${this.getToken()}` });
+    return this.http.get<OrderResultDto[]>(`${this.baseUrl}/GetAllOrders`, {headers,});
+  }
+
   private getToken(): string | null {
     const currentUser = JSON.parse(localStorage.getItem('currentUser')!);
     return currentUser?.token || null;

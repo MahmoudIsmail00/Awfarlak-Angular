@@ -7,19 +7,21 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { CartService } from '../Services/cart/cart.service';
 import { ProductWithSpecs } from '../../Models/productWithSpecs';
 import { ProductComponent } from "../product/product.component";
+import { NgxPaginationModule } from 'ngx-pagination';
+import { NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-home-product',
   templateUrl: './home-product.component.html',
   styleUrls: ['./home-product.component.css'],
   standalone: true,
-  imports: [RouterLink, RouterOutlet, ProductComponent],
+  imports: [RouterLink, RouterOutlet, ProductComponent,NgxPaginationModule,NgFor],
 })
 export class HomeProductComponent implements OnInit {
   @Input() subCategory!: SubCategory;
   product!: ProductWithSpecs;
   products: ProductWithSpecs[] = [];
-
+  page:number = 1 ;
   constructor(
     private ProductsService: ProductsService,
     private cartService: CartService,
@@ -35,7 +37,7 @@ export class HomeProductComponent implements OnInit {
   }
 
 
-  
+
 
   addToWishList() {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
