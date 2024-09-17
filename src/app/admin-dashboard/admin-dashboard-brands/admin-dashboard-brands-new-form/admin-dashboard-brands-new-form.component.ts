@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { Brand } from '../../../../Models/brand';
 import { ProductsService } from '../../../Services/store/products.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-dashboard-brands-new-form',
@@ -18,7 +19,8 @@ export class AdminDashboardBrandsNewFormComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private productsService:ProductsService,
-    private router: Router
+    private router: Router,
+    private snackBar : MatSnackBar
   ){
     this.newBrandForm = this.fb.group({
       name: ['', Validators.required]
@@ -28,21 +30,34 @@ export class AdminDashboardBrandsNewFormComponent implements OnInit{
   ngOnInit(): void {
 
   }
-  CreateBrand(){
-    if(this.newBrandForm.valid){
-      let newBranditem : Brand = {
-        id : 0,
-        name : this.newBrandForm.value.name
+  CreateBrand() {
+    if (this.newBrandForm.valid) {
+      let newBrandItem: Brand = {
+        id: 0,
+        name: this.newBrandForm.value.name
       };
-      console.log(newBranditem);
+      console.log(newBrandItem);
 
-      this.productsService.CreateNewBrand(newBranditem).subscribe(data=>{});
-      alert('Brand Has been added Successfully!');
-      this.router.navigate(['/adminDashboard/admin-brands']).then(()=>{
-        window.location.reload();
+      this.productsService.CreateNewBrand(newBrandItem).subscribe(
+        data => {
+          this.snackBar.open('Brand has been added successfully!', '', {
+            duration: 3000,
+          });
+          this.router.navigate(['/adminDashboard/admin-brands']).then(() => {
+            window.location.reload();
+          });
+        },
+        error => {
+          this.snackBar.open('Failed to add brand', '', {
+            duration: 3000,
+          });
+
+        }
+      );
+    } else {
+      this.snackBar.open('Form is invalid', '', {
+        duration: 3000,
       });
-    }else {
-      alert("Form is invalid");
     }
   }
 

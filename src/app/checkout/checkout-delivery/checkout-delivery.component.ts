@@ -4,6 +4,7 @@ import { DeliveryMethod } from '../../../Models/order';
 import { CommonModule, NgFor } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkout-delivery',
@@ -16,7 +17,7 @@ export class CheckoutDeliveryComponent implements OnInit {
   deliveryMethods: DeliveryMethod[] = [];
   selectedDeliveryMethod: number | null = null;
 
-  constructor(private orderService: OrderService, private router: Router) {}
+  constructor(private orderService: OrderService, private router: Router , private snackBar :MatSnackBar ) {}
 
   ngOnInit(): void {
     this.orderService.getAllDeliveryMethods().subscribe(methods => {
@@ -26,10 +27,14 @@ export class CheckoutDeliveryComponent implements OnInit {
 
   proceedToReview() {
     if (this.selectedDeliveryMethod !== null) {
-      this.orderService.setDeliveryMethod(this.selectedDeliveryMethod); // Save selected method
+      this.orderService.setDeliveryMethod(this.selectedDeliveryMethod);
       this.router.navigate(['/checkout/review']);
     } else {
-      alert('Please select a delivery method.');
+      this.snackBar.open('Delivery updated successfully!', '', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
     }
   }
 }

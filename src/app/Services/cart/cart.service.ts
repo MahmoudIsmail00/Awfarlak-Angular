@@ -110,8 +110,8 @@ export class CartService {
     this.http.post<CustomerBasketDto>(this.apiUrl + 'updateBasket', this.userCart, { headers }).pipe(
       catchError(this.handleError)
     ).subscribe(
-      response => console.log('Cart updated successfully', response),
-      error => console.log('Error updating cart:', error)
+      // response => console.log('Cart updated successfully', response),
+      // error => console.log('Error updating cart:', error)
     );
   }
 

@@ -7,6 +7,7 @@ import { AddressDto, OrderDto, OrderItemDto } from '../../Models/order';
 import { AuthService } from '../Services/authentication/auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-checkout',
@@ -34,7 +35,8 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService,
     private orderService: OrderService,
     private authService: AuthService,
-    private router: Router
+    private router: Router ,
+    private snackBar : MatSnackBar
   ) {}
 
   ngOnInit() {
@@ -66,7 +68,14 @@ export class CheckoutComponent implements OnInit {
     if (coupon) {
       this.discount = coupon;
     } else {
-      alert('Invalid coupon code');
+      this.snackBar.open('Inavalid Coupon Code ', '', {
+        duration: 3000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
+      setTimeout(() => {
+        this.router.navigate(['addresses']);
+      });
       this.discount = 0;
     }
     this.calculateTotals();

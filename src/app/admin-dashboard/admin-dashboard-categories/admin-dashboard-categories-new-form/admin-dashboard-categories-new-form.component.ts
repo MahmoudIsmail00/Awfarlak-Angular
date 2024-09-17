@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { ProductType, SubCategoryWithType } from '../../../../Models/subCategory';
 import { ProductsService } from '../../../Services/store/products.service';
 import { Router, RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-dashboard-categories-new-form',
@@ -19,7 +20,8 @@ export class AdminDashboardCategoriesNewFormComponent implements OnInit{
   constructor(
     private fb: FormBuilder,
     private productsService:ProductsService,
-    private router: Router
+    private router: Router,
+    private snackBar :MatSnackBar
   ){
     this.newCategoryForm = this.fb.group({
       name: ['', Validators.required],
@@ -31,7 +33,7 @@ export class AdminDashboardCategoriesNewFormComponent implements OnInit{
   ngOnInit(): void {
     this.productsService.getAllTypes().subscribe(data=>{this.types = data})
   }
-  CreateCategory(){
+  CreateCategory() {
     if (this.newCategoryForm.valid) {
       let newCategory: SubCategoryWithType = {
         id: 0,
@@ -40,13 +42,26 @@ export class AdminDashboardCategoriesNewFormComponent implements OnInit{
       };
       console.log(newCategory);
 
-      this.productsService.createNewSubCategory(newCategory).subscribe(data=>{});
-      alert('SubCategory Has been added Successfully!');
-      this.router.navigate(['/adminDashboard/admin-categories']).then(()=>{
-        window.location.reload();
-      });
+      this.productsService.createNewSubCategory(newCategory).subscribe(
+        data => {
+          this.snackBar.open('SubCategory has been added successfully!', 'Close', {
+            duration: 5000,
+          });
+          this.router.navigate(['/adminDashboard/admin-categories']).then(() => {
+            window.location.reload();
+          });
+        },
+        error => {
+          this.snackBar.open('Failed to add SubCategory. Please try again.', 'Close', {
+            duration: 3000,
+          });
+
+        }
+      );
     } else {
-      alert("Form is invalid");
+      this.snackBar.open('Form is invalid. Please check the details and try again.', 'Close', {
+        duration: 3000,
+      });
     }
   }
 }

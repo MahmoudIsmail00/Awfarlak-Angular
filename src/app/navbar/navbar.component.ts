@@ -45,8 +45,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   updateSearch() {
-    console.log('updating the search');
-    console.log(this.search);
+    // console.log('updating the search');
+    // console.log(this.search);
     this.productsService.updateSearchTerm(this.search);
   }
 
@@ -59,8 +59,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   isActive(route: string): boolean {
-    console.log('ho222la');
-    console.log(this.router.url);
+    // console.log('ho222la');
+    // console.log(this.router.url);
     return this.router.url === route;
   }
 

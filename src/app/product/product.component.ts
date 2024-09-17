@@ -56,7 +56,7 @@ export class ProductComponent implements OnInit {
           this.router.navigate(['/cart']); // Adjust route as necessary
         });
 
-      console.log('Product added to cart');
+      // console.log('Product added to cart');
     }
   }
 

@@ -7,6 +7,7 @@ import { specs } from '../../../Models/specs';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { NgFor } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { MatSnackBar } from '@angular/material/snack-bar';
 @Component({
   selector: 'app-admin-dashboard-products',
   standalone: true,
@@ -18,7 +19,7 @@ export class AdminDashboardProductsComponent  implements OnInit{
   products:ProductWithSpecs[] = [];
   page: number = 1;
 
-  constructor(private productService:ProductsService, private router:Router){}
+  constructor(private productService:ProductsService, private router:Router , private snackBar : MatSnackBar){}
   ngOnInit(): void {
     this.getAllProductsWithSpecs();
 
@@ -28,7 +29,6 @@ export class AdminDashboardProductsComponent  implements OnInit{
     this.getAllProductsWithSpecs();
   }
 
-   // Fetch all products and their specs
    getAllProductsWithSpecs() {
     forkJoin({
       products: this.productService.getAllProducts(),
@@ -48,21 +48,34 @@ export class AdminDashboardProductsComponent  implements OnInit{
     });
 
   }
-  DeleteProduct(id:number){
-    let res = confirm('Are you sure you want to delete this product?');
-    if(res){
-      this.productService.DeleteProduct(id).subscribe(data=>{});
-      this.products.filter(x=>x.id != id);
-      alert('Product has been deleted successfully!')
-      this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
-        window.location.reload();
+  DeleteProduct(id: number) {
+    const res = confirm('Are you sure you want to delete this product?');
+    if (res) {
+      this.productService.DeleteProduct(id).subscribe(
+        data => {
+          this.products = this.products.filter(x => x.id !== id);
+
+          this.snackBar.open('Product has been deleted successfully!', 'Close', {
+            duration: 3000,
+          });
+          this.router.navigate(['/adminDashboard/admin-products']).then(() => {
+            window.location.reload();
+          });
+        },
+        error => {
+          this.snackBar.open('Failed to delete product. Please try again.', 'Close', {
+            duration: 3000,
+          });
+
+        }
+      );
+    } else {
+      this.snackBar.open('Product has not been deleted!', 'Close', {
+        duration: 3000,
       });
-    }else{
-      alert('Product has has not been deleted !')
-      this.router.navigate(['/adminDashboard/admin-products']).then(()=>{
+      this.router.navigate(['/adminDashboard/admin-products']).then(() => {
         window.location.reload();
       });
     }
-
   }
 }

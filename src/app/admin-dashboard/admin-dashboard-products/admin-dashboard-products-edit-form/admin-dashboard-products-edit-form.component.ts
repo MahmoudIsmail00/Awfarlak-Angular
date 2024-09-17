@@ -7,6 +7,7 @@ import { SubCategory } from '../../../../Models/subCategory';
 import { ProductWithSpecsCreationDTO } from '../../../../Models/productWithSpecs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgIf } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-dashboard-products-edit-form',
@@ -27,7 +28,8 @@ export class AdminDashboardProductsEditFormComponent implements OnInit {
     private fb: FormBuilder,
     private productsService: ProductsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute ,
+     private snackBar : MatSnackBar
   ) {
     this.editProductForm = this.fb.group({
       name: ['', Validators.required],
@@ -99,7 +101,7 @@ export class AdminDashboardProductsEditFormComponent implements OnInit {
   }
 
   updateProduct() {
-    debugger;
+    
     if (this.editProductForm.valid && this.productId !== null) {
       const formData = new FormData();
       const controls = this.editProductForm.controls;
@@ -113,25 +115,30 @@ export class AdminDashboardProductsEditFormComponent implements OnInit {
       });
       if (this.imageFile) {
         formData.append('ImageFile', this.imageFile, this.imageFile.name);
+      } else {
+        // If no new image is provided, append the existing image URL if needed
+        // formData.append('PictureUrl', this.existingImageUrl);
       }
 
-      // else {
-
-      //   formData.append('PictureUrl', this.existingImageUrl);
-      // }
       this.productsService.UpdateExistingProduct(this.productId, formData).subscribe({
         next: () => {
-          alert('Product has been updated successfully!');
+          this.snackBar.open('Product has been updated successfully!', 'Close', {
+            duration: 3000,
+          });
           this.router.navigate(['/adminDashboard/admin-products']);
         },
         error: (error: HttpErrorResponse) => {
           console.error('Error updating product:', error);
-          alert(`Server returned code ${error.status}, error message: ${JSON.stringify(error.error)}`);
+          this.snackBar.open(`Server returned code ${error.status}, error message: ${JSON.stringify(error.error)}`, 'Close', {
+            duration: 3000,
+          });
         }
       });
     } else {
       console.log('Form is invalid:', this.editProductForm.errors);
-      alert("Form is invalid. Please check all required fields.");
+      this.snackBar.open('Form is invalid. Please check all required fields.', 'Close', {
+        duration: 3000,
+      });
     }
   }
 

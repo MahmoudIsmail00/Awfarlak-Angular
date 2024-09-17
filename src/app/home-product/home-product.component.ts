@@ -84,21 +84,21 @@ export class HomeProductComponent implements OnInit {
 
   addToCart() {
     if (this.product) {
-      this.cartService.addToCart(this.product, 1); // Ensure addToCart method accepts ProductWithSpecs and quantity as number
+      this.cartService.addToCart(this.product, 1); 
 
       // Show snackbar with button to navigate to cart
       this.snackBar
         .open('Product added to cart!', 'Go to Cart', {
-          duration: 5000, // Duration in milliseconds
+          duration: 5000,
           horizontalPosition: 'right',
           verticalPosition: 'top',
         })
         .onAction()
         .subscribe(() => {
-          this.router.navigate(['/cart']); // Adjust route as necessary
+          this.router.navigate(['/cart']);
         });
 
-      console.log('Product added to cart');
+      // console.log('Product added to cart');
     }
   }
 }

@@ -68,7 +68,7 @@ export class CartComponent implements OnInit {
     }
   }
   goToCheckout() {
-    console.log(this.basketId);
+    // console.log(this.basketId);
     this.cartService.createPaymentIntent(this.basketId).subscribe(data=>{});
     this.router.navigate(['/checkout']);
   }

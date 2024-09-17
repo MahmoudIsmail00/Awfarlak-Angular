@@ -34,11 +34,8 @@ export class AwfarlkComponentComponent implements OnInit {
         this.productService.getProductWithSpecs(idNumber).subscribe(
           (data: ProductWithSpecs) => {
             this.product = data;
-            console.log('Product fetched:', this.product); // Log the product data
+            // console.log('Product fetched:', this.product); // Log the product data
           },
-          (error) => {
-            console.error('Error fetching product details:', error);
-          }
         );
       }
     });
@@ -57,8 +54,6 @@ export class AwfarlkComponentComponent implements OnInit {
       }).onAction().subscribe(() => {
         this.router.navigate(['/wishlist']);
       });
-    } else {
-      console.error('User or Wishlist data is missing');
     }
   }
 
@@ -102,10 +97,8 @@ export class AwfarlkComponentComponent implements OnInit {
           this.router.navigate(['/cart']);
         });
 
-      console.log('Product added to cart:', this.product.name);
-      console.log('Product ID:', this.product.id);
-    } else {
-      console.error('Product is not initialized');
+      // console.log('Product added to cart:', this.product.name);
+      // console.log('Product ID:', this.product.id);
     }
   }
 }

@@ -23,7 +23,7 @@ export class CompareComponent implements OnInit {
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
-    console.log(user);
+    // console.log(user);
     for (const item of user.CompareList.data) {
       this.productsService.getProductWithSpecs(Number(item)).subscribe((data:ProductWithSpecs)=>{
         this.compareList.push(data);
@@ -31,10 +31,10 @@ export class CompareComponent implements OnInit {
     }
   }
   removeCompareListProduct(productId: number) {
-    console.log('clicked');
-    console.log(productId);
+    // console.log('clicked');
+    // console.log(productId);
     const user = JSON.parse(localStorage.getItem('currentUser')!);
-    console.log(user);
+    // console.log(user);
     user.CompareList.data = user.CompareList.data.filter(
       (id: string) => id !== productId.toString()
     );

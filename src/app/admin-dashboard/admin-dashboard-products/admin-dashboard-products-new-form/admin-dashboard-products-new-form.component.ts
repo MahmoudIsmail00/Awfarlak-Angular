@@ -7,6 +7,7 @@ import { SubCategory } from '../../../../Models/subCategory';
 import { ProductWithSpecsCreationDTO } from '../../../../Models/productWithSpecs';
 import { HttpErrorResponse } from '@angular/common/http';
 import { validate } from 'uuid';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-dashboard-products-new-form',
@@ -23,7 +24,8 @@ export class AdminDashboardProductsNewFormComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private productsService: ProductsService,
-    private router: Router
+    private router: Router ,
+    private snackBar : MatSnackBar
   ) {
     this.newProductForm = this.fb.group({
       name: ['', Validators.required],
@@ -76,35 +78,46 @@ export class AdminDashboardProductsNewFormComponent implements OnInit {
         }
       });
       if (parseInt(formData.get('quantity') as string, 10) < 1) {
-        alert('Quantity must be at least 1');
+        this.snackBar.open('Quantity must be at least 1', 'Close', {
+          duration: 3000,
+        });
         return;
       }
+
       formData.forEach((value, key) => {
-        console.log(key, value);
+        // console.log(key, value);
       });
 
       this.productsService.createNewProduct(formData).subscribe({
         next: (response) => {
-          console.log('Product created successfully:', response);
-          alert('Product has been added successfully!');
+          // console.log('Product created successfully:', response);
+          this.snackBar.open('Product has been added successfully!', 'Close', {
+            duration: 3000, // Duration in milliseconds
+          });
           this.router.navigate(['/adminDashboard/admin-products']);
         },
         error: (error: HttpErrorResponse) => {
-          console.error('Error creating product:', error);
+          // console.error('Error creating product:', error);
           if (error.error instanceof ErrorEvent) {
-            alert(`An error occurred: ${error.error.message}`);
+            this.snackBar.open(`An error occurred: ${error.error.message}`, 'Close', {
+              duration: 3000,
+            });
           } else {
-            alert(`Server returned code ${error.status}, error message: ${JSON.stringify(error.error)}`);
+            this.snackBar.open(`Server returned code ${error.status}, error message: ${JSON.stringify(error.error)}`, 'Close', {
+              duration: 3000,
+            });
           }
         }
       });
     } else {
-      console.log('Form is invalid:', this.newProductForm.errors);
-      alert("Form is invalid. Please check all required fields.");
+      // console.log('Form is invalid:', this.newProductForm.errors);
+      this.snackBar.open('Form is invalid. Please check all required fields.', 'Close', {
+        duration: 3000,
+      });
       Object.keys(this.newProductForm.controls).forEach(key => {
         const control = this.newProductForm.get(key);
         if (control?.invalid) {
-          console.log(`${key} is invalid:`, control.errors);
+          // console.log(`${key} is invalid:`, control.errors);
         }
       });
     }

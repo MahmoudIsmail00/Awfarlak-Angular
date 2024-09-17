@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Brand } from '../../../../Models/brand';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProductsService } from '../../../Services/store/products.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-dashboard-brands-edit-form',
@@ -20,7 +21,8 @@ export class AdminDashboardBrandsEditFormComponent implements OnInit{
     private fb: FormBuilder,
     private productsService:ProductsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute ,
+    private snackBar :MatSnackBar
   ){
     this.newBrandForm = this.fb.group({
       name: ['', Validators.required],
@@ -42,17 +44,27 @@ export class AdminDashboardBrandsEditFormComponent implements OnInit{
       });
     });
   }
-  UpdateBrand(){
+  UpdateBrand() {
     if (this.newBrandForm.valid) {
       let updatedBrand: Brand = {
-        id:0,
+        id: this.brandId,
         name: this.newBrandForm.value.name
       };
-      this.productsService.UpdateExistingBrand(this.brandId,updatedBrand).subscribe(data=>{});
-      alert('Brand has been updated');
-      this.router.navigate(['/adminDashboard/admin-brands']).then(()=>{
-        window.location.reload();
-      });
+      this.productsService.UpdateExistingBrand(this.brandId, updatedBrand).subscribe(
+        data => {
+          this.snackBar.open('Brand has been updated', '', {
+            duration: 3000,
+          });
+          this.router.navigate(['/adminDashboard/admin-brands']).then(() => {
+            window.location.reload();
+          });
+        },
+        error => {
+          this.snackBar.open('Failed to update brand', '', {
+            duration: 3000,
+          });
+        }
+      );
     }
   }
 }

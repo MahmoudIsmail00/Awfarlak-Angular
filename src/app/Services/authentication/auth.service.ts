@@ -54,7 +54,6 @@ export class AuthService {
             this.updateCurrentUser(updatedUser);
             localStorage.setItem('currentUser', JSON.stringify(updatedUser));
           }
-          console.log('Login response:', response);
 
         });
 
@@ -97,7 +96,6 @@ export class AuthService {
     const headers = new HttpHeaders({ Authorization: `Bearer ${this.getToken()}` });
     return this.http.get<AddressDto>(`${this.apiUrl}/getaddress`, { headers }).pipe(
       map(address => {
-        console.log('Fetched Address:', address);
         return address;
       }),
       catchError(error => {

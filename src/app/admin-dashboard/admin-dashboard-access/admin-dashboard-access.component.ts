@@ -38,14 +38,8 @@ export class AdminDashboardAccessComponent implements OnInit {
             const currentUser = this.authService.currentUserValue;
             if (currentUser && currentUser.roles.includes('Admin')) {
               this.router.navigate(['/adminDashboard']);
-            } else {
-              this.loginError = 'You do not have permission to access the admin dashboard.';
             }
           }
-        },
-        (error) => {
-          console.error('Login failed:', error);
-          this.loginError = 'Login failed. Please check your credentials and try again.';
         }
       );
     }

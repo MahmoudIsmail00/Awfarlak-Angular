@@ -22,19 +22,7 @@ export class SignupComponent implements OnInit {
 
   onSignUp() {
     const { email, displayName, password } = this.registerForm.value;
-    this.authService.signup(email!, displayName!, password!).subscribe(
-      (isLoggedIn) => {
-        if (isLoggedIn) {
-          console.log('Signup successful');
-          this.router.navigate(['products/0']);
-        } else {
-          console.log('Signup not successful');
-        }
-      },
-      (error) => {
-        console.error('Signup failed:', error);
-      }
-    );
+    this.authService.signup(email!, displayName!, password!).subscribe();
   }
 
   ngOnInit() {

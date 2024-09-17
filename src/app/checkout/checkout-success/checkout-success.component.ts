@@ -22,19 +22,17 @@ export class CheckoutSuccessComponent implements OnInit {
 
   ngOnInit(): void {
     const navigation = this.location.getState() as any;
-    console.log('Navigation State:', navigation);
+    // console.log('Navigation State:', navigation);
     if (navigation) {
       this.order = navigation.order as OrderResultDto;
       this.address = navigation.address as AddressDto;
       this.total = navigation.total as number;
       this.products = navigation.order.orderItems as OrderItemDto[];
-      console.log('Order:', this.order);
-      console.log('Address:', this.address);
-      console.log('Total:', this.total);
-      console.log('Products:', this.products);
+      // console.log('Order:', this.order);
+      // console.log('Address:', this.address);
+      // console.log('Total:', this.total);
+      // console.log('Products:', this.products);
       this.cartService.clearCart();
-    } else {
-      console.error('No navigation state available.');
     }
   }
 

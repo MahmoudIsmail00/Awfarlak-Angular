@@ -18,7 +18,7 @@ export class WishlistComponent {
   constructor(private productsService: ProductsService) {}
   removeFromWishlist(productId: number) {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
-    console.log(user);
+    // console.log(user);
     user.WishList.data = user.WishList.data.filter(
       (id: string) => id !== productId.toString()
     );
@@ -30,15 +30,15 @@ export class WishlistComponent {
 
   ngOnInit() {
     const user = JSON.parse(localStorage.getItem('currentUser')!);
-    console.log(user);
-    console.log(user.WishList.data);
+    // console.log(user);
+    // console.log(user.WishList.data);
     this.productsService.getAllProducts().subscribe((data: Product[]) => {
-      console.log(data);
+      // console.log(data);
       this.wishListProducts = data.filter((product) =>
         user.WishList.data.includes(product.id.toString())
       );
-      console.log('wish list products ');
-      console.log(this.wishListProducts);
+      // console.log('wish list products ');
+      // console.log(this.wishListProducts);
     });
   }
 }

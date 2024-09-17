@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProductType, SubCategoryWithType } from '../../../../Models/subCategory';
 import { ProductsService } from '../../../Services/store/products.service';
 import { NgIf } from '@angular/common';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-admin-dashboard-categories-edit-form',
@@ -21,7 +22,8 @@ export class AdminDashboardCategoriesEditFormComponent implements OnInit{
     private fb: FormBuilder,
     private productsService:ProductsService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private snackBar : MatSnackBar
   ){
     this.newCategoryForm = this.fb.group({
       name: ['', Validators.required],
@@ -50,19 +52,34 @@ export class AdminDashboardCategoriesEditFormComponent implements OnInit{
     }
 
   }
-  UpdateCategory(){
+  UpdateCategory() {
     if (this.newCategoryForm.valid) {
-      // Map form values to the Product object
-      let updatedsub: SubCategoryWithType = {
-        id: 0,
+      let updatedSub: SubCategoryWithType = {
+        id: this.subCategoryId,
         name: this.newCategoryForm.value.name,
         typeId: this.newCategoryForm.value.typeId
       };
-      this.productsService.UpdateExistingSubCategory(this.subCategoryId,updatedsub).subscribe(data=>{});
-      alert('SubCategory has been updated');
-      this.router.navigate(['/adminDashboard/admin-categories']).then(()=>{
-        window.location.reload();
+
+      this.productsService.UpdateExistingSubCategory(this.subCategoryId, updatedSub).subscribe(
+        data => {
+          this.snackBar.open('SubCategory has been updated successfully!', 'Close', {
+            duration: 3000,
+          });
+          this.router.navigate(['/adminDashboard/admin-categories']).then(() => {
+            window.location.reload();
+          });
+        },
+        error => {
+          this.snackBar.open('Failed to update SubCategory. Please try again.', 'Close', {
+            duration: 3000,
+          });
+          console.error('Update failed', error);
+        }
+      );
+    } else {
+      this.snackBar.open('Form is invalid. Please check the details and try again.', 'Close', {
+        duration: 3000,
       });
+    }
   }
-}
 }

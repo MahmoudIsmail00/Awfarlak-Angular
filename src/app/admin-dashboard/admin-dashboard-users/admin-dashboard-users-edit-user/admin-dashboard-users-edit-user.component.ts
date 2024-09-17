@@ -59,7 +59,7 @@ export class AdminDashboardUsersEditUserComponent implements OnInit{
         email:this.userForm.value.email,
         newRole: this.userForm.value.role
       }
-      console.log(UpdatedUser);
+      // console.log(UpdatedUser);
 
       this.userService.UpdateRole(UpdatedUser).subscribe(data=>{});
       this.snackBar.open('Role has been updated successfully!', 'View Users', {

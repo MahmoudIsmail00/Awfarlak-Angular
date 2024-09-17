@@ -11,7 +11,6 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { AuthGuard } from './Services/authentication/authguard';
 import { NotfoundComponent } from './notfound/notfound.component';
-import { ProfileComponent } from './profile/profile.component';
 import { AlertComponent } from './alert/alert.component';
 import { CompareComponent } from './compare/compare.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -31,7 +30,6 @@ import { AdminDashboardBrandsComponent } from './admin-dashboard/admin-dashboard
 import { AdminDashboardDeliveryComponent } from './admin-dashboard/admin-dashboard-delivery/admin-dashboard-delivery.component';
 import { AdminDashboardOrdersComponent } from './admin-dashboard/admin-dashboard-orders/admin-dashboard-orders.component';
 import { AdminDashboardProductsNewFormComponent } from './admin-dashboard/admin-dashboard-products/admin-dashboard-products-new-form/admin-dashboard-products-new-form.component';
-import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-success.component';
 import { AdminDashboardCategoriesEditFormComponent } from './admin-dashboard/admin-dashboard-categories/admin-dashboard-categories-edit-form/admin-dashboard-categories-edit-form.component';
 import { AdminDashboardBrandsNewFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-new-form/admin-dashboard-brands-new-form.component';
 import { AdminDashboardBrandsEditFormComponent } from './admin-dashboard/admin-dashboard-brands/admin-dashboard-brands-edit-form/admin-dashboard-brands-edit-form.component';
@@ -39,6 +37,7 @@ import { AdminGuard } from './Services/authentication/adminguard';
 import { AdminDashboardUsersComponent } from './admin-dashboard/admin-dashboard-users/admin-dashboard-users.component';
 import { AdminDashboardUsersEditUserComponent } from './admin-dashboard/admin-dashboard-users/admin-dashboard-users-edit-user/admin-dashboard-users-edit-user.component';
 import { OrdersComponent } from './orders/orders.component';
+import { CheckoutSuccessComponent } from './checkout/checkout-success/checkout-success.component';
 
 export const routes: Routes = [
   { path: 'products/:id', component: ProductsComponent },
@@ -50,7 +49,6 @@ export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'alert', component: AlertComponent },
   { path: 'addresses', component: AllAddressesComponent },
   { path: 'orders', component: OrdersComponent },
@@ -89,6 +87,7 @@ export const routes: Routes = [
     { path: 'review', component: CheckoutReviewComponent },
     { path: 'payment', component: CheckoutPaymentComponent },
     {path: 'success' , component : CheckoutSuccessComponent}
+
   ]
 },
 { path: '', redirectTo: '/checkout/address', pathMatch: 'full' },

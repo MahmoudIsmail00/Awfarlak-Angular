@@ -10,7 +10,7 @@ export class AdminGuard implements CanActivate {
 
   canActivate(): boolean {
     const user = this.authService.currentUserValue;
-    console.log("User Roles = " +user?.roles);
+    // console.log("User Roles = " +user?.roles);
     if (user && user.roles && user.roles.includes('Admin')) {
       return true;
     } else {

@@ -28,19 +28,13 @@ export class LoginComponent implements OnInit {
       this.authService.login(email, password).subscribe(
         (isLoggedIn) => {
           if (isLoggedIn) {
-            console.log('Login successful');
+            // console.log('Login successful');
             this.router.navigate(['products/0']);
-          } else {
-            this.loginError = 'Invalid email or password';
           }
         },
-        (error) => {
-          this.loginError = 'Invalid email or password';
-          console.error('Login failed:', error);
-        }
       );
     } else {
-      console.log('Form is invalid');
+      // console.log('Form is invalid');
     }
   }
 
