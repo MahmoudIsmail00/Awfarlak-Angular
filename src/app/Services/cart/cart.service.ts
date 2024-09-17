@@ -6,12 +6,14 @@ import { environment } from '../environment';
 import { ProductWithSpecs } from '../../../Models/productWithSpecs';
 import { ProductsService } from '../store/products.service';
 import { v4 as uuidv4 } from 'uuid';
+import { AuthService } from '../authentication/auth.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   apiUrl = `${environment.apiUrl}/basket/`;
+  paymentURL = `${environment.apiUrl}/Payment/`;
   userCart: CustomerBasketDto = {
     id: '',
     basketItems: [],
@@ -27,22 +29,12 @@ export class CartService {
   cart$ = this.cartSubject.asObservable();
   isCartCleared$ = this.isCartCleared.asObservable();
 
-  constructor(private http: HttpClient, private productService: ProductsService) {
+  constructor(private http: HttpClient, private productService: ProductsService,private authService:AuthService) {
     this.initializeCartFromLocalStorage();
   }
 
-  private getToken(): string | null {
-    const token = localStorage.getItem('currentUser');
-    if (token) {
-      const parsedToken = JSON.parse(token);
-      return parsedToken.token;
-    }
-    return null;
-  }
-
-  private getHeaders(): HttpHeaders | null {
-    const token = this.getToken();
-    if (!token) return null; // Return null if no token is found
+  private getHeaders(): HttpHeaders {
+    const token = this.authService.getToken();
     return new HttpHeaders({ Authorization: `Bearer ${token}` });
   }
 
@@ -175,5 +167,9 @@ export class CartService {
     return this.userCart.basketItems.reduce((total, item) => total + (item.Price * item.Quantity), 0);
   }
 
+  createPaymentIntent(basketId:string):Observable<any>{
+    const headers = this.getHeaders();
+    return this.http.post<any>(`${this.paymentURL}CreateOrUpdatePaymentIntent/${basketId}`,null ,{headers});
+  }
 
 }

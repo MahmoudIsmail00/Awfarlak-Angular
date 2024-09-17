@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location, NgFor } from '@angular/common';
 import { AddressDto, OrderItemDto, OrderResultDto } from '../../../Models/order';
+import { CartService } from '../../Services/cart/cart.service';
 
 @Component({
   selector: 'app-checkout-success',
@@ -17,7 +18,7 @@ export class CheckoutSuccessComponent implements OnInit {
   orderCode: string = Math.random().toString(36).substring(2, 8).toUpperCase();
   products: OrderItemDto[] = [];
 
-  constructor(public router: Router, private location: Location) {}
+  constructor(private cartService: CartService,public router: Router, private location: Location) {}
 
   ngOnInit(): void {
     const navigation = this.location.getState() as any;
@@ -31,6 +32,7 @@ export class CheckoutSuccessComponent implements OnInit {
       console.log('Address:', this.address);
       console.log('Total:', this.total);
       console.log('Products:', this.products);
+      this.cartService.clearCart();
     } else {
       console.error('No navigation state available.');
     }
