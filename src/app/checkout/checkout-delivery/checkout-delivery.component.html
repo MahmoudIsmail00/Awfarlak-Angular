@@ -3,10 +3,11 @@
   <form class="space-y-6">
     <div *ngFor="let method of deliveryMethods">
       <label class="flex items-center">
-        <input type="radio" name="delivery" [value]="method.id" [(ngModel)]="selectedDeliveryMethod" class="mr-4">
+        <input type="radio" name="delivery" [value]="method.id" [(ngModel)]="selectedDeliveryMethod"
+               (change)="onDeliveryMethodChange(method.id)" class="mr-4">
         <span>{{ method.shortName }} - {{ method.price | currency }}</span>
       </label>
     </div>
-    <button type="button" (click)="proceedToReview()" class="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600">Go to Review</button>
+    <button type="button"  class="w-full bg-blue-500 text-white py-3 rounded-md hover:bg-blue-600">Go to Review</button>
   </form>
 </div>

@@ -25,16 +25,13 @@ export class CheckoutDeliveryComponent implements OnInit {
     });
   }
 
-  proceedToReview() {
-    if (this.selectedDeliveryMethod !== null) {
-      this.orderService.setDeliveryMethod(this.selectedDeliveryMethod);
-      this.router.navigate(['/checkout/review']);
-    } else {
-      this.snackBar.open('Delivery updated successfully!', '', {
-        duration: 3000,
-        horizontalPosition: 'right',
-        verticalPosition: 'top',
-      });
-    }
+  onDeliveryMethodChange(methodId: number) {
+    this.selectedDeliveryMethod = methodId;
+    this.orderService.setDeliveryMethod(this.selectedDeliveryMethod);
+    this.snackBar.open('Delivery method updated!', '', {
+      duration: 3000,
+      horizontalPosition: 'right',
+      verticalPosition: 'top',
+    });
   }
 }

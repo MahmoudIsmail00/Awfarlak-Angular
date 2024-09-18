@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CartService } from '../Services/cart/cart.service';
 import { OrderService } from '../Services/order/order.service';
 import { BasketItemDto } from '../../Models/customerBasket';
@@ -30,6 +30,9 @@ export class CheckoutComponent implements OnInit {
   basketId: string = '';
   total: number = 0;
   selectedDeliveryMethodId: number | null = null;
+
+
+
 
   constructor(
     private cartService: CartService,
@@ -90,15 +93,18 @@ export class CheckoutComponent implements OnInit {
 
   placeOrder(): void {
 
-    if (!this.buyerEmail || !this.basketId || !this.address) {
-      alert('Please ensure all details are filled out.');
+    if (!this.buyerEmail || !this.basketId || !this.address || this.selectedDeliveryMethodId == null) {
+      this.snackBar
+        .open('Please ensure all details are filled out', '', {
+          duration: 5000
+        });
       return;
     }
 
     const orderDto: OrderDto = {
       basketId: this.basketId,
       buyerEmail: this.buyerEmail,
-      deliveryMethodId:4,
+      deliveryMethodId: this.selectedDeliveryMethodId,
       shippingAddress: this.address,
       OrderItems: this.usercartItems.map(item => ({
         productItemId: item.Id,
@@ -117,11 +123,16 @@ export class CheckoutComponent implements OnInit {
             total: this.total,
             address: this.address
           }
-        });
+        }
+      );
+
       },
       (error) => {
-        console.error('Error creating order:', error);
-        alert('There was a problem placing your order. Please try again.');
+        // console.error('Error creating order:', error);
+        this.snackBar
+        .open('There was a problem placing your order. Please try again.', '', {
+          duration: 5000
+        });
       }
     );
   }
