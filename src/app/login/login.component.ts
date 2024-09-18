@@ -31,7 +31,13 @@ export class LoginComponent implements OnInit {
             // console.log('Login successful');
             this.router.navigate(['products/0']);
           }
+          else {
+            this.loginError = 'Invalid email or password';
+          }
         },
+        (error) => {
+          this.loginError = 'Invalid email or password';
+        }
       );
     } else {
       // console.log('Form is invalid');
