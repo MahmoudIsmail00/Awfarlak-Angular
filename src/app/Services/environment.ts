@@ -1,4 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7082/api'
+  apiUrl: 'http://mahmoudx98-001-site1.ltempurl.com/api'
 };
