@@ -1,10 +1,10 @@
 {
   "/images": {
-    "target": "http://mahmoudx98-001-site1.ltempurl.com",
+    "target": "http://awfarlakapi.runasp.net",
     "secure": false
   },
   "/wp-content": {
-    "target": "http://mahmoudx98-001-site1.ltempurl.com",
+    "target": "http://awfarlakapi.runasp.net",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"
