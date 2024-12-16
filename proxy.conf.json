@@ -1,10 +1,10 @@
 {
   "/images": {
-    "target": "https://localhost:7082",
+    "target": "http://mahmoudx98-001-site1.ltempurl.com",
     "secure": false
   },
   "/wp-content": {
-    "target": "https://www.awfarlak.com",
+    "target": "http://mahmoudx98-001-site1.ltempurl.com",
     "secure": true,
     "changeOrigin": true,
     "logLevel": "debug"

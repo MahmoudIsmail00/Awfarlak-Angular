@@ -180,6 +180,8 @@ export class ProductsComponent implements OnInit {
       products: this.productService.getAllProducts(),
       specs: this.productService.getAllSpecs(),
     }).subscribe(({ products, specs }) => {
+      console.log(products);
+      
       const combinedProducts = products.map((product: Product) => {
         const productSpec = specs.find(
           (spec: specs) => spec.productId === product.id
